@@ -1,5 +1,5 @@
 PageSpeed Insights
-Report from Oct 15, 2026, 5:58:54 PM
+Report from Oct 15, 2026, 6:56:47 PM
 https://www.vistarmodels.com/
 Enter a valid URL
 
@@ -14,7 +14,7 @@ Discover what your real users are experiencing
 No Data
 
 Diagnose performance issues
-98
+95
 Performance
 100
 Accessibility
@@ -24,7 +24,7 @@ Best Practices
 SEO
 3/3
 Agentic Browsing
-98
+95
 FCP
 +9
 LCP
@@ -34,7 +34,7 @@ TBT
 CLS
 +25
 SI
-+10
++8
 Performance
 Values are estimated and may vary. The performance score is calculated directly from these metrics.See calculator.
 0–49
@@ -45,16 +45,16 @@ Final Screenshot
 Metrics
 Expand view
 First Contentful Paint
-1.8 s
+1.9 s
 Largest Contentful Paint
-2.1 s
+2.3 s
 Total Blocking Time
-30 ms
+0 ms
 Cumulative Layout Shift
 0
 Speed Index
-1.8 s
-Captured at Oct 15, 2026, 5:58 PM GMT+5:30
+4.2 s
+Captured at Oct 15, 2026, 6:56 PM GMT+5:30
 Emulated Moto G Power with Lighthouse 13.5.0
 Single page session
 Initial page load
@@ -76,21 +76,13 @@ All
 FCP
 
 LCP
-
-TBT
 Insights
-Forced reflow
-A forced reflow occurs when JavaScript queries geometric properties (such as offsetWidth) after styles have been invalidated by a change to the DOM state. This can result in poor performance. Learn more about forced reflows and possible mitigations.Unscored
-Source
-Total reflow time
-[unattributed]
-78 ms
 Network dependency tree
 Avoid chaining critical requests by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load.LCPUnscored
-Maximum critical path latency: 458 ms
+Maximum critical path latency: 761 ms
 Initial Navigation
-https://www.vistarmodels.com - 351 ms, 7.90 KiB
-/assets/index-C65eTy0i.css(www.vistarmodels.com) - 458 ms, 18.38 KiB
+https://www.vistarmodels.com - 337 ms, 7.90 KiB
+/assets/index-DnSgzOZH.css(www.vistarmodels.com) - 761 ms, 18.43 KiB
 Preconnected origins
 preconnect hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.
 no origins were preconnected
@@ -98,36 +90,56 @@ Preconnect candidates
 Add preconnect hints to your most important origins, but try to use no more than 4.
 No additional origins are good candidates for preconnecting
 Render-blocking requests
-Optimize DOM size
-LCP breakdown
-These insights are also available in the Chrome DevTools Performance Panel - record a trace to view more detailed information.
-Diagnostics
-Reduce unused JavaScript Est savings of 57 KiB
-Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. Learn how to reduce unused JavaScript.LCPFCPUnscored
+Requests are blocking the page's initial render, which may delay LCP. Deferring or inlining can move these network requests out of the critical path.LCPFCPUnscored
 URL
 Transfer Size
-Est Savings
+Duration
 vistarmodels.com 1st party
-108.4 KiB	56.6 KiB
-/assets/entry.client-Bm-9tX61.js(www.vistarmodels.com)
-67.9 KiB
-32.1 KiB
-/assets/errorBoun….js(www.vistarmodels.com)
-40.5 KiB
-24.5 KiB
+18.4 KiB	300 ms
+/assets/index-DnSgzOZH.css(www.vistarmodels.com)
+18.4 KiB
+300 ms
+LCP breakdown
+Each subpart has specific improvement strategies. Ideally, most of the LCP time should be spent on loading the resources, not within delays.LCPUnscored
+Subpart
+Duration
+Time to first byte
+0 ms
+Resource load delay
+330 ms
+Resource load duration
+310 ms
+Element render delay
+1,830 ms
+Illustrative physical architectural model with miniature residential towers, la…
+<img src="/images/architectural.webp" alt="Illustrative physical architectural model with miniature residential tower…" width="960" height="548" fetchpriority="high" decoding="async">
+These insights are also available in the Chrome DevTools Performance Panel - record a trace to view more detailed information.
+Diagnostics
 Reduce unused CSS Est savings of 14 KiB
 Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. Learn how to reduce unused CSS.LCPFCPUnscored
 URL
 Transfer Size
 Est Savings
 vistarmodels.com 1st party
-17.7 KiB	14.3 KiB
-/assets/index-C65eTy0i.css(www.vistarmodels.com)
-17.7 KiB
-14.3 KiB
-Avoid long main-thread tasks 4 long tasks found
+17.8 KiB	14.4 KiB
+/assets/index-DnSgzOZH.css(www.vistarmodels.com)
+17.8 KiB
+14.4 KiB
+Reduce unused JavaScript Est savings of 54 KiB
+Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. Learn how to reduce unused JavaScript.LCPFCPUnscored
+URL
+Transfer Size
+Est Savings
+vistarmodels.com 1st party
+108.4 KiB	54.4 KiB
+/assets/entry.client-Bm-9tX61.js(www.vistarmodels.com)
+67.9 KiB
+29.9 KiB
+/assets/errorBoun….js(www.vistarmodels.com)
+40.5 KiB
+24.5 KiB
 More information about the performance of your application. These numbers don't directly affect the Performance score.
-Passed audits (19)
+Passed audits (22)
 Show
 100
 Accessibility
