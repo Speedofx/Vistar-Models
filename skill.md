@@ -1,48 +1,79 @@
+# 🧠 AI IDE SKILL PROTOCOL: THE 100/100 PRODUCTION STANDARD
+
+> **MANDATORY INSTRUCTION FOR ALL AI CODING AGENTS & DEVELOPERS:**  
+> Before writing any code, modifying routes, creating components, or configuring deployment, you MUST read and strictly adhere to:  
+> 📖 **[`MASTER_100_PERCENT_BLUEPRINT.md`](./MASTER_100_PERCENT_BLUEPRINT.md)**
+
+---
+
+## ⚡ CORE NON-NEGOTIABLE PRINCIPLES
+
+1. **Brand Authenticity:** Always strictly use **Vistar Models** (`vistarmodels.com`, UDYAM-RJ-17-0536099, Owner: Yogendra Yogi). Never use old prototype brand names.
+2. **PageSpeed 100/100 (Mobile & Desktop):**
+   * **Images:** WebP format ONLY (`quality=80`, max ~60–90 KB). Never serve raw PNG/JPG.
+   * **LCP Preload:** `<link rel="preload" as="image" href="..." fetchpriority="high" type="image/webp">` must always be present for hero images.
+   * **Zero Render-Blocking Fonts:** Never import `fonts.googleapis.com` CSS. Use self-hosted variable WOFF2 in `/public/fonts/` with `@font-face` and `<link rel="preload" as="font">`.
+   * **Favicon:** Keep favicon under 10 KB.
+   * **Edge Caching:** `vercel.json` must enforce 1-year immutable caching on `/images/*` and `/fonts/*`.
+3. **AEO & GEO Knowledge Architecture:**
+   * Every physical branch MUST have **200 FAQs** (100 core technical + 100 municipal/regional authority questions).
+   * Every branch must feature a **40–60 word Direct Answer Snippet Box** for AI Overviews and Perplexity search grounding.
+   * Triple JSON-LD Schemas: `LocalBusiness` + `FAQPage` + `BreadcrumbList` on every location page.
+4. **AI Crawlers & Discovery:**
+   * `robots.txt` must allow `GPTBot`, `ClaudeBot`, `PerplexityBot`, `Google-Extended` with `Content-Signal: search=yes, ai-input=yes, ai-train=yes`.
+   * `llms.txt` must expose verified markdown facts for zero-token LLM extraction.
+5. **Google Search Console SOP:**
+   * Submit ONLY `sitemap.xml` to "Add a new sitemap".
+   * Submit individual web pages to the **top URL Inspection search bar** (`Inspect any URL`) -> "Test Live URL" -> "Request Indexing".
+   * Never submit web page URLs into the sitemap submission box.
+6. **Local 3-Pack Maps (GBP):**
+   * Address, phone, and name must match the on-page JSON-LD schema exactly.
+   * Link GBP listings directly to `/units/:city`, never to the generic root homepage.
+
+---
+
+## 📂 FULL DIRECTORY BLUEPRINT
+
+```
 vistar-models/
-├── .npmrc                   # Vercel पर बिना एरर install कराने के लिए (legacy-peer-deps=true)
-├── .gitignore               # Git में फालतू node_modules/dist जाने से रोकता है
-├── package.json             # प्रोजेक्ट की dependencies और scripts (dev, build, start)
-├── vite.config.ts           # Vite Bundler और डेवलपमेंट सर्वर की सेटिंग
-├── react-router.config.ts   # React Router v7/v8 और Vercel Serverless Preset सेटिंग
-├── tailwind.config.js       # Tailwind CSS की स्टाइलिंग और कलर पैलेट
-├── tsconfig.json            # TypeScript कंपाइलर कॉन्फ़िगरेशन
-├── README.md                # प्रोजेक्ट ओवरव्यू और Vercel डिप्लॉय गाइड
+├── MASTER_100_PERCENT_BLUEPRINT.md   # 🏛️ Complete 100/100 Master Coding Bible & SOP
+├── SEO_AEO_GEO_MASTER_GUIDE/         # 📚 Specialized operational guides
+│   ├── README.md                     # Overview & live status
+│   ├── 01_CODE_ARCHITECTURE.md       # Technical specs & JSON-LD
+│   ├── 02_GOOGLE_SEARCH_CONSOLE_GUIDE.md # 39 URLs directory & indexing SOP
+│   ├── 03_GOOGLE_MY_BUSINESS_LOCAL_SEO.md # Google Maps 3-Pack strategy
+│   └── 04_DYNAMIC_URL_EXPANSION_SYSTEM.md # Dynamic scaling for new cities/posts
+├── vercel.json                       # ⚡ Edge caching (1-yr immutable) & security headers
+├── package.json                      # React Router v7, Tailwind, Lucide
+├── vite.config.ts                    # Vite build configuration
+├── react-router.config.ts            # Serverless preset configuration
 │
-├── public/                  # Static Files (Favicon, Logos आदि)
-│   └── favicon.png
+├── public/                           # Static assets
+│   ├── favicon.png                   # 7 KB optimized favicon
+│   ├── fonts/
+│   │   └── manrope-latin.woff2       # 24 KB self-hosted variable font
+│   └── images/                       # Ultra-compressed WebP images (96% reduced)
+│       ├── architectural.webp        # 64 KB (Hero LCP)
+│       ├── township.webp             # 95 KB
+│       ├── industrial.webp           # 51 KB
+│       └── ...                       # All 9 categories in WebP
 │
-├── plugins/                 # Vite के इंटरनल प्लगइन्स (Horizons Runtime, Visual Editor)
-│
-├── src/                     # 👉 मुख्य वेबसाइट का असली कोड (Source Code)
-│   ├── root.tsx             # पूरी वेबसाइट का Master Layout (HTML, Head, Fonts, Header, Footer)
-│   ├── routes.ts            # वेबसाइट के सारे URLs/Paths की लिस्ट
-│   ├── index.css            # ग्लोबल CSS, कस्टम डिज़ाइन सिस्टम और फॉन्ट वैरिएबल्स
-│   │
-│   ├── routes/              # सारे Pages के रूट कंपोनेंट्स
-│   │   ├── home.tsx         # होमपेज (/)
-│   │   ├── page.tsx         # सारे डायनामिक पेजेस (/about, /services, /contact, etc.)
-│   │   ├── blog.tsx         # ब्लॉग लिस्टिंग पेज (/blog)
-│   │   ├── blog.$slug.tsx   # सिंगल ब्लॉग आर्टिकल पेज (/blog/:slug)
-│   │   ├── sitemap.xml.ts   # Google SEO Sitemap
-│   │   ├── robots.txt.ts    # Search Engine Crawlers के लिए Robots फाइल
-│   │   └── rss.xml.ts       # RSS Feed
-│   │
-│   ├── components/          # वेबसाइट के विज़ुअल सेक्शन्स (UI Blocks)
-│   │   ├── site-header.tsx  # ऊपर का नेविगेशन बार (Logo, Links, CTA)
-│   │   ├── site-footer.tsx  # नीचे का फ़ूटर (Links, Disclaimer, Copyright)
-│   │   ├── enquiry-form.tsx # WhatsApp डायरेक्ट इंक्वायरी फॉर्म
-│   │   ├── capability.tsx   # क्षमता/फीचर्स दिखाने वाला ब्लॉक
-│   │   ├── process.tsx      # 5-Step Process सेक्शन
-│   │   ├── founder.tsx      # फाउंडर/कंसल्टेंट सेक्शन
-│   │   ├── home/            # होमपेज के सेक्शन्स (Hero, Perspective, Partners)
-│   │   └── ui/              # Shadcn/Radix UI के 40+ री-यूज़ेबल कंपोनेंट्स (Dialog, Accordion, etc.)
-│   │
-│   ├── data/                # 👉 वेबसाइट का सारा डाटा (CMS की तरह काम करता है)
-│   │   ├── site.ts          # सारे पेजेस, श्रेणियां (Categories), FAQs, सर्विसेज और WhatsApp नंबर
-│   │   ├── blog-posts.ts    # सारे पब्लिश ब्लॉग आर्टिकल्स और उनका पूरा कंटेंट
-│   │   └── business.ts      # बिज़नेस की लीगल और कंसल्टेंसी डिटेल्स
-│   │
-│   ├── lib/                 # SEO, JSON-LD स्कीमा, मेटा टैग्स और यूटिलिटी फंक्शन्स
-│   └── hooks/               # React के कस्टम हुक्स (useHydrated, useMobile, useToast)
-│
-└── vault/                   # 🧠 👉 वो फ़ोल्डर जो AI को "Best Website" बनाने के लिए गाइड करता है!
+└── src/                              # Source code
+    ├── root.tsx                      # Master layout with font preloading & schema links
+    ├── routes.ts                     # Strict route hierarchy
+    ├── index.css                     # Design system & @font-face definition
+    ├── routes/
+    │   ├── home.tsx                  # Home page with hero image preload
+    │   ├── units.tsx                 # "My Branches" Hub directory
+    │   ├── units.$city.tsx           # Dynamic branch page with 200 FAQs & Triple Schema
+    │   ├── sitemap.xml.ts            # Dynamic XML sitemap (auto-syncs all 39 URLs)
+    │   ├── robots.txt.ts             # AI bot crawler permissions & content signals
+    │   └── llms.txt.ts               # Machine-readable facts feed
+    ├── data/
+    │   ├── units.ts                  # 9 branch units with NAP, ratings, coordinates
+    │   ├── units-core-faqs.ts        # 100 deep technical/commercial FAQs
+    │   ├── units-city-faqs.ts        # 100 municipal/regional FAQs per city
+    │   ├── site.ts                   # Category definitions & WebP image mapping
+    │   └── blog-posts.ts             # Dynamic authority articles
+    └── components/                   # UI components (Hero, FAQ filter, Header, Footer)
+```
