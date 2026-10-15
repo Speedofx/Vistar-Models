@@ -338,10 +338,10 @@ export default function CityUnitPage() {
 					}}
 				>
 					<h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem', color: 'var(--accent, #e5a93c)' }}>
-						Scale Model Maker in {unit.city} — Quick Overview & Key Facts:
+						Best Architectural & 3D Scale Model Maker in {unit.city} — Official Overview:
 					</h2>
 					<p style={{ margin: 0, fontSize: '0.98rem', lineHeight: 1.65, color: 'var(--foreground, #f0f6fc)' }}>
-						<strong>Vistar Models {unit.city}</strong> is a Government MSME-registered (<strong>UDYAM-RJ-17-0536099</strong>) architectural and 3D scale model company located at <strong>{unit.address}, {unit.city}, {unit.state} – {unit.pincode}</strong>. Rated <strong>{unit.rating}/5.0</strong> by architects, real estate builders, and industrial promoters, Vistar Models crafts precision 1:50 to 1:500 physical models for sales lounges, RERA approvals under {unit.rera}, and municipal presentations with {unit.authority}. Services include cast acrylic laser-cutting, high-resolution SLA 3D printing, smart tablet-controlled DMX LED lighting, and shock-protected wooden export crating with on-site technician assembly across {unit.city}.
+						Looking for the <strong>best model maker in {unit.city}</strong>? <strong>Vistar Models {unit.city}</strong> is a Government MSME-registered (<strong>UDYAM-RJ-17-0536099</strong>) premier <strong>architectural model maker</strong>, <strong>scale model maker</strong>, <strong>miniature model maker</strong>, and commercial <strong>display model maker in {unit.city}</strong> located at <strong>{unit.address}, {unit.city}, {unit.state} – {unit.pincode}</strong>. Rated <strong>{unit.rating}/5.0</strong> by leading real estate developers and architects across {unit.state}, we engineer precision 1:25 to 1:500 physical models for builder sales lounges, RERA approvals under {unit.rera}, and municipal presentations with {unit.authority}. Capabilities include precision laser-cut cast acrylic, SLA/PolyJet 3D printing, smart tablet-controlled DMX LED lighting, and shock-crated delivery with on-site technician assembly across {unit.city}.
 					</p>
 				</section>
 
