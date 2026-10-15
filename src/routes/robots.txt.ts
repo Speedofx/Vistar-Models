@@ -25,57 +25,30 @@ const UNPUBLISHED_HOST_SUFFIXES = [
  * robots.txt, since a human asked for the page — naming them records the site's
  * answer, it does not enforce it.
  */
-const AI_ANSWER_AGENTS = [
+const AI_AGENTS = [
+	'GPTBot',
 	'OAI-SearchBot',
 	'ChatGPT-User',
+	'ClaudeBot',
 	'Claude-SearchBot',
 	'Claude-User',
+	'anthropic-ai',
 	'PerplexityBot',
 	'Perplexity-User',
+	'Google-Extended',
+	'Applebot-Extended',
+	'Amazonbot',
+	'Amzn-SearchBot',
+	'Amzn-User',
 	'DuckAssistBot',
 	'MistralAI-User',
 	'meta-webindexer',
 	'meta-externalfetcher',
-	'Amzn-SearchBot',
-	'Amzn-User',
-];
-
-/**
- * Tokens whose meaning is permission to train generative models on the content.
- * `Google-Extended` and `Applebot-Extended` are not crawlers and never fetch
- * anything — they read robots.txt as a usage licence, so `Disallow: /` is the
- * only way to express `ai-train=no` to them. The rest are the crawlers that
- * collect training corpora. Most have an answer-engine counterpart above that
- * keeps the site citable in exchange; `Bytespider` is last because ByteDance
- * runs no answer engine to trade the access for.
- *
- * Blocking `Google-Extended` also gives up grounding in the Gemini app. Google
- * Search, and the AI Overviews built from its index, are unaffected, and
- * `Applebot-Extended` works the same way for Siri and Spotlight. `Googlebot`
- * and `Applebot` themselves keep their access through the wildcard group, which
- * is why neither is named above.
- */
-const AI_TRAINING_AGENTS = [
-	'GPTBot',
-	'ClaudeBot',
-	'Google-Extended',
-	'Applebot-Extended',
 	'meta-externalagent',
-	'Amazonbot',
-	'Bytespider',
+	'FacebookBot',
 ];
 
-/**
- * Content signals (contentsignals.org) state what crawlers may do with the
- * content once fetched: appear in search results, ground an AI answer, or train
- * a model. Search and AI answers are allowed because they bring readers back;
- * training is not, which is the default every publisher starts from.
- *
- * A named group replaces the wildcard group for that agent rather than adding
- * to it, so the signal is repeated inside each one — otherwise the agents it is
- * aimed at are the only ones that never read it.
- */
-const CONTENT_SIGNAL = 'Content-Signal: search=yes, ai-input=yes, ai-train=no';
+const CONTENT_SIGNAL = 'Content-Signal: search=yes, ai-input=yes, ai-train=yes';
 
 function publishedRules(origin: string): string[] {
 	return [
@@ -83,8 +56,10 @@ function publishedRules(origin: string): string[] {
 		CONTENT_SIGNAL,
 		'Allow: /',
 		'',
-		...AI_ANSWER_AGENTS.flatMap(agent => [`User-agent: ${agent}`, CONTENT_SIGNAL, 'Allow: /', '']),
-		...AI_TRAINING_AGENTS.flatMap(agent => [`User-agent: ${agent}`, 'Disallow: /', '']),
+		...AI_AGENTS.flatMap(agent => [`User-agent: ${agent}`, CONTENT_SIGNAL, 'Allow: /', '']),
+		'User-agent: Bytespider',
+		'Disallow: /',
+		'',
 		`Sitemap: ${origin}/sitemap.xml`,
 	];
 }

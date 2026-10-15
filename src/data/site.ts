@@ -67,4 +67,5 @@ export const pages: Record<string, {title:string; eyebrow:string; intro:string}>
  privacy:{title:'Privacy Policy',eyebrow:'Last updated · 15 October 2026',intro:'How Vistar Models handles information submitted through this website.'},
  terms:{title:'Terms of Use',eyebrow:'Last updated · 15 October 2026',intro:'Please read these terms before using our website or making a sourcing enquiry.'},
 };
-export const publicPaths = ['/', ...Object.keys(pages).map(s=>'/'+s), ...categories.map(c=>'/'+c.slug)];
+import { unitPaths } from './units';
+export const publicPaths = ['/', ...Object.keys(pages).map(s=>'/'+s), ...categories.map(c=>'/'+c.slug), ...unitPaths];

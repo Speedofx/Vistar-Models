@@ -4,6 +4,8 @@ export default [
 	index('routes/home.tsx'),
 	route('blog', 'routes/blog.tsx'),
 	route('blog/:slug', 'routes/blog.$slug.tsx'),
+	route('units', 'routes/units.tsx'),
+	route('units/:city', 'routes/units.$city.tsx'),
 	route(':slug', 'routes/page.tsx'),
 	route('rss.xml', 'routes/rss.xml.ts'),
 	route('llms.txt', 'routes/llms.txt.ts'),
