@@ -38,7 +38,11 @@ export function HorizonsPreviewScripts() {
 		}
 
 		if (!import.meta.env.DEV) {
-			void import('virtual:horizons-runtime');
+			if ('requestIdleCallback' in window) {
+				window.requestIdleCallback(() => void import('virtual:horizons-runtime'));
+			} else {
+				setTimeout(() => void import('virtual:horizons-runtime'), 2500);
+			}
 		}
 	}, []);
 
