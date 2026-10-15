@@ -28,14 +28,17 @@ Production-ready scale-model consultancy platform for India built with React Rou
 ### `src/routes/` — Application Routes
 - `src/routes/home.tsx` — `/` Homepage.
 - `src/routes/page.tsx` — Dynamic route handler for all content pages (`/about`, `/services`, `/find-a-model-maker`, `/categories`, `/industries`, `/how-it-works`, `/for-manufacturers`, `/become-a-partner`, `/faq`, `/contact`, `/privacy`, `/terms`, and category slugs).
+- `src/routes/units.tsx` — `/units` My Branches Hub page (9 MSME Registered Units across India).
+- `src/routes/units.$city.tsx` — `/units/:city` Dynamic branch detail page with quick-switch bar, Google Reviews, and 200 searchable FAQs.
 - `src/routes/blog.tsx` — `/blog` Journal index listing.
 - `src/routes/blog.$slug.tsx` — `/blog/:slug` Article pages with `tlDr` summaries and related links.
-- `src/routes/sitemap.xml.ts` — `GET /sitemap.xml` SEO sitemap with all public pages and articles.
-- `src/routes/robots.txt.ts` — `GET /robots.txt` Crawler instructions.
+- `src/routes/sitemap.xml.ts` — `GET /sitemap.xml` SEO sitemap with all public pages, unit pages, and articles.
+- `src/routes/robots.txt.ts` — `GET /robots.txt` Crawler instructions allowing all major AI search bots.
 - `src/routes/llms.txt.ts` — `GET /llms.txt` Generative Engine Optimization (GEO) feed for AI search engines (Perplexity, ChatGPT, Gemini).
 - `src/routes/rss.xml.ts` — `GET /rss.xml` Journal RSS feed.
 - `src/routes/api.health.ts` — `GET /api/health` Health check endpoint answering `{ ok: true }`.
 - `src/routes/api.$.ts` — JSON `404` handler for unmatched `/api/*` paths.
+- `vault/VERCEL_DEPLOYMENT_GUIDE.md` — Complete Vercel deployment troubleshooting runbook.
 
 ### `src/components/` — UI Components & Sections
 - `src/components/site-header.tsx` — Responsive navigation bar, logo, and "Discuss Your Requirement" CTA.
