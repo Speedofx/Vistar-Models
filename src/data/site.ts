@@ -1,14 +1,14 @@
 export const whatsapp = 'https://wa.me/918302806913?text=' + encodeURIComponent('Hello Vistar Models, I have a scale-model requirement and would like help finding a suitable manufacturing partner. Please let me know what project details you need.');
 export const images = {
- architectural: '/images/architectural.png',
- township: '/images/township.png',
- industrial: '/images/industrial.png',
- villa: '/images/villa.png',
- interior: '/images/interior.png',
- exhibition: '/images/exhibition.png',
- engineering: '/images/engineering.png',
- working: '/images/working.png',
- printing: '/images/printing.png',
+	architectural: '/images/architectural.webp',
+	township: '/images/township.webp',
+	industrial: '/images/industrial.webp',
+	villa: '/images/villa.webp',
+	interior: '/images/interior.webp',
+	exhibition: '/images/exhibition.webp',
+	engineering: '/images/engineering.webp',
+	working: '/images/working.webp',
+	printing: '/images/printing.webp',
 };
 export const categories = [
  {slug:'architectural-makers', name:'Architectural Models', image:images.architectural, description:'Building form, facade detail and context, translated into a physical presentation.', needs:['Building plans, elevations and reference renders','Presentation purpose, scale and overall footprint','Facade finish, landscape detail and lighting'], considerations:'Look for experience with facade materials, clean assembly, landscape treatment and presentation bases. A sales-gallery model may need different detailing from a design-review model.'},

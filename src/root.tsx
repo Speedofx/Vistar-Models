@@ -15,18 +15,15 @@ import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 
 export const links: Route.LinksFunction = () => [
-	{ rel: 'stylesheet', href: stylesheet },
-	{ rel: 'icon', href: '/favicon.png', type: 'image/png' },
-	{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
 	{
-		rel: 'preconnect',
-		href: 'https://fonts.gstatic.com',
+		rel: 'preload',
+		href: '/fonts/manrope-latin.woff2',
+		as: 'font',
+		type: 'font/woff2',
 		crossOrigin: 'anonymous',
 	},
-	{
-		rel: 'stylesheet',
-		href: 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap',
-	},
+	{ rel: 'stylesheet', href: stylesheet },
+	{ rel: 'icon', href: '/favicon.png', type: 'image/png' },
 	{
 		rel: 'alternate',
 		type: 'application/rss+xml',
