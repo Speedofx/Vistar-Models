@@ -13,10 +13,15 @@ import {
 	Star,
 	Navigation,
 	Compass,
+	CheckCircle2,
+	DollarSign,
+	Clock,
+	Layers,
+	Eye,
 } from 'lucide-react';
 import { seo, siteOriginFrom, absoluteUrl } from '@/lib/seo';
 import { getUnit, units, type Unit } from '@/data/units';
-import { categories } from '@/data/site';
+import { categories, images } from '@/data/site';
 import { ContactCta } from '@/components/contact-cta';
 
 export function loader({ params }: { params: { city?: string } }) {
@@ -51,12 +56,15 @@ export function meta({
 
 	const { unit } = loaderData;
 	const canonicalUrl = absoluteUrl(origin, `/units/${unit.slug}`);
+	const pageTitle = `3D Scale Model Making Company in ${unit.city} | Best Architectural Model Maker — Vistar Models`;
+	const pageDesc = `Leading 3D architectural scale model making company in ${unit.city}. High-rise towers, township master plans, industrial plants & villa models. Rated 5.0 ★. MSME UDYAM-RJ-17-0536099. Call +91 83028 06913.`;
 
 	return seo(
 		{ matches, location },
 		{
-			title: `Scale Model Maker in ${unit.city} | Vistar Models — UDYAM Registered`,
-			description: unit.description,
+			title: pageTitle,
+			description: pageDesc,
+			image: images.architectural,
 			jsonLd: [
 				{
 					'@context': 'https://schema.org',
@@ -64,14 +72,15 @@ export function meta({
 					itemListElement: [
 						{ '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl(origin, '/') },
 						{ '@type': 'ListItem', position: 2, name: 'My Branches', item: absoluteUrl(origin, '/units') },
-						{ '@type': 'ListItem', position: 3, name: unit.name, item: canonicalUrl },
+						{ '@type': 'ListItem', position: 3, name: `Vistar Models ${unit.city}`, item: canonicalUrl },
 					],
 				},
 				{
 					'@context': 'https://schema.org',
 					'@type': ['LocalBusiness', 'ProfessionalService'],
-					name: unit.name,
-					description: unit.description,
+					name: `Vistar Models – 3D Scale Model Making Company in ${unit.city}`,
+					description: pageDesc,
+					image: absoluteUrl(origin, images.architectural),
 					address: {
 						'@type': 'PostalAddress',
 						streetAddress: unit.address,
@@ -87,17 +96,31 @@ export function meta({
 						'@type': 'City',
 						name: unit.city,
 					},
-					serviceType: 'Architectural Scale Model Consultancy & Manufacturing Sourcing',
+					serviceType: '3D Scale Model Making, Architectural Models, Township & Industrial Scale Models',
 					priceRange: '₹₹–₹₹₹',
 					aggregateRating: {
 						'@type': 'AggregateRating',
 						ratingValue: unit.rating,
 						reviewCount: unit.reviewCount,
+						bestRating: '5',
+						worstRating: '1',
 					},
 					identifier: {
 						'@type': 'PropertyValue',
 						name: 'MSME UDYAM Registration',
 						value: 'UDYAM-RJ-17-0536099',
+					},
+					hasOfferCatalog: {
+						'@type': 'OfferCatalog',
+						name: `Scale Model Making Services in ${unit.city}`,
+						itemListElement: categories.map((cat, i) => ({
+							'@type': 'Offer',
+							itemOffered: {
+								'@type': 'Service',
+								name: `${cat.name} in ${unit.city}`,
+								description: cat.description,
+							},
+						})),
 					},
 				},
 				{
@@ -129,6 +152,50 @@ export default function CityUnitPage() {
 			f => f.question.toLowerCase().includes(query) || f.answer.toLowerCase().includes(query),
 		);
 	}, [unit.faqs, faqSearch]);
+
+	// Structured pricing & scale data tailored for this city
+	const pricingRows = [
+		{
+			category: 'High-Rise Architectural Towers',
+			scale: '1:75 · 1:100',
+			materials: 'Cast Acrylic, SLA 3D Resin, PU Auto-coat',
+			time: '2–3 Weeks',
+			budget: '₹1,50,000 – ₹5,50,000',
+			purpose: 'Sales Lounges, RERA Display, Investor Meets',
+		},
+		{
+			category: 'Township & Master Plans',
+			scale: '1:200 · 1:500',
+			materials: 'Modular Marine Base, Flocked Turf, CNC Foam',
+			time: '3–5 Weeks',
+			budget: '₹3,00,000 – ₹12,00,000+',
+			purpose: 'Gated Communities, Infrastructure & Municipal Approvals',
+		},
+		{
+			category: 'Industrial Plants & Factories',
+			scale: '1:100 · 1:250',
+			materials: 'ABS, Brass Etched Trusses, Color-coded Piping',
+			time: '3–4 Weeks',
+			budget: '₹2,50,000 – ₹8,00,000',
+			purpose: 'Safety Inductions, EPC Constructability, Expo Displays',
+		},
+		{
+			category: 'Luxury Villas & Bungalows',
+			scale: '1:25 · 1:50',
+			materials: 'Laser-cut Acrylic, Solid Wood Trim, Cutaway Interiors',
+			time: '10–14 Days',
+			budget: '₹75,000 – ₹2,25,000',
+			purpose: 'Private Clients, NRI Marketing, Sales Galleries',
+		},
+		{
+			category: 'Commercial & IT Business Parks',
+			scale: '1:100 · 1:150',
+			materials: 'Optically Clear PMMA, DMX iPad LEDs, Glass Facades',
+			time: '2–4 Weeks',
+			budget: '₹2,00,000 – ₹6,00,000',
+			purpose: 'Corporate Pre-Leasing, GIC Campuses, Tech Corridors',
+		},
+	];
 
 	return (
 		<main className="unit-city-detail-page">
@@ -256,10 +323,29 @@ export default function CityUnitPage() {
 						letterSpacing: '-0.02em',
 					}}
 				>
-					Scale Model Maker & Architectural Model Consultancy in {unit.city}
+					3D Scale Model Making Company in {unit.city} — Architectural & Industrial Scale Models
 				</h1>
 
-				{/* Atomic Address & Direct Fact Block (Engineered for Instant LLM Extraction) */}
+				{/* Atomic Featured Snippet / AI Overview Extraction Box (AEO Anchor) */}
+				<section
+					aria-label={`About Vistar Models ${unit.city}`}
+					style={{
+						background: 'rgba(229, 169, 60, 0.08)',
+						border: '1px solid rgba(229, 169, 60, 0.3)',
+						borderRadius: '12px',
+						padding: '1.5rem',
+						margin: '0 0 1.75rem',
+					}}
+				>
+					<h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem', color: 'var(--accent, #e5a93c)' }}>
+						Scale Model Maker in {unit.city} — Quick Overview & Key Facts:
+					</h2>
+					<p style={{ margin: 0, fontSize: '0.98rem', lineHeight: 1.65, color: 'var(--foreground, #f0f6fc)' }}>
+						<strong>Vistar Models {unit.city}</strong> is a Government MSME-registered (<strong>UDYAM-RJ-17-0536099</strong>) architectural and 3D scale model company located at <strong>{unit.address}, {unit.city}, {unit.state} – {unit.pincode}</strong>. Rated <strong>{unit.rating}/5.0</strong> by architects, real estate builders, and industrial promoters, Vistar Models crafts precision 1:50 to 1:500 physical models for sales lounges, RERA approvals under {unit.rera}, and municipal presentations with {unit.authority}. Services include cast acrylic laser-cutting, high-resolution SLA 3D printing, smart tablet-controlled DMX LED lighting, and shock-protected wooden export crating with on-site technician assembly across {unit.city}.
+					</p>
+				</section>
+
+				{/* Atomic Address & Direct Contact Block for Search Engines */}
 				<address
 					style={{
 						fontStyle: 'normal',
@@ -269,7 +355,7 @@ export default function CityUnitPage() {
 						borderRadius: '8px',
 						padding: '1.25rem',
 						margin: '0 0 1.75rem',
-						fontSize: '0.95rem',
+						fontSize: '0.92rem',
 						lineHeight: 1.6,
 						color: 'var(--foreground, #f0f6fc)',
 						maxWidth: '960px',
@@ -277,24 +363,12 @@ export default function CityUnitPage() {
 				>
 					<strong>Official Branch Address:</strong> {unit.name}, {unit.address}, {unit.city}, {unit.state} – {unit.pincode}, India.
 					<br />
-					<strong>Area Coverage:</strong> {unit.areaHighlights}
+					<strong>Regional Area Highlights:</strong> {unit.areaHighlights}
 					<br />
-					<strong>Direct Phone / Inquiry:</strong> <a href="tel:+918302806913" style={{ color: 'var(--accent, #e5a93c)' }}>+91 83028 06913</a> · <strong>Email:</strong> <a href="mailto:vistarmodels@gmail.com" style={{ color: 'var(--accent, #e5a93c)' }}>vistarmodels@gmail.com</a> · <strong>UDYAM:</strong> UDYAM-RJ-17-0536099.
+					<strong>Inquiry Hotline:</strong> <a href="tel:+918302806913" style={{ color: 'var(--accent, #e5a93c)', fontWeight: 600 }}>+91 83028 06913</a> · <strong>Email:</strong> <a href="mailto:vistarmodels@gmail.com" style={{ color: 'var(--accent, #e5a93c)' }}>vistarmodels@gmail.com</a> · <strong>MSME Reg:</strong> UDYAM-RJ-17-0536099.
 				</address>
 
-				<p
-					style={{
-						fontSize: '1.05rem',
-						color: 'var(--muted, #a0aec0)',
-						maxWidth: '900px',
-						lineHeight: 1.6,
-						margin: '0 0 2rem',
-					}}
-				>
-					{unit.description}
-				</p>
-
-				{/* Quick Contact & Action Buttons */}
+				{/* Action CTAs */}
 				<div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
 					<a
 						href={`https://wa.me/918302806913?text=${encodeURIComponent(`Hello Vistar Models ${unit.city}, I have a scale model requirement for a project in ${unit.city}.`)}`}
@@ -314,7 +388,7 @@ export default function CityUnitPage() {
 						}}
 					>
 						<MessageSquare size={18} />
-						Enquire on WhatsApp <ArrowUpRight size={16} />
+						Get Instant Quote on WhatsApp <ArrowUpRight size={16} />
 					</a>
 
 					<a
@@ -360,67 +434,141 @@ export default function CityUnitPage() {
 				</div>
 			</header>
 
-			{/* Unit Address & Authority Overview Card */}
+			{/* Visual Scale Model Showcase with Image SEO for Google Image Pack */}
 			<section style={{ maxWidth: '1240px', margin: '0 auto 3.5rem', padding: '0 1.5rem' }}>
+				<div style={{ marginBottom: '1.5rem' }}>
+					<span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent, #e5a93c)', fontWeight: 700 }}>
+						Portfolio & Visual Showcase
+					</span>
+					<h2 style={{ fontSize: '1.85rem', fontWeight: 700, margin: '0.5rem 0 0', color: 'var(--foreground, #f0f6fc)' }}>
+						Scale Model Types Fabricated for {unit.city} Projects
+					</h2>
+				</div>
+
 				<div
 					style={{
-						background: 'var(--card, #12141a)',
-						border: '1px solid var(--border, rgba(255, 255, 255, 0.08))',
-						borderRadius: '16px',
-						padding: '2rem',
 						display: 'grid',
 						gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-						gap: '2rem',
+						gap: '1.5rem',
 					}}
 				>
-					<div>
-						<span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent, #e5a93c)', fontWeight: 700 }}>
-							Registered Branch Location
-						</span>
-						<h2 style={{ fontSize: '1.25rem', margin: '0.5rem 0', color: 'var(--foreground, #f0f6fc)' }}>
-							{unit.name}
-						</h2>
-						<p style={{ margin: '0 0 1rem', fontSize: '0.9rem', color: 'var(--muted, #a0aec0)', lineHeight: 1.5 }}>
-							<MapPin size={16} style={{ display: 'inline', marginRight: '6px', color: 'var(--accent, #e5a93c)' }} />
-							{unit.address}, {unit.city}, {unit.state} – {unit.pincode}
-						</p>
-						<a
-							href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(unit.mapQuery)}`}
-							target="_blank"
-							rel="noreferrer"
-							style={{ fontSize: '0.85rem', color: 'var(--accent, #e5a93c)', textDecoration: 'none', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}
-						>
-							<Navigation size={14} /> Get Directions on Google Maps <ArrowUpRight size={14} />
-						</a>
+					<div style={{ background: 'var(--card, #12141a)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', overflow: 'hidden' }}>
+						<img
+							src={images.architectural}
+							alt={`Architectural Scale Model Maker in ${unit.city} - High-Rise Tower Sales Gallery Presentation`}
+							loading="lazy"
+							width="400"
+							height="260"
+							style={{ width: '100%', height: '220px', objectFit: 'cover' }}
+						/>
+						<div style={{ padding: '1.25rem' }}>
+							<h3 style={{ margin: '0 0 0.5rem', fontSize: '1.1rem', color: 'var(--foreground, #f0f6fc)' }}>
+								High-Rise Architectural Models
+							</h3>
+							<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted, #a0aec0)', lineHeight: 1.5 }}>
+								Precision multi-storey residential and commercial tower models crafted with laser-scored acrylic curtain walls, podium parking, and multi-tier floor lighting.
+							</p>
+						</div>
 					</div>
 
-					<div>
-						<span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent, #e5a93c)', fontWeight: 700 }}>
-							Governing Authority & Compliance
-						</span>
-						<h3 style={{ fontSize: '1.1rem', margin: '0.5rem 0', color: 'var(--foreground, #f0f6fc)', fontWeight: 600 }}>
-							{unit.authority}
-						</h3>
-						<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted, #a0aec0)', lineHeight: 1.5 }}>
-							<strong>Regulatory Framework:</strong> {unit.rera}
-							<br />
-							<strong>MSME Registration:</strong> UDYAM-RJ-17-0536099
-							<br />
-							<strong>Operating Desk:</strong> Mon–Sat · 24 Hours Open (Sunday Closed)
-						</p>
+					<div style={{ background: 'var(--card, #12141a)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', overflow: 'hidden' }}>
+						<img
+							src={images.township}
+							alt={`Township Master Plan Model Maker in ${unit.city} - Gated Community Layout with Topographical Contours`}
+							loading="lazy"
+							width="400"
+							height="260"
+							style={{ width: '100%', height: '220px', objectFit: 'cover' }}
+						/>
+						<div style={{ padding: '1.25rem' }}>
+							<h3 style={{ margin: '0 0 0.5rem', fontSize: '1.1rem', color: 'var(--foreground, #f0f6fc)' }}>
+								Township & Master Plans
+							</h3>
+							<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted, #a0aec0)', lineHeight: 1.5 }}>
+								Expansive 50 to 500+ acre master planning models showing road hierarchies, lakes with clear resin wave ripples, internal clubhouse amenities, and phased zoning.
+							</p>
+						</div>
 					</div>
 
-					<div>
-						<span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent, #e5a93c)', fontWeight: 700 }}>
-							Verified Customer Satisfaction
-						</span>
-						<h3 style={{ fontSize: '1.1rem', margin: '0.5rem 0', color: 'var(--foreground, #f0f6fc)', fontWeight: 600 }}>
-							★★★★★ {unit.rating} / 5.0 Rating
-						</h3>
-						<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted, #a0aec0)', lineHeight: 1.5 }}>
-							Backed by {unit.reviewCount}+ verified client reviews from real estate developers, architects, and industrial plant managers across {unit.city} and {unit.state}.
-						</p>
+					<div style={{ background: 'var(--card, #12141a)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', overflow: 'hidden' }}>
+						<img
+							src={images.industrial}
+							alt={`Industrial Plant and Factory Scale Model Maker in ${unit.city} - Engineering Refineries and Automated Plants`}
+							loading="lazy"
+							width="400"
+							height="260"
+							style={{ width: '100%', height: '220px', objectFit: 'cover' }}
+						/>
+						<div style={{ padding: '1.25rem' }}>
+							<h3 style={{ margin: '0 0 0.5rem', fontSize: '1.1rem', color: 'var(--foreground, #f0f6fc)' }}>
+								Industrial Plants & Refineries
+							</h3>
+							<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted, #a0aec0)', lineHeight: 1.5 }}>
+								Heavy engineering plant scale layouts featuring color-coded process piping, conveyor systems, storage silos, and safety evacuation routes.
+							</p>
+						</div>
 					</div>
+
+					<div style={{ background: 'var(--card, #12141a)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', overflow: 'hidden' }}>
+						<img
+							src={images.villa}
+							alt={`Luxury Villa Scale Model Maker in ${unit.city} - Bungalow Cutaway and Interior Detailing`}
+							loading="lazy"
+							width="400"
+							height="260"
+							style={{ width: '100%', height: '220px', objectFit: 'cover' }}
+						/>
+						<div style={{ padding: '1.25rem' }}>
+							<h3 style={{ margin: '0 0 0.5rem', fontSize: '1.1rem', color: 'var(--foreground, #f0f6fc)' }}>
+								Villa & Luxury Bungalow Models
+							</h3>
+							<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted, #a0aec0)', lineHeight: 1.5 }}>
+								Intricate 1:25 to 1:50 scale estate models highlighting private swimming pools, landscaped gardens, pergolas, and removable roofs showing luxury interior layouts.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* Comprehensive Pricing & Specification Comparison Table (GEO & LLM Extraction Anchor) */}
+			<section style={{ maxWidth: '1240px', margin: '0 auto 4rem', padding: '0 1.5rem' }}>
+				<div style={{ marginBottom: '1.5rem' }}>
+					<span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent, #e5a93c)', fontWeight: 700 }}>
+						Transparent Budgeting & Specifications
+					</span>
+					<h2 style={{ fontSize: '1.85rem', fontWeight: 700, margin: '0.5rem 0 0', color: 'var(--foreground, #f0f6fc)' }}>
+						Scale Model Cost & Technical Specifications in {unit.city}
+					</h2>
+					<p style={{ margin: '0.5rem 0 0', fontSize: '0.92rem', color: 'var(--muted, #a0aec0)' }}>
+						Reference pricing guide for developers, architects, and engineering contractors in {unit.city}. Exact costs vary based on CAD complexity, lighting zones, and base cabinet requirements.
+					</p>
+				</div>
+
+				<div style={{ overflowX: 'auto', background: 'var(--card, #12141a)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px' }}>
+					<table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
+						<thead>
+							<tr style={{ background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+								<th style={{ padding: '1rem', color: 'var(--accent, #e5a93c)', fontWeight: 700 }}>Model Category</th>
+								<th style={{ padding: '1rem', color: 'var(--foreground, #f0f6fc)' }}>Standard Scale</th>
+								<th style={{ padding: '1rem', color: 'var(--foreground, #f0f6fc)' }}>Key Materials</th>
+								<th style={{ padding: '1rem', color: 'var(--foreground, #f0f6fc)' }}>Fabrication Time</th>
+								<th style={{ padding: '1rem', color: 'var(--accent, #e5a93c)' }}>Price Range</th>
+								<th style={{ padding: '1rem', color: 'var(--foreground, #f0f6fc)' }}>Ideal Purpose</th>
+							</tr>
+						</thead>
+						<tbody>
+							{pricingRows.map((row, idx) => (
+								<tr key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+									<td style={{ padding: '1rem', fontWeight: 600, color: 'var(--foreground, #f0f6fc)' }}>{row.category}</td>
+									<td style={{ padding: '1rem', color: 'var(--muted, #cbd5e0)' }}>{row.scale}</td>
+									<td style={{ padding: '1rem', color: 'var(--muted, #cbd5e0)' }}>{row.materials}</td>
+									<td style={{ padding: '1rem', color: 'var(--muted, #cbd5e0)' }}>{row.time}</td>
+									<td style={{ padding: '1rem', fontWeight: 700, color: 'var(--accent, #e5a93c)' }}>{row.budget}</td>
+									<td style={{ padding: '1rem', color: 'var(--muted, #a0aec0)', fontSize: '0.82rem' }}>{row.purpose}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
 				</div>
 			</section>
 
@@ -439,7 +587,7 @@ export default function CityUnitPage() {
 						<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent, #e5a93c)', marginBottom: '0.75rem' }}>
 							<Building2 size={20} />
 							<h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 600, color: 'var(--foreground, #f0f6fc)' }}>
-								About Our {unit.city} Branch
+								About Our {unit.city} Operational Branch
 							</h2>
 						</div>
 						<p style={{ fontSize: '0.95rem', color: 'var(--muted, #cbd5e0)', lineHeight: 1.7, margin: 0 }}>
@@ -458,56 +606,6 @@ export default function CityUnitPage() {
 							{unit.marketContext}
 						</p>
 					</div>
-				</div>
-			</section>
-
-			{/* Sourced Model Categories in this City */}
-			<section style={{ maxWidth: '1240px', margin: '0 auto 4rem', padding: '0 1.5rem' }}>
-				<div style={{ marginBottom: '2rem' }}>
-					<span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent, #e5a93c)', fontWeight: 700 }}>
-						Capabilities Sourced in {unit.city}
-					</span>
-					<h2 style={{ fontSize: '1.85rem', fontWeight: 700, margin: '0.5rem 0 0', color: 'var(--foreground, #f0f6fc)' }}>
-						Specialist Scale Model Categories
-					</h2>
-				</div>
-
-				<div
-					style={{
-						display: 'grid',
-						gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-						gap: '1.25rem',
-					}}
-				>
-					{categories.map(cat => (
-						<Link
-							key={cat.slug}
-							to={`/${cat.slug}`}
-							style={{
-								background: 'var(--card, #12141a)',
-								border: '1px solid var(--border, rgba(255, 255, 255, 0.08))',
-								borderRadius: '12px',
-								padding: '1.5rem',
-								textDecoration: 'none',
-								color: 'inherit',
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'space-between',
-							}}
-						>
-							<div>
-								<h3 style={{ fontSize: '1.05rem', fontWeight: 600, margin: '0 0 0.5rem', color: 'var(--foreground, #f0f6fc)' }}>
-									{cat.name}
-								</h3>
-								<p style={{ fontSize: '0.8rem', color: 'var(--muted, #8b949e)', lineHeight: 1.5, margin: 0 }}>
-									{cat.description}
-								</p>
-							</div>
-							<span style={{ fontSize: '0.8rem', color: 'var(--accent, #e5a93c)', fontWeight: 600, marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
-								Explore Category <ArrowUpRight size={14} />
-							</span>
-						</Link>
-					))}
 				</div>
 			</section>
 
