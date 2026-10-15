@@ -167,7 +167,16 @@ export const links: Route.LinksFunction = () => [
      ];
      ```
 
-### D. Edge Caching & Security Headers (`vercel.json`)
+### D. Main-Thread Deferral & Zero Forced Reflow Rules
+1. **Never load preview/runtime editor scripts synchronously in production:**
+   * Heavy runtime bundles must be deferred using `requestIdleCallback` or `setTimeout(..., 2500)` so they never contend with hydration, FCP, or LCP.
+2. **Prevent Forced Reflow on Initial Page Load:**
+   * Global `html { scroll-behavior: smooth; }` forces the browser engine to animate any scroll restoration, triggering repeated layout reflows on mobile CPU (costing 70–100ms).
+   * *Solution:* Keep `html { scroll-behavior: auto; }` and apply smooth scrolling strictly scoped to in-page anchor jumps via `:root:has(:target) { scroll-behavior: smooth; }`.
+3. **Exact Responsive Dimensions:**
+   * Match WebP image dimensions to the maximum CSS container widths (e.g., 960x548 for hero, 720x480 for 3-col grid cards) to achieve 0-byte layout shift (CLS = 0) and zero oversized image delivery warnings.
+
+### E. Edge Caching & Security Headers (`vercel.json`)
 Create `vercel.json` in root to enforce 1-year immutable caching on all static assets and establish enterprise security:
 
 ```json
