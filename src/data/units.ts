@@ -64,9 +64,9 @@ export const unitsRawData: Omit<Unit, 'faqs'>[] = [
 		pincode: '400011',
 		mapQuery: 'Lower Parel Mumbai Maharashtra 400011',
 		description:
-			'Vistar Models Mumbai — UDYAM-registered (UDYAM-RJ-17-0536099) scale model consultancy at Lower Parel. High-rise tower models, luxury residential, SRA & township models. Call +91 83028 06913.',
+			'Vistar Models Mumbai — UDYAM-registered (UDYAM-RJ-17-0536099) scale model consultancy at Lower Parel. High-rise tower models, luxury residential, MMRDA infrastructure & Dharavi redevelopment masterplan models. Call +91 83028 06913.',
 		intro:
-			'Vistar Models Mumbai serves India’s premier financial hub and most demanding real estate market from our Lower Parel unit. With UDYAM Registration UDYAM-RJ-17-0536099, we cater to top-tier developers, architectural studios, and infrastructure consortiums across Mumbai, Thane, and Navi Mumbai. From ultra-luxury skyscraper presentation models in Worli and BKC to extensive urban redevelopment schemes under MMRDA and BMC, our consultancy coordinates advanced multi-zone LED illuminated models with micro-detailing that command attention in high-stakes sales lounges and boardroom pitches.',
+			'Vistar Models Mumbai serves India’s premier financial hub and most demanding real estate market from our Lower Parel unit. Operating under MSME UDYAM Registration UDYAM-RJ-17-0536099 (founded by Yogendra Yogi), we cater to top-tier developers, architectural studios, and infrastructure consortiums across Mumbai, Thane, and Navi Mumbai. Our recognized portfolio includes benchmark projects such as the Dharavi Masterplan Model, extensive urban redevelopment schemes under MMRDA and BMC, and ultra-luxury skyscraper presentation models in Worli, Lower Parel, and BKC. Our consultancy coordinates advanced multi-zone LED illuminated models with micro-detailing that command attention in high-stakes sales lounges and boardroom pitches.',
 		marketContext:
 			'Mumbai’s vertical density and coastal skyline create unique presentation challenges. High-rise residential towers exceeding 60 to 80 storeys require 1:75 and 1:100 scale models that accurately articulate cantilevered balconies, multi-tiered parking podiums, rooftop helipads, and clubhouse amenities. With major mega-infrastructure projects like the Mumbai Coastal Road, Atal Setu (MTHL), and the Navi Mumbai International Airport reshaping connectivity, physical models provide developers with an irreplaceable tactile medium to communicate project prestige and spatial luxury under MahaRERA compliance.',
 		authority: 'Mumbai Metropolitan Region Development Authority (MMRDA) and BMC',
@@ -74,7 +74,7 @@ export const unitsRawData: Omit<Unit, 'faqs'>[] = [
 		rating: '5.0',
 		reviewCount: 62,
 		areaHighlights:
-			'Heart of Mumbai luxury real estate in Lower Parel. Fast connectivity to BKC, Worli, Prabhadevi, South Mumbai, and Thane/Navi Mumbai high-rise development belts.',
+			'Heart of Mumbai luxury real estate in Lower Parel. Creators of celebrated Dharavi Masterplan scale models, MMRDA metro corridor presentations, and high-rise sales gallery vitrines across BKC, Worli, Prabhadevi, and South Mumbai.',
 	},
 	{
 		slug: 'gurugram',

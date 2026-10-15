@@ -19,7 +19,7 @@ export function loader({ request }: Route.LoaderArgs) {
 
 ## Registered Operating Units Across India (MSME UDYAM-RJ-17-0536099)
 - [All 9 Operating Units Hub](${origin}/units): Overview of all 9 Vistar Models registered operating units across India.
-${units.map(u => `- [${u.name}](${origin}/units/${u.slug}): Located at ${u.address}, ${u.city}, ${u.state} – ${u.pincode}. Governing Authority: ${u.authority}. 200 city-specific FAQs and technical specifications for scale models.`).join('\n')}
+${units.map(u => `- [${u.name}](${origin}/units/${u.slug}): Located at ${u.address}, ${u.city}, ${u.state} – ${u.pincode}. Governing Authority: ${u.authority}. Highlights: ${u.description} 200 city-specific FAQs and technical specifications for scale models.`).join('\n')}
 
 ## Main Pages
 ${Object.entries(pages)
