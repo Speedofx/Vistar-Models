@@ -10,8 +10,6 @@ import { Founder } from '@/components/founder';
 import { IndustryPartners } from '@/components/home/industry-partners';
 import { BlogTeaser } from '@/components/home/blog-teaser';
 import { ContactCta } from '@/components/contact-cta';
-import { HomeFaq } from '@/components/home/home-faq';
-import { faqs } from '@/data/site';
 import { business, openingHoursSpec } from '@/data/business';
 
 export const links: Route.LinksFunction = () => [
@@ -50,7 +48,7 @@ export function meta({ matches, location }: Route.MetaArgs) {
 					email: business.email,
 					description: business.description,
 					areaServed: business.areaServed,
-					sameAs: ['https://www.rdmodels.in', 'https://msme.gov.in'],
+					sameAs: ['https://msme.gov.in'],
 				},
 				{
 					'@context': 'https://schema.org',
@@ -65,19 +63,7 @@ export function meta({ matches, location }: Route.MetaArgs) {
 					openingHoursSpecification: openingHoursSpec,
 					currenciesAccepted: 'INR',
 					priceRange: '$$',
-					sameAs: ['https://www.rdmodels.in', 'https://msme.gov.in'],
-				},
-				{
-					'@context': 'https://schema.org',
-					'@type': 'FAQPage',
-					mainEntity: faqs.slice(0, 8).map(([q, a]) => ({
-						'@type': 'Question',
-						name: q,
-						acceptedAnswer: {
-							'@type': 'Answer',
-							text: a,
-						},
-					})),
+					sameAs: ['https://msme.gov.in'],
 				},
 			],
 		},
@@ -94,10 +80,10 @@ export default function HomePage() {
 			<Process />
 			<Founder />
 			<IndustryPartners />
-			<HomeFaq />
 			<BlogTeaser />
 			<ContactCta />
 		</main>
 	);
 }
+
 
