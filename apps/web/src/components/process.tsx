@@ -1,0 +1,2 @@
+import { steps } from '@/data/site';
+export function Process(){return <section className="section process"><p className="label">04 / How it works</p><h2>A structured search.<br/>A straightforward conversation.</h2><ol className="process-list">{steps.map(([name,copy],i)=><li key={name}><span className="step-number">0{i+1}</span><h3>{name}</h3><p>{copy}</p></li>)}</ol><p className="process-note">We facilitate the introduction. You and the maker agree the final scope, pricing, production, payment and delivery.</p></section>}

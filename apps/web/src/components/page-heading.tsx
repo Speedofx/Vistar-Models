@@ -1,0 +1,2 @@
+import { Link } from 'react-router';
+export function PageHeading({title,eyebrow,intro}:{title:string;eyebrow:string;intro:string}){return <section className="page-heading section"><div className="breadcrumb"><Link to="/">Home</Link><span>/</span><span>{eyebrow.split(' · ')[0]}</span></div><p className="label"><span className="yellow-square"/>{eyebrow}</p><h1>{title}</h1><p className="lead">{intro}</p></section>}

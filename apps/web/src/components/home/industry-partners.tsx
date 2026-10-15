@@ -1,0 +1,4 @@
+import { Link } from 'react-router';
+import { ArrowUpRight } from 'lucide-react';
+import { industries } from '@/data/site';
+export function IndustryPartners(){return <section className="section industry-partners"><div className="industry-preview"><p className="label">Across sectors. Across India.</p><h2>For people who need<br/>to make ideas tangible.</h2><div className="industry-names">{industries.map(([name])=><Link key={name} to="/industries">{name}</Link>)}</div><Link className="text-link" to="/industries">Explore industries <ArrowUpRight size={17}/></Link></div><div className="partner-strip"><div><p className="label">For specialist workshops</p><h3>Are You a Scale Model Maker?</h3><p>Share your capabilities for consideration in our maker network. No promises of orders—just a place to start a relevant conversation.</p></div><Link className="button outline" to="/become-a-partner">Join the Maker Network <ArrowUpRight size={18}/></Link></div></section>}
