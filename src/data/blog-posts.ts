@@ -412,5 +412,5 @@ export const blogPosts: BlogPost[] = [
 	},
 ];
 
-export const blogPostBySlug = (slug: string): BlogPost | undefined =>
-	blogPosts.find(post => post.slug === slug);
+export const blogPostBySlug = (slug?: string): BlogPost | undefined =>
+	slug ? blogPosts.find(post => post.slug === slug) : undefined;
