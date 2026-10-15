@@ -6,8 +6,8 @@ import { withApi } from '@/lib/api.server';
 import logger from '@/lib/logger.server';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// apps/web/src/routes/api.download-source.ts -> workspace root
-const workspaceRoot = path.resolve(__dirname, '../../../..');
+// src/routes/api.download-source.ts -> project root
+const workspaceRoot = path.resolve(__dirname, '../..');
 
 /**
  * Streams a gzipped tar archive of the full website source code as a download.

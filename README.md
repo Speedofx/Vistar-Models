@@ -25,12 +25,9 @@ Scale-model consultancy platform for India — connecting architectural studios,
    npm run build
    ```
 
-## Deploying to Vercel
+## Deploying to Vercel (1-Click Zero Config)
 
-1. Import this repository in the [Vercel Dashboard](https://vercel.com).
-2. Set **Root Directory** to `apps/web`.
-3. In **Build and Output Settings**, override the **Install Command**:
-   ```bash
-   npm install --legacy-peer-deps
-   ```
-4. Click **Deploy**.
+1. Go to [Vercel Dashboard](https://vercel.com/new).
+2. Click **Import** next to `Speedofx/Vistar-Models`.
+3. Click **Deploy**. (No settings needed — zero configuration!)
+

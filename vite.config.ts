@@ -14,7 +14,6 @@ import iframeRouteRestorationPlugin from './plugins/vite-plugin-iframe-route-res
 import pocketbaseAuthPlugin from './plugins/vite-plugin-pocketbase-auth.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const monorepoRoot = path.resolve(__dirname, '../..');
 const isDev = process.env.NODE_ENV !== 'production';
 
 // Vite serves public files only at their exact path; the published site also serves this shell at `/checkout/`.
@@ -47,7 +46,7 @@ export default defineConfig({
 		allowedHosts: ['.app-preview.com', '.app-preview.io'],
 		fs: {
 			strict: true,
-			allow: [__dirname, path.join(monorepoRoot, 'node_modules')],
+			allow: [__dirname],
 		},
 	},
 	preview: {
