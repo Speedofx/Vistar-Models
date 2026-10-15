@@ -69,208 +69,154 @@ export default function UnitsHub() {
 				intro="Explore Vistar Models' 9 regional branch units in India's leading metropolitan and industrial centers. Select your city below to inspect complete physical location details, Google Map navigation, verified client ratings, local authority alignment, and 200 specialized FAQs."
 			/>
 
-			{/* Branches Grid */}
-			<section className="section-container" style={{ padding: '0 1.5rem 4rem' }}>
-				<div
-					style={{
-						display: 'grid',
-						gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-						gap: '2rem',
-						maxWidth: '1240px',
-						margin: '0 auto',
-					}}
-				>
-					{units.map(unit => (
-						<article
-							key={unit.slug}
+			{/* Metro Corridor Quick Station Bar */}
+			<section style={{ padding: '0 4% 2rem', maxWidth: '1240px', margin: '0 auto' }}>
+				<div style={{
+					display: 'flex',
+					flexWrap: 'wrap',
+					gap: '8px',
+					alignItems: 'center',
+					padding: '14px 18px',
+					background: 'rgba(32, 33, 36, 0.03)',
+					border: '1px solid var(--line)',
+				}}>
+					<span className="label" style={{ marginRight: '10px', color: 'var(--ink)' }}>
+						<span className="yellow-square" /> 9 ACTIVE HUBS:
+					</span>
+					{units.map((u, i) => (
+						<a
+							key={u.slug}
+							href={`#unit-${u.slug}`}
 							style={{
-								background: 'var(--card, #12141a)',
-								border: '1px solid var(--border, rgba(255, 255, 255, 0.08))',
-								borderRadius: '16px',
-								padding: '2.25rem',
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'space-between',
-								boxShadow: '0 8px 24px rgba(0, 0, 0, 0.25)',
+								fontSize: '11px',
+								fontFamily: 'monospace',
+								padding: '4px 10px',
+								border: '1px solid var(--line)',
+								background: 'var(--paper)',
+								color: 'var(--ink)',
+								textTransform: 'uppercase',
+								display: 'inline-flex',
+								alignItems: 'center',
+								gap: '4px',
+								textDecoration: 'none',
 							}}
 						>
+							<span style={{ color: 'var(--yellow)', fontWeight: 700 }}>0{i + 1}</span> {u.city}
+						</a>
+					))}
+				</div>
+			</section>
+
+			{/* Architectural Masterplan Directory — Clean Terminal Strips (No Cards) */}
+			<section style={{ padding: '0 4% 5rem', maxWidth: '1240px', margin: '0 auto' }}>
+				<div style={{ borderBottom: '1px solid var(--line)' }}>
+					{units.map((unit, idx) => (
+						<div
+							key={unit.slug}
+							id={`unit-${unit.slug}`}
+							className="unit-terminal-row"
+						>
+							{/* Left Column: Station Code & Identity */}
 							<div>
-								<div
-									style={{
-										display: 'flex',
-										justifyContent: 'space-between',
-										alignItems: 'center',
-										marginBottom: '1rem',
-									}}
-								>
+								<p className="label" style={{ marginBottom: '8px' }}>
+									<span className="yellow-square" /> 0{idx + 1} / REGIONAL UNIT
+								</p>
+								<h2 style={{ fontSize: 'clamp(24px, 2.4vw, 32px)', fontWeight: 700, margin: '0 0 10px', lineHeight: 1.15 }}>
+									{unit.city}
+								</h2>
+								<div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
 									<span
 										style={{
-											fontSize: '0.75rem',
-											textTransform: 'uppercase',
-											letterSpacing: '0.08em',
+											fontFamily: 'monospace',
+											fontSize: '10px',
+											padding: '3px 7px',
+											background: 'var(--yellow)',
+											color: 'var(--ink)',
 											fontWeight: 700,
-											color: 'var(--accent, #e5a93c)',
-											background: 'rgba(229, 169, 60, 0.12)',
-											padding: '4px 10px',
-											borderRadius: '6px',
+											letterSpacing: '0.04em',
+											textTransform: 'uppercase',
 										}}
 									>
-										{unit.city} Branch
+										{unit.state}
 									</span>
-
-									{/* Google Review Trust Badge */}
-									<div
+									<span
 										style={{
-											display: 'inline-flex',
-											alignItems: 'center',
-											gap: '4px',
-											fontSize: '0.75rem',
-											fontWeight: 600,
-											color: '#ffc107',
-											background: 'rgba(255, 193, 7, 0.1)',
-											padding: '4px 8px',
-											borderRadius: '6px',
+											fontFamily: 'monospace',
+											fontSize: '10px',
+											padding: '3px 7px',
+											border: '1px solid var(--line)',
+											color: 'var(--ink)',
 										}}
 									>
-										<Star size={13} fill="#ffc107" />
-										<span>{unit.rating} ({unit.reviewCount} Reviews)</span>
-									</div>
-								</div>
-
-								<h2
-									style={{
-										fontSize: '1.4rem',
-										fontWeight: 600,
-										margin: '0 0 0.75rem',
-										color: 'var(--foreground, #f0f6fc)',
-									}}
-								>
-									{unit.name}
-								</h2>
-
-								{/* Area Highlights */}
-								<p
-									style={{
-										fontSize: '0.85rem',
-										color: 'var(--muted, #cbd5e0)',
-										lineHeight: 1.6,
-										margin: '0 0 1.25rem',
-										background: 'rgba(255, 255, 255, 0.03)',
-										padding: '0.75rem',
-										borderRadius: '8px',
-										borderLeft: '3px solid var(--accent, #e5a93c)',
-									}}
-								>
-									{unit.areaHighlights}
-								</p>
-
-								{/* Physical Office Address */}
-								<div
-									style={{
-										display: 'flex',
-										alignItems: 'flex-start',
-										gap: '0.5rem',
-										fontSize: '0.825rem',
-										color: 'var(--foreground, #f0f6fc)',
-										marginBottom: '0.75rem',
-									}}
-								>
-									<MapPin size={16} style={{ flexShrink: 0, marginTop: '2px', color: 'var(--accent, #e5a93c)' }} />
-									<span>
-										<strong>Office Address:</strong> {unit.address}, {unit.city}, {unit.state} – {unit.pincode}
+										{unit.rera}
 									</span>
 								</div>
-
-								{/* Authority Tag */}
-								<div
-									style={{
-										display: 'flex',
-										alignItems: 'center',
-										gap: '0.5rem',
-										fontSize: '0.78rem',
-										color: 'var(--muted, #8b949e)',
-										marginBottom: '1.25rem',
-									}}
-								>
-									<Building2 size={14} style={{ flexShrink: 0 }} />
-									<span>Authority: {unit.authority}</span>
+								<div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '11px', fontWeight: 600 }}>
+									<Star size={13} fill="var(--yellow)" stroke="var(--yellow)" />
+									<span>{unit.rating} Rating · {unit.reviewCount} Audited Projects</span>
 								</div>
 							</div>
 
+							{/* Middle Column: Spatial Corridor & Strategic Presence */}
 							<div>
-								{/* Direct Google Maps & Action Buttons */}
-								<div style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.75rem' }}>
+								<p className="label" style={{ opacity: 0.7, marginBottom: '6px' }}>
+									OFFICE LOCATION & INDUSTRIAL BELT
+								</p>
+								<p style={{ fontSize: '15px', fontWeight: 700, margin: '0 0 8px', color: 'var(--ink)' }}>
+									<MapPin size={14} style={{ display: 'inline', marginRight: '6px', verticalAlign: '-1px' }} />
+									{unit.address}, {unit.city}, {unit.state} – {unit.pincode}
+								</p>
+								<p style={{ fontSize: '13px', lineHeight: 1.65, margin: '0 0 12px', color: 'var(--ink)', opacity: 0.9 }}>
+									{unit.areaHighlights}
+								</p>
+								<div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', opacity: 0.75, fontFamily: 'monospace' }}>
+									<Building2 size={13} />
+									<span>Authority Jurisdiction: {unit.authority}</span>
+								</div>
+							</div>
+
+							{/* Right Column: Direct Institutional Action Terminal */}
+							<div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+								<Link
+									to={`/units/${unit.slug}`}
+									className="button"
+									style={{
+										width: '100%',
+										justifyContent: 'space-between',
+										padding: '14px 18px',
+										fontSize: '11px',
+										minHeight: '46px',
+									}}
+								>
+									<span>Explore {unit.city} & 200 FAQs</span>
+									<ArrowUpRight size={16} />
+								</Link>
+
+								<div style={{ display: 'flex', gap: '14px', alignItems: 'center', paddingLeft: '4px' }}>
 									<a
 										href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(unit.mapQuery)}`}
 										target="_blank"
 										rel="noreferrer"
-										style={{
-											flex: 1,
-											display: 'inline-flex',
-											alignItems: 'center',
-											justifyContent: 'center',
-											gap: '0.4rem',
-											padding: '0.65rem 0.75rem',
-											background: 'rgba(255, 255, 255, 0.05)',
-											color: 'var(--foreground, #f0f6fc)',
-											fontSize: '0.8rem',
-											fontWeight: 600,
-											borderRadius: '8px',
-											textDecoration: 'none',
-											border: '1px solid rgba(255, 255, 255, 0.1)',
-										}}
+										className="text-link"
+										style={{ fontSize: '11px', padding: '4px 0' }}
 									>
-										<Navigation size={14} style={{ color: 'var(--accent, #e5a93c)' }} />
-										Google Maps
+										<span>Google Maps</span>
+										<Navigation size={12} />
 									</a>
 
 									<a
 										href={`https://wa.me/918302806913?text=${encodeURIComponent(`Hello Vistar Models, I am inquiring about scale model services at the ${unit.city} branch.`)}`}
 										target="_blank"
 										rel="noreferrer"
-										style={{
-											display: 'inline-flex',
-											alignItems: 'center',
-											justifyContent: 'center',
-											gap: '0.4rem',
-											padding: '0.65rem 1rem',
-											background: 'rgba(37, 211, 102, 0.15)',
-											color: '#25d366',
-											fontSize: '0.8rem',
-											fontWeight: 600,
-											borderRadius: '8px',
-											textDecoration: 'none',
-											border: '1px solid rgba(37, 211, 102, 0.25)',
-										}}
+										className="text-link"
+										style={{ fontSize: '11px', padding: '4px 0' }}
 									>
-										<MessageSquare size={14} />
-										WhatsApp
+										<span>WhatsApp Desk</span>
+										<MessageSquare size={12} />
 									</a>
 								</div>
-
-								{/* Main City Detail Page Link */}
-								<Link
-									to={`/units/${unit.slug}`}
-									style={{
-										width: '100%',
-										boxSizing: 'border-box',
-										display: 'inline-flex',
-										alignItems: 'center',
-										justifyContent: 'center',
-										gap: '0.5rem',
-										padding: '0.8rem 1rem',
-										background: 'var(--accent, #e5a93c)',
-										color: '#000',
-										fontWeight: 700,
-										fontSize: '0.9rem',
-										borderRadius: '8px',
-										textDecoration: 'none',
-									}}
-								>
-									Explore {unit.city} Branch & 200 FAQs <ArrowUpRight size={16} />
-								</Link>
 							</div>
-						</article>
+						</div>
 					))}
 				</div>
 			</section>
@@ -278,10 +224,10 @@ export default function UnitsHub() {
 			{/* National Capability & Trust Badges */}
 			<section
 				style={{
-					background: 'rgba(255, 255, 255, 0.02)',
-					borderTop: '1px solid rgba(255, 255, 255, 0.06)',
-					borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
-					padding: '3rem 1.5rem',
+					background: 'rgba(32, 33, 36, 0.02)',
+					borderTop: '1px solid var(--line)',
+					borderBottom: '1px solid var(--line)',
+					padding: '3rem 4%',
 					margin: '2rem 0',
 				}}
 			>
@@ -291,41 +237,41 @@ export default function UnitsHub() {
 						margin: '0 auto',
 						display: 'grid',
 						gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-						gap: '2rem',
+						gap: '2.5rem',
 					}}
 				>
 					<div>
-						<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', color: 'var(--accent, #e5a93c)' }}>
-							<ShieldCheck size={20} />
-							<h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 600, color: 'var(--foreground, #f0f6fc)' }}>
+						<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', color: 'var(--ink)' }}>
+							<ShieldCheck size={20} color="var(--yellow)" />
+							<h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: 'var(--ink)' }}>
 								MSME UDYAM Registered
 							</h3>
 						</div>
-						<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted, #a0aec0)', lineHeight: 1.5 }}>
+						<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ink)', opacity: 0.8, lineHeight: 1.6 }}>
 							Officially verified under UDYAM-RJ-17-0536099 by Ministry of Micro, Small & Medium Enterprises, Government of India.
 						</p>
 					</div>
 
 					<div>
-						<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', color: 'var(--accent, #e5a93c)' }}>
-							<Building2 size={20} />
-							<h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 600, color: 'var(--foreground, #f0f6fc)' }}>
+						<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', color: 'var(--ink)' }}>
+							<Building2 size={20} color="var(--yellow)" />
+							<h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: 'var(--ink)' }}>
 								Pan-India Logistics & Crating
 							</h3>
 						</div>
-						<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted, #a0aec0)', lineHeight: 1.5 }}>
+						<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ink)', opacity: 0.8, lineHeight: 1.6 }}>
 							Heavy-duty shock-insulated plywood export crating with on-site technician delivery and assembly across all 9 regions.
 						</p>
 					</div>
 
 					<div>
-						<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', color: 'var(--accent, #e5a93c)' }}>
-							<Phone size={20} />
-							<h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 600, color: 'var(--foreground, #f0f6fc)' }}>
+						<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', color: 'var(--ink)' }}>
+							<Phone size={20} color="var(--yellow)" />
+							<h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: 'var(--ink)' }}>
 								24/6 Technical Desk
 							</h3>
 						</div>
-						<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted, #a0aec0)', lineHeight: 1.5 }}>
+						<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ink)', opacity: 0.8, lineHeight: 1.6 }}>
 							Round-the-clock requirement consultation and rapid CAD file vectorization from Monday through Saturday.
 						</p>
 					</div>
