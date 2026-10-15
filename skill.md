@@ -29,6 +29,19 @@
 6. **Local 3-Pack Maps (GBP):**
    * Address, phone, and name must match the on-page JSON-LD schema exactly.
    * Link GBP listings directly to `/units/:city`, never to the generic root homepage.
+7. **The Anti-Card Directory Law:**
+   * Never use 3x3 rounded e-commerce cards with drop shadows in architectural/engineering directories.
+   * Use an **Architectural Terminal Roster** with a horizontal station navigator bar (`01 MUMBAI`, `02 DELHI`...) and full-width terminal strips separated by hairline dividers.
+8. **Expansive 2-Column Editorial Spread:**
+   * Never squeeze article reading content into a 600-700px narrow column.
+   * Use a `1200px+` 2-column layout: Sticky left sidebar (300px) with metadata, table of contents, and consultation dock + wide right column (800px+) for reading.
+9. **Homepage Featherweight Performance:**
+   * Never inject heavy FAQ accordions or giant `<head>` JSON-LD schemas onto the root homepage (`/`). Keep it under 8 KB SSR HTML for 100/100 Mobile Speed. Distribute deep FAQs to regional landing pages.
+10. **Entity Purity & Assertive Voice:**
+   * Never mention or link unowned third-party brands in schemas or text. Maintain 100% brand entity purity.
+   * Write confident, authoritative consulting copy without weak legal hedging ("A suitable match may not always be available").
+11. **Zero-Error Tailwind Linter Protocol:**
+   * Ensure `.vscode/settings.json` has `{"css.lint.unknownAtRules": "ignore"}` to prevent `@tailwind` diagnostic warnings.
 
 ---
 

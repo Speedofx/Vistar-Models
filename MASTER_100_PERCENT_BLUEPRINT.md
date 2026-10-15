@@ -50,7 +50,7 @@
 
 ---
 
-### 💎 The 9 Eternal Laws of the "Nichod":
+### 💎 The 14 Eternal Laws of the "Nichod":
 
 #### 1. The WebP Responsive Image Law (96% Reduction)
 * **Never serve uncompressed PNGs or JPGs.** An uncompressed 1.2 MB PNG causes an 8.3s LCP on mobile 4G and caps performance at 70.
@@ -96,6 +96,42 @@
 * **Sitemap Submission:** Only submit `sitemap.xml` into the "Add a new sitemap" input. (Never paste web page HTML URLs there!).
 * **Instant Priority Indexing:** Use the top search bar (`Inspect any URL`) -> "Test Live URL" -> "Request Indexing" for Tier-1 money pages.
 * **Google Maps (GBP):** Match Name, Address, and Phone 100% with on-page schema, and link GBP directly to `/units/:city` (never to generic root homepage).
+
+#### 10. The Anti-Card Architectural Directory Law (No Generic SaaS Cards)
+* **Never use 3x3 rounded e-commerce card grids** with cheesy drop-shadows for high-end technical, architectural, or enterprise directories. It looks like a cheap SaaS template and ruins brand credibility.
+* **The Solution — The Architectural Terminal Roster:**
+  * **Station Navigator Bar:** Horizontal station ticker with numbered codes (`01 / MUMBAI`, `02 / DELHI`...) for instant in-page jumping.
+  * **Expansive Terminal Rows:** Full-width architectural strips separated by crisp hairline dividers (`1px solid var(--line)`):
+    * Column 1: Station Code, Region Name, State & Regulatory Authority badges (e.g. `MMRDA · MahaRERA`), and Verified Client Ratings.
+    * Column 2: Exact Physical Address, Major Arterial Corridors, and Flagship Project Highlights.
+    * Column 3: Institutional Action Cluster (`Explore Hub & 200 FAQs →` primary button + `Google Maps ↗` + `WhatsApp Desk ↗`).
+
+#### 11. The Expansive 2-Column Editorial Spread Law (No "Squished" Content)
+* **Never constrain reading articles to a 600–700px narrow tube centered in a 1920px screen.** Squeezed between a full-width header and a full-bleed yellow footer, it looks claustrophobic ("सकड़ा दिया गया लेआउट").
+* **The Solution — The 1200px+ 2-Column Architectural Editorial Spread:**
+  * **Sticky Left Sidebar (300px):** Category badge, Author & Date, Reading time, Interactive Table of Contents (01, 02 numbered sections), and a minimal brief consultation card.
+  * **Expansive Right Reading Column (800px+):** Large architectural headlines, wide 16:9 hero imagery, dark TL;DR summary box, and generous line-height (`1.75`) for an editorial monograph feel.
+  * Automatically collapses into a clean, legible single column on mobile (< 960px).
+
+#### 12. The Homepage Featherweight Performance Law (Preserving 100/100 Mobile)
+* **Never bloat the root homepage (`/`) with heavy FAQ accordions or giant `<head>` JSON-LD schemas.**
+* Adding a 50-item FAQPage schema into `<head>` inflates initial SSR HTML payload, delaying HTML parsing on mobile 4G CPUs (Element Render Delay balloons by 1.8s and Speed Index jumps from 1.8s to 4.2s, dropping mobile performance from 100 to 95!).
+* **The Solution:** Keep the root homepage featherweight (< 8 KB SSR HTML, < 10 KB JS). Distribute deep FAQs and specialized schemas to dedicated regional landing pages (`/units/[city]`) and journal articles (`/blog/[slug]`).
+
+#### 13. The Entity Purity & Assertive Voice Law (AEO / GEO Domination)
+* **Never link or mention third-party/unowned company names** in schemas (`sameAs`) or content. Always preserve 100% brand entity purity.
+* **Eliminate all weak legal hedging:** Phrases like *"A suitable match may not always be available"* or *"No promises of orders"* destroy LLM recommendation confidence.
+* **Write Active, Authoritative Language:** *"We evaluate 0.1mm CNC/SLA machine tolerances, multi-zone LED lighting, and workshop capacity to match your project brief with verified specialist makers."*
+
+#### 14. The Zero-Error CSS & Tailwind Linter Protocol (`.vscode/settings.json`)
+* When using Tailwind CSS with CSS files, VS Code's internal language server defaults to flagging `@tailwind` with `Unknown at rule @tailwind (unknownAtRules)`.
+* Every production repository MUST include `.vscode/settings.json`:
+  ```json
+  {
+    "css.lint.unknownAtRules": "ignore"
+  }
+  ```
+  This guarantees a clean, zero-diagnostic IDE experience for any AI agent or human developer.
 
 ---
 
