@@ -21,6 +21,7 @@ export function loader({ request }: Route.LoaderArgs) {
 		.map(post => {
 			const url = `${origin}/blog/${post.slug}`;
 			const cover = coverMap[post.cover] ?? images.architectural;
+			const coverUrl = cover.startsWith('http') ? cover : `${origin}${cover}`;
 			return `\t\t<item>
 \t\t\t<title>${escapeXml(post.title)}</title>
 \t\t\t<link>${url}</link>
@@ -28,7 +29,7 @@ export function loader({ request }: Route.LoaderArgs) {
 \t\t\t<pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
 \t\t\t<dc:creator>${escapeXml(post.author)}</dc:creator>
 \t\t\t<description>${escapeXml(post.excerpt)}</description>
-\t\t\t<enclosure url="${cover}" type="image/png" />
+\t\t\t<enclosure url="${coverUrl}" type="image/png" />
 \t\t</item>`;
 		})
 		.join('\n');

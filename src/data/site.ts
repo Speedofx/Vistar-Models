@@ -1,14 +1,14 @@
 export const whatsapp = 'https://wa.me/918302806913?text=' + encodeURIComponent('Hello Vistar Models, I have a scale-model requirement and would like help finding a suitable manufacturing partner. Please let me know what project details you need.');
 export const images = {
- architectural: 'https://images.hostinger.com/1aa888f8-2ed0-47a3-84f2-65ce39996103/e6a133ad-52b2-4c0e-aefd-aa2794455da6.png',
- township: 'https://images.hostinger.com/1aa888f8-2ed0-47a3-84f2-65ce39996103/aa1b7a74-896d-4c29-ad88-1ddfdeecf926.png',
- industrial: 'https://images.hostinger.com/1aa888f8-2ed0-47a3-84f2-65ce39996103/b172c168-6150-46df-9efb-5e4b2fa1512d.png',
- villa: 'https://images.hostinger.com/1aa888f8-2ed0-47a3-84f2-65ce39996103/fb796250-07eb-4ebb-b0fe-1b965e0e4667.png',
- interior: 'https://images.hostinger.com/1aa888f8-2ed0-47a3-84f2-65ce39996103/b798524a-ea8d-4726-9fcb-dbae81756a0a.png',
- exhibition: 'https://images.hostinger.com/1aa888f8-2ed0-47a3-84f2-65ce39996103/9cf3264f-8440-4222-b867-4d6a65895dcb.png',
- engineering: 'https://images.hostinger.com/1aa888f8-2ed0-47a3-84f2-65ce39996103/213cb63d-6a66-454d-9ec6-8600ba84ac55.png',
- working: 'https://images.hostinger.com/1aa888f8-2ed0-47a3-84f2-65ce39996103/89584f3a-c6f8-4846-bca2-78ad031af4c9.png',
- printing: 'https://images.hostinger.com/1aa888f8-2ed0-47a3-84f2-65ce39996103/9667bb67-4f60-4a0a-ab07-0344ee92c656.png',
+ architectural: '/images/architectural.png',
+ township: '/images/township.png',
+ industrial: '/images/industrial.png',
+ villa: '/images/villa.png',
+ interior: '/images/interior.png',
+ exhibition: '/images/exhibition.png',
+ engineering: '/images/engineering.png',
+ working: '/images/working.png',
+ printing: '/images/printing.png',
 };
 export const categories = [
  {slug:'architectural-makers', name:'Architectural Models', image:images.architectural, description:'Building form, facade detail and context, translated into a physical presentation.', needs:['Building plans, elevations and reference renders','Presentation purpose, scale and overall footprint','Facade finish, landscape detail and lighting'], considerations:'Look for experience with facade materials, clean assembly, landscape treatment and presentation bases. A sales-gallery model may need different detailing from a design-review model.'},
