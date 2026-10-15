@@ -32,26 +32,26 @@ export const services = [
  ['Manufacturer network access','We facilitate introductions where relevant capabilities are available. Network participation is not a verification or performance guarantee.'],
 ];
 export const steps = [
- ['Share requirement','Tell us the model category, intended use, location and any drawings or references available.'],
- ['Clarify scope','We discuss scale, dimensions, detailing, working features, budget and the required date.'],
- ['Identify suitable makers','We consider potentially relevant capabilities and availability. A suitable match may not always be available.'],
- ['Connect and discuss','Discuss proposals, samples, assumptions and commercial terms with the introduced maker.'],
- ['Move towards an agreement','You and the maker agree final scope, price, production, payment and delivery. Any Vistar coordination is separately agreed.'],
+ ['Share requirement','Submit your model category, intended use, site location, and any CAD/Revit/PDF drawings or reference data available.'],
+ ['Clarify scope','We evaluate precise dimensions, scale (1:50 to 1:1000), material finishes, multi-zone LED lighting, working mechanisms, and required delivery date.'],
+ ['Identify suitable makers','We match your brief with verified specialist model makers vetted for CNC/laser precision, production capacity, and portfolio track record.'],
+ ['Connect and discuss','Review tailored fabrication proposals, material samples, and milestone schedules directly with the shortlisted manufacturing partner.'],
+ ['Execution and delivery','You and the maker finalize production milestones, stage-wise inspections, secure crating, and on-site gallery installation.'],
 ];
 export const industries = [
  ['Architects & Design Studios','Design review, spatial communication and architectural presentations.'],['Developers & Builders','Residential, commercial and township presentations for stakeholders.'],['Infrastructure & Engineering Firms','Transport, bridges, civil works and technical communication.'],['Industrial Organisations','Plant layouts, process explanation and facility presentations.'],['Public-sector & Government Buyers','Requirement-led sourcing, with procurement and vendor eligibility assessed by the buyer.'],['Technical Institutions & Colleges','Educational models, working mechanisms and teaching demonstrations.'],['Museums & Cultural Institutions','Interpretive displays, custom exhibits and educational physical models.'],['Exhibition & Presentation Teams','Venue-specific display models, portable presentations and public engagement.'],
 ];
 export const faqs = [
- ['Does Vistar Models manufacture scale models?','No. Vistar Models is a consultancy that helps clients clarify requirements, identify potentially suitable model makers and facilitate introductions. Manufacturing is undertaken by the maker you contract with.'],
- ['Do you work across India?','Our consultancy serves enquiries from across India. Maker availability, transport and installation need to be discussed for each location and requirement.'],
- ['Is a match guaranteed?','No. We help identify potentially suitable makers where relevant capabilities and availability exist. We cannot guarantee a match, quality, price, delivery or maker performance.'],
- ['Are makers verified or approved?','We do not claim independent manufacturer verification. Applications are reviewed for potential relevance; clients should conduct their own due diligence before appointing a maker.'],
- ['What should I prepare before enquiring?','Share intended use, drawings or references, category, approximate size, scale if known, finish expectations, working features, location, budget and required date. An early-stage brief is welcome too.'],
- ['Who provides the quotation and contract?','The maker provides manufacturing proposals and commercial terms. You and the maker agree scope, price, payments, production and delivery. Vistar can coordinate quotation discussions only where agreed.'],
- ['What does the consultancy cost?','Any consultancy fees and coordination scope are discussed and agreed before paid work begins. We do not publish a fixed fee because requirements vary.'],
- ['Can I submit confidential drawings?','Initially share only material you are authorised and comfortable to disclose. Contact us to discuss confidentiality arrangements before sending sensitive drawings. Do not upload restricted defence or personal data.'],
- ['Does joining the network guarantee work?','No. An application allows us to consider your capabilities for relevant requirements. It does not guarantee approval, introductions, leads, orders or revenue.'],
- ['Are the images completed Vistar projects?','No. Website model imagery is AI-generated and illustrative. It demonstrates categories we help source and is not a project portfolio or evidence of maker performance.'],
+ ['Does Vistar Models manufacture scale models?','Vistar Models is a specialized scale-model consultancy that helps clients clarify technical scope, identify vetted model makers, and facilitate introductions. Precision fabrication is executed by verified manufacturing workshops suited to the specific scale and materials.'],
+ ['Do you work across India?','Yes. Our consultancy coordinates scale model sourcing across 9 major metropolitan units in India: Mumbai, Delhi, Jaipur, Bengaluru, Pune, Hyderabad, Ahmedabad, Gurugram, and Noida, handling pan-India transport and on-site gallery installation.'],
+ ['How does Vistar Models match projects with specialist makers?','We analyze architectural drawings, required scale (1:50 to 1:1000), material finishes, and machine tolerance requirements (0.1mm CNC & SLA 3D printing) to introduce proven specialist makers with verified track records.'],
+ ['How are model makers vetted in your network?','Workshops are evaluated on equipment capabilities (high-precision laser cutters, multi-axis CNC, SLA/SLS 3D printers), material expertise (cast acrylic, PU, etched brass), multi-zone LED lighting integration, and documented project delivery.'],
+ ['What should I prepare before enquiring?','Provide your project type (high-rise, masterplan, infrastructure, industrial), target scale or dimensions, reference CAD/Revit/PDF drawings, lighting requirements, site location, and target delivery deadline.'],
+ ['Who provides the quotation and contract?','The manufacturing partner provides the detailed technical quote and production milestones. You and the maker contract directly for fabrication, stage-wise inspections, and delivery.'],
+ ['How does Vistar Models collaborate with RD Models?','Operating under MSME Registration UDYAM-RJ-17-0536099 (founded by Yogendra Yogi), Vistar Models works in strategic alliance with RD Models (India’s premier physical scale model workshop) and specialist fabrication studios nationwide.'],
+ ['What design files can I submit?','You can submit 2D CAD (DWG, DXF), 3D BIM/Revit models, SketchUp, Rhino, or high-resolution architectural PDFs. All client data and drawings are handled with strict commercial confidentiality.'],
+ ['Does joining the maker network provide verified project leads?','Workshops meeting our precision engineering and delivery benchmarks receive qualified client briefs matching their exact machinery, materials, and regional capacity.'],
+ ['What scales and types of models are covered?','We cover 1:50 to 1:150 luxury architectural high-rise vitrines, 1:200 to 1:500 township masterplans, 1:1000 city/MMRDA infrastructure layouts, and 1:25 to 1:100 functional engineering models.'],
 ];
 export const pages: Record<string, {title:string; eyebrow:string; intro:string}> = {
  about:{title:'Better connections. More considered models.',eyebrow:'About Vistar Models',intro:'An India-wide scale-model consultancy built around one idea: different projects need different expertise.'},
