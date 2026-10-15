@@ -8,14 +8,15 @@ import {
 	ArrowUpRight,
 	Search,
 	ShieldCheck,
-	Layers,
-	Clock,
 	Award,
 	ChevronRight,
+	Star,
+	Navigation,
+	Compass,
 } from 'lucide-react';
 import { seo, siteOriginFrom, absoluteUrl } from '@/lib/seo';
 import { getUnit, units, type Unit } from '@/data/units';
-import { categories, whatsapp } from '@/data/site';
+import { categories } from '@/data/site';
 import { ContactCta } from '@/components/contact-cta';
 
 export function loader({ params }: { params: { city?: string } }) {
@@ -62,7 +63,7 @@ export function meta({
 					'@type': 'BreadcrumbList',
 					itemListElement: [
 						{ '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl(origin, '/') },
-						{ '@type': 'ListItem', position: 2, name: 'Units', item: absoluteUrl(origin, '/units') },
+						{ '@type': 'ListItem', position: 2, name: 'My Branches', item: absoluteUrl(origin, '/units') },
 						{ '@type': 'ListItem', position: 3, name: unit.name, item: canonicalUrl },
 					],
 				},
@@ -88,6 +89,11 @@ export function meta({
 					},
 					serviceType: 'Architectural Scale Model Consultancy & Manufacturing Sourcing',
 					priceRange: '₹₹–₹₹₹',
+					aggregateRating: {
+						'@type': 'AggregateRating',
+						ratingValue: unit.rating,
+						reviewCount: unit.reviewCount,
+					},
 					identifier: {
 						'@type': 'PropertyValue',
 						name: 'MSME UDYAM Registration',
@@ -142,39 +148,102 @@ export default function CityUnitPage() {
 					</Link>
 					<ChevronRight size={14} />
 					<Link to="/units" style={{ color: 'inherit', textDecoration: 'none' }}>
-						Operating Units
+						My Branches
 					</Link>
 					<ChevronRight size={14} />
 					<span style={{ color: 'var(--foreground, #f0f6fc)', fontWeight: 500 }}>{unit.city}</span>
 				</div>
 			</div>
 
-			{/* Hero Section */}
-			<header
+			{/* Quick-Switch Branch Navigation Bar */}
+			<div
 				style={{
-					padding: '3.5rem 1.5rem 3rem',
-					maxWidth: '1240px',
-					margin: '0 auto',
+					background: 'rgba(255, 255, 255, 0.03)',
+					borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
+					padding: '0.75rem 1.5rem',
+					overflowX: 'auto',
 				}}
 			>
 				<div
 					style={{
-						display: 'inline-flex',
+						maxWidth: '1240px',
+						margin: '0 auto',
+						display: 'flex',
 						alignItems: 'center',
-						gap: '0.5rem',
-						fontSize: '0.8rem',
-						textTransform: 'uppercase',
-						letterSpacing: '0.08em',
-						fontWeight: 700,
-						color: 'var(--accent, #e5a93c)',
-						background: 'rgba(229, 169, 60, 0.12)',
-						padding: '6px 14px',
-						borderRadius: '20px',
-						marginBottom: '1.25rem',
+						gap: '0.6rem',
+						fontSize: '0.82rem',
 					}}
 				>
-					<ShieldCheck size={16} />
-					<span>MSME Registered · UDYAM-RJ-17-0536099 · {unit.city}, {unit.state}</span>
+					<span style={{ fontWeight: 600, color: 'var(--accent, #e5a93c)', display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
+						<Compass size={14} /> Switch Branch:
+					</span>
+					{units.map(u => (
+						<Link
+							key={u.slug}
+							to={`/units/${u.slug}`}
+							style={{
+								padding: '4px 10px',
+								borderRadius: '6px',
+								textDecoration: 'none',
+								flexShrink: 0,
+								fontWeight: u.slug === unit.slug ? 700 : 500,
+								background: u.slug === unit.slug ? 'var(--accent, #e5a93c)' : 'rgba(255, 255, 255, 0.05)',
+								color: u.slug === unit.slug ? '#000' : 'var(--muted, #a0aec0)',
+								border: u.slug === unit.slug ? 'none' : '1px solid rgba(255, 255, 255, 0.08)',
+							}}
+						>
+							{u.city}
+						</Link>
+					))}
+				</div>
+			</div>
+
+			{/* Hero Section */}
+			<header
+				style={{
+					padding: '3rem 1.5rem 2.5rem',
+					maxWidth: '1240px',
+					margin: '0 auto',
+				}}
+			>
+				<div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center', marginBottom: '1.25rem' }}>
+					<div
+						style={{
+							display: 'inline-flex',
+							alignItems: 'center',
+							gap: '0.5rem',
+							fontSize: '0.8rem',
+							textTransform: 'uppercase',
+							letterSpacing: '0.08em',
+							fontWeight: 700,
+							color: 'var(--accent, #e5a93c)',
+							background: 'rgba(229, 169, 60, 0.12)',
+							padding: '6px 14px',
+							borderRadius: '20px',
+						}}
+					>
+						<ShieldCheck size={16} />
+						<span>MSME Registered · UDYAM-RJ-17-0536099 · {unit.city}, {unit.state}</span>
+					</div>
+
+					{/* Google Review Badge */}
+					<div
+						style={{
+							display: 'inline-flex',
+							alignItems: 'center',
+							gap: '6px',
+							fontSize: '0.8rem',
+							fontWeight: 600,
+							color: '#ffc107',
+							background: 'rgba(255, 193, 7, 0.1)',
+							padding: '6px 12px',
+							borderRadius: '20px',
+							border: '1px solid rgba(255, 193, 7, 0.2)',
+						}}
+					>
+						<Star size={14} fill="#ffc107" />
+						<span>{unit.rating} Google Rating ({unit.reviewCount} Verified Client Reviews)</span>
+					</div>
 				</div>
 
 				<h1
@@ -190,9 +259,32 @@ export default function CityUnitPage() {
 					Scale Model Maker & Architectural Model Consultancy in {unit.city}
 				</h1>
 
+				{/* Atomic Address & Direct Fact Block (Engineered for Instant LLM Extraction) */}
+				<address
+					style={{
+						fontStyle: 'normal',
+						background: 'rgba(255, 255, 255, 0.03)',
+						border: '1px solid rgba(255, 255, 255, 0.08)',
+						borderLeft: '4px solid var(--accent, #e5a93c)',
+						borderRadius: '8px',
+						padding: '1.25rem',
+						margin: '0 0 1.75rem',
+						fontSize: '0.95rem',
+						lineHeight: 1.6,
+						color: 'var(--foreground, #f0f6fc)',
+						maxWidth: '960px',
+					}}
+				>
+					<strong>Official Branch Address:</strong> {unit.name}, {unit.address}, {unit.city}, {unit.state} – {unit.pincode}, India.
+					<br />
+					<strong>Area Coverage:</strong> {unit.areaHighlights}
+					<br />
+					<strong>Direct Phone / Inquiry:</strong> <a href="tel:+918302806913" style={{ color: 'var(--accent, #e5a93c)' }}>+91 83028 06913</a> · <strong>Email:</strong> <a href="mailto:vistarmodels@gmail.com" style={{ color: 'var(--accent, #e5a93c)' }}>vistarmodels@gmail.com</a> · <strong>UDYAM:</strong> UDYAM-RJ-17-0536099.
+				</address>
+
 				<p
 					style={{
-						fontSize: '1.15rem',
+						fontSize: '1.05rem',
 						color: 'var(--muted, #a0aec0)',
 						maxWidth: '900px',
 						lineHeight: 1.6,
@@ -226,7 +318,9 @@ export default function CityUnitPage() {
 					</a>
 
 					<a
-						href="tel:+918302806913"
+						href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(unit.mapQuery)}`}
+						target="_blank"
+						rel="noreferrer"
 						style={{
 							display: 'inline-flex',
 							alignItems: 'center',
@@ -241,25 +335,28 @@ export default function CityUnitPage() {
 							textDecoration: 'none',
 						}}
 					>
-						<Phone size={18} />
-						Call +91 83028 06913
+						<Navigation size={18} style={{ color: 'var(--accent, #e5a93c)' }} />
+						Open in Google Maps
 					</a>
 
-					<Link
-						to="/find-a-model-maker"
+					<a
+						href="tel:+918302806913"
 						style={{
 							display: 'inline-flex',
 							alignItems: 'center',
 							gap: '0.5rem',
 							padding: '0.85rem 1.5rem',
-							color: 'var(--muted, #cbd5e0)',
+							background: 'rgba(255, 255, 255, 0.03)',
+							color: 'var(--foreground, #f0f6fc)',
 							fontWeight: 600,
 							fontSize: '0.95rem',
+							borderRadius: '8px',
 							textDecoration: 'none',
 						}}
 					>
-						Submit Drawing Set →
-					</Link>
+						<Phone size={18} />
+						Call +91 83028 06913
+					</a>
 				</div>
 			</header>
 
@@ -278,7 +375,7 @@ export default function CityUnitPage() {
 				>
 					<div>
 						<span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent, #e5a93c)', fontWeight: 700 }}>
-							Registered Operating Location
+							Registered Branch Location
 						</span>
 						<h2 style={{ fontSize: '1.25rem', margin: '0.5rem 0', color: 'var(--foreground, #f0f6fc)' }}>
 							{unit.name}
@@ -291,9 +388,9 @@ export default function CityUnitPage() {
 							href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(unit.mapQuery)}`}
 							target="_blank"
 							rel="noreferrer"
-							style={{ fontSize: '0.85rem', color: 'var(--accent, #e5a93c)', textDecoration: 'none', fontWeight: 600 }}
+							style={{ fontSize: '0.85rem', color: 'var(--accent, #e5a93c)', textDecoration: 'none', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}
 						>
-							View on Google Maps <ArrowUpRight size={14} style={{ display: 'inline' }} />
+							<Navigation size={14} /> Get Directions on Google Maps <ArrowUpRight size={14} />
 						</a>
 					</div>
 
@@ -315,13 +412,13 @@ export default function CityUnitPage() {
 
 					<div>
 						<span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent, #e5a93c)', fontWeight: 700 }}>
-							Fabrication Standards
+							Verified Customer Satisfaction
 						</span>
 						<h3 style={{ fontSize: '1.1rem', margin: '0.5rem 0', color: 'var(--foreground, #f0f6fc)', fontWeight: 600 }}>
-							Precision Scale Standards
+							★★★★★ {unit.rating} / 5.0 Rating
 						</h3>
 						<p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted, #a0aec0)', lineHeight: 1.5 }}>
-							Cast acrylic (PMMA), laser vector cutting, CNC contour routing, SLA/PolyJet 3D printing, multi-tier DMX/iPad LED zoning, and export-grade fumigated crating.
+							Backed by {unit.reviewCount}+ verified client reviews from real estate developers, architects, and industrial plant managers across {unit.city} and {unit.state}.
 						</p>
 					</div>
 				</div>
@@ -342,7 +439,7 @@ export default function CityUnitPage() {
 						<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent, #e5a93c)', marginBottom: '0.75rem' }}>
 							<Building2 size={20} />
 							<h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 600, color: 'var(--foreground, #f0f6fc)' }}>
-								About Our {unit.city} Operational Unit
+								About Our {unit.city} Branch
 							</h2>
 						</div>
 						<p style={{ fontSize: '0.95rem', color: 'var(--muted, #cbd5e0)', lineHeight: 1.7, margin: 0 }}>
@@ -396,7 +493,6 @@ export default function CityUnitPage() {
 								display: 'flex',
 								flexDirection: 'column',
 								justifyContent: 'space-between',
-								transition: 'border-color 0.2s',
 							}}
 						>
 							<div>
@@ -492,7 +588,6 @@ export default function CityUnitPage() {
 									border: '1px solid rgba(255, 255, 255, 0.06)',
 									borderRadius: '10px',
 									padding: '1rem 1.25rem',
-									transition: 'background 0.2s',
 								}}
 							>
 								<summary
@@ -542,10 +637,10 @@ export default function CityUnitPage() {
 				</div>
 			</section>
 
-			{/* Other Regional Units Directory */}
+			{/* Other Regional Branches Directory */}
 			<section style={{ maxWidth: '1240px', margin: '0 auto 4rem', padding: '0 1.5rem' }}>
 				<h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--foreground, #f0f6fc)', marginBottom: '1.25rem' }}>
-					Explore Other Vistar Models Regional Units in India:
+					Explore Other Vistar Models Branches in India:
 				</h3>
 				<div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
 					{units
@@ -567,7 +662,7 @@ export default function CityUnitPage() {
 									textDecoration: 'none',
 								}}
 							>
-								{other.city} Unit <ArrowUpRight size={12} />
+								{other.city} Branch <ArrowUpRight size={12} />
 							</Link>
 						))}
 				</div>

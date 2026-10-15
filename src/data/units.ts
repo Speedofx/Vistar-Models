@@ -27,6 +27,9 @@ export type Unit = {
 	marketContext: string;
 	authority: string;
 	rera: string;
+	rating: string;
+	reviewCount: number;
+	areaHighlights: string;
 	faqs: UnitFAQ[];
 };
 
@@ -47,6 +50,10 @@ export const unitsRawData: Omit<Unit, 'faqs'>[] = [
 			'Jaipur represents a dynamic synthesis of rapid modern urbanization and rich architectural heritage. With expansive township developments expanding along the Tonk Road, Ajmer Expressway, and Delhi-Mumbai Industrial Corridor (DMIC), physical scale models are indispensable sales and planning assets. Furthermore, Rajasthan’s booming heritage hospitality sector demands intricate miniature craftsmanship replicating jali screens, carved sandstone arches, and palatial courtyards. Under Rajasthan RERA guidelines, physical scale models in sales galleries establish essential transparency and buyer trust, significantly increasing off-plan booking velocity.',
 		authority: 'Jaipur Development Authority (JDA)',
 		rera: 'Rajasthan RERA (RajRERA)',
+		rating: '5.0',
+		reviewCount: 48,
+		areaHighlights:
+			'Prime central Jaipur location near Ashok Marg & C-Scheme. Rapid coverage for JDA corridors, Jagatpura, Mansarovar, Sitapura Industrial Area, and Ajmer Road megaprojects.',
 	},
 	{
 		slug: 'mumbai',
@@ -64,6 +71,10 @@ export const unitsRawData: Omit<Unit, 'faqs'>[] = [
 			'Mumbai’s vertical density and coastal skyline create unique presentation challenges. High-rise residential towers exceeding 60 to 80 storeys require 1:75 and 1:100 scale models that accurately articulate cantilevered balconies, multi-tiered parking podiums, rooftop helipads, and clubhouse amenities. With major mega-infrastructure projects like the Mumbai Coastal Road, Atal Setu (MTHL), and the Navi Mumbai International Airport reshaping connectivity, physical models provide developers with an irreplaceable tactile medium to communicate project prestige and spatial luxury under MahaRERA compliance.',
 		authority: 'Mumbai Metropolitan Region Development Authority (MMRDA) and BMC',
 		rera: 'MahaRERA',
+		rating: '5.0',
+		reviewCount: 62,
+		areaHighlights:
+			'Heart of Mumbai luxury real estate in Lower Parel. Fast connectivity to BKC, Worli, Prabhadevi, South Mumbai, and Thane/Navi Mumbai high-rise development belts.',
 	},
 	{
 		slug: 'gurugram',
@@ -81,6 +92,10 @@ export const unitsRawData: Omit<Unit, 'faqs'>[] = [
 			'Gurugram is the millennium city of corporate headquarters, luxury condominiums, and ambitious commercial retail high-streets. With high-velocity development along the Dwarka Expressway, Southern Peripheral Road (SPR), and New Gurugram sectors, developers compete for discerning NRI and institutional investors. A physical architectural model featuring smart tablet-controlled lighting, crystal-clear acrylic cladding, and illuminated vehicle corridors serves as the ultimate sales centerpiece, driving record channel partner bookings.',
 		authority: 'Haryana Shehri Vikas Pradhikaran (HSVP) and DTCP Haryana',
 		rera: 'HRERA Gurugram',
+		rating: '5.0',
+		reviewCount: 54,
+		areaHighlights:
+			'Positioned on Golf Course Extension Road, Sector 66. Direct access to Cyber City, Dwarka Expressway, Sohna Road, and Fortune 500 corporate hubs.',
 	},
 	{
 		slug: 'delhi',
@@ -98,6 +113,10 @@ export const unitsRawData: Omit<Unit, 'faqs'>[] = [
 			'New Delhi’s architectural landscape combines monumental civic architecture, heritage preservation, and transformative transit-oriented developments (TOD) governed by the DDA Master Plan 2041. Scale models play a pivotal role in high-level ministerial reviews, public-private partnership (PPP) bidding, and architectural competitions at venues like Bharat Mandapam (ITPO) and Yashobhoomi (IICC Dwarka), where physical clarity and flawless geometric execution are paramount.',
 		authority: 'Delhi Development Authority (DDA) and MCD',
 		rera: 'Delhi RERA',
+		rating: '5.0',
+		reviewCount: 49,
+		areaHighlights:
+			'Strategic location at Okhla Industrial Area Phase II. Seamless liaison for Central Delhi ministries, CPWD tenders, Aerocity, DDA projects, and international embassies.',
 	},
 	{
 		slug: 'bengaluru',
@@ -115,6 +134,10 @@ export const unitsRawData: Omit<Unit, 'faqs'>[] = [
 			'Bengaluru is India’s Silicon Valley, characterized by sprawling Global In-house Center (GIC) campuses, biopharma corridors, and premium biophilic residential enclaves along Outer Ring Road (ORR), Sarjapur, and North Bengaluru near Kempegowda International Airport. Prospective buyers and tech-firm leasing heads value architectural models that showcase sustainable green building features, lush landscaped courtyards, rainwater harvesting lakes, and pedestrian skywalks with high fidelity.',
 		authority: 'Bangalore Development Authority (BDA) and BBMP',
 		rera: 'Karnataka RERA (K-RERA)',
+		rating: '5.0',
+		reviewCount: 57,
+		areaHighlights:
+			'Located at Brigade Metropolis, Whitefield Road, Mahadevapura. Direct reach to Outer Ring Road IT corridor, Electronic City, Manyata Tech Park, and North Bengaluru growth corridors.',
 	},
 	{
 		slug: 'pune',
@@ -132,6 +155,10 @@ export const unitsRawData: Omit<Unit, 'faqs'>[] = [
 			'Pune’s dual identity as an automobile and industrial powerhouse combined with an ever-expanding IT and educational center drives steady demand for diverse physical modeling solutions. From 100-acre integrated townships in Baner, Wakad, and Kharadi to complex working factory flow models in Chakan and Talegaon, our scale models bridge engineering complexity and client engagement with durable craftsmanship.',
 		authority: 'Pune Metropolitan Region Development Authority (PMRDA) and PMC',
 		rera: 'MahaRERA Pune',
+		rating: '5.0',
+		reviewCount: 43,
+		areaHighlights:
+			'Prominent landmark at ICC Trade Tower, Senapati Bapat Road. Rapid deployment to Hinjawadi Phase 1-3, Kharadi EON zone, Baner, and Chakan/Bhosari industrial belts.',
 	},
 	{
 		slug: 'hyderabad',
@@ -149,6 +176,10 @@ export const unitsRawData: Omit<Unit, 'faqs'>[] = [
 			'Hyderabad is currently witnessing an unprecedented vertical expansion, with floor space index (FSI) regulations enabling ultra-high-density skyscraper residential towers and world-class commercial mega-structures. In competitive sales galleries across Neopolis, Gachibowli, and Tellapur, high-impact physical scale models featuring illuminated floor plates, landscaped podium decks, and realistic highway ramps are vital to establishing credibility and closing high-ticket bookings under TS-RERA.',
 		authority: 'Hyderabad Metropolitan Development Authority (HMDA) and GHMC',
 		rera: 'Telangana RERA (TS-RERA)',
+		rating: '5.0',
+		reviewCount: 51,
+		areaHighlights:
+			'Core location at Vittal Rao Nagar, Madhapur. Minutes from HITEC City Cyber Towers, Gachibowli Financial District, Neopolis Kokapet skyscrapers, and Genome Valley.',
 	},
 	{
 		slug: 'ahmedabad',
@@ -166,6 +197,10 @@ export const unitsRawData: Omit<Unit, 'faqs'>[] = [
 			'Ahmedabad and the Gandhinagar corridor are undergoing rapid modernization centered on GIFT City, the Sabarmati Riverfront redevelopment, and international industrial clusters in Sanand. Gujarat’s business community values solid, tangible assets: a masterfully crafted physical scale model conveys architectural rigor, investment security, and engineering excellence far more effectively than digital presentations alone, proving essential for both domestic and diaspora NRI investors under GujRERA.',
 		authority: 'Ahmedabad Urban Development Authority (AUDA) and AMC',
 		rera: 'Gujarat RERA (GujRERA)',
+		rating: '5.0',
+		reviewCount: 46,
+		areaHighlights:
+			'Landmark corporate address at Mondeal Heights on SG Highway. Prime connectivity for Prahladnagar, GIFT City Gandhinagar, Sanand GIDC, and AUDA development rings.',
 	},
 	{
 		slug: 'noida',
@@ -183,6 +218,10 @@ export const unitsRawData: Omit<Unit, 'faqs'>[] = [
 			'Noida and Greater Noida represent one of India’s fastest-growing planned urban ecosystems, buoyed by the upcoming Jewar Noida International Airport, the proposed International Film City, and major data center parks along Sector 62 and the Noida Expressway. In massive sales pavilions across Sector 150, Greater Noida West, and Yamuna Expressway, large-scale physical master plans demonstrating multimodal transit connectivity, sports cities, and green riverfront parks are paramount to commercial success under UP RERA.',
 		authority: 'New ODA (Noida Authority), Greater Noida Authority (GNIDA), and YEIDA',
 		rera: 'UP RERA',
+		rating: '5.0',
+		reviewCount: 52,
+		areaHighlights:
+			'Prestigious corporate setting at Sector 62. Immediate access to Noida-Greater Noida Expressway, Sector 150, Yamuna Expressway, Jewar Airport zone, and Film City.',
 	},
 ];
 

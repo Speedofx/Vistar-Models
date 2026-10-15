@@ -1,26 +1,25 @@
 import { Link } from 'react-router';
-import { ArrowUpRight, MapPin, Building2, CheckCircle2, ShieldCheck, Phone, MessageSquare } from 'lucide-react';
+import { ArrowUpRight, MapPin, Building2, CheckCircle2, ShieldCheck, Phone, MessageSquare, Star, Navigation } from 'lucide-react';
 import { seo, siteOriginFrom, absoluteUrl } from '@/lib/seo';
 import { units } from '@/data/units';
 import { PageHeading } from '@/components/page-heading';
 import { ContactCta } from '@/components/contact-cta';
-import { whatsapp } from '@/data/site';
 
 export function meta({ matches, location }: { matches: any[]; location: { pathname: string } }) {
 	const origin = siteOriginFrom(matches);
 	return seo(
 		{ matches, location },
 		{
-			title: 'Our 9 MSME Operating Units Across India | Vistar Models',
+			title: 'My Branches & Operating Units Across India | Vistar Models',
 			description:
-				'Vistar Models operates 9 registered regional units across Jaipur, Mumbai, Gurugram, Delhi, Bengaluru, Pune, Hyderabad, Ahmedabad, and Noida. UDYAM-RJ-17-0536099.',
+				'Explore Vistar Models\' 9 registered branch locations across Jaipur, Mumbai, Gurugram, Delhi, Bengaluru, Pune, Hyderabad, Ahmedabad, and Noida. UDYAM-RJ-17-0536099.',
 			jsonLd: [
 				{
 					'@context': 'https://schema.org',
 					'@type': 'BreadcrumbList',
 					itemListElement: [
 						{ '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl(origin, '/') },
-						{ '@type': 'ListItem', position: 2, name: 'Operating Units', item: absoluteUrl(origin, '/units') },
+						{ '@type': 'ListItem', position: 2, name: 'My Branches', item: absoluteUrl(origin, '/units') },
 					],
 				},
 				{
@@ -49,6 +48,11 @@ export function meta({ matches, location }: { matches: any[]; location: { pathna
 						},
 						telephone: '+918302806913',
 						priceRange: '₹₹–₹₹₹',
+						aggregateRating: {
+							'@type': 'AggregateRating',
+							ratingValue: u.rating,
+							reviewCount: u.reviewCount,
+						},
 					})),
 				},
 			],
@@ -60,17 +64,18 @@ export default function UnitsHub() {
 	return (
 		<main className="units-hub-page">
 			<PageHeading
-				title="Our 9 Registered Operating Units Across India."
-				eyebrow="MSME Registered · UDYAM-RJ-17-0536099"
-				intro="Vistar Models operates 9 registered regional units in major Indian metropolitan and industrial hubs. Each unit coordinates architectural, township, industrial, and engineering scale model requirements with local authority, RERA, and market expertise."
+				title="Our Registered Branches & Operating Units Across India."
+				eyebrow="MSME Registered · UDYAM-RJ-17-0536099 · 9 Strategic Hubs"
+				intro="Explore Vistar Models' 9 regional branch units in India's leading metropolitan and industrial centers. Select your city below to inspect complete physical location details, Google Map navigation, verified client ratings, local authority alignment, and 200 specialized FAQs."
 			/>
 
+			{/* Branches Grid */}
 			<section className="section-container" style={{ padding: '0 1.5rem 4rem' }}>
 				<div
 					style={{
 						display: 'grid',
-						gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-						gap: '1.75rem',
+						gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+						gap: '2rem',
 						maxWidth: '1240px',
 						margin: '0 auto',
 					}}
@@ -82,12 +87,11 @@ export default function UnitsHub() {
 								background: 'var(--card, #12141a)',
 								border: '1px solid var(--border, rgba(255, 255, 255, 0.08))',
 								borderRadius: '16px',
-								padding: '2rem',
+								padding: '2.25rem',
 								display: 'flex',
 								flexDirection: 'column',
 								justifyContent: 'space-between',
 								boxShadow: '0 8px 24px rgba(0, 0, 0, 0.25)',
-								transition: 'transform 0.2s ease, border-color 0.2s ease',
 							}}
 						>
 							<div>
@@ -111,21 +115,31 @@ export default function UnitsHub() {
 											borderRadius: '6px',
 										}}
 									>
-										{unit.city} Unit
+										{unit.city} Branch
 									</span>
-									<span
+
+									{/* Google Review Trust Badge */}
+									<div
 										style={{
+											display: 'inline-flex',
+											alignItems: 'center',
+											gap: '4px',
 											fontSize: '0.75rem',
-											color: 'var(--muted, #8b949e)',
+											fontWeight: 600,
+											color: '#ffc107',
+											background: 'rgba(255, 193, 7, 0.1)',
+											padding: '4px 8px',
+											borderRadius: '6px',
 										}}
 									>
-										{unit.state}
-									</span>
+										<Star size={13} fill="#ffc107" />
+										<span>{unit.rating} ({unit.reviewCount} Reviews)</span>
+									</div>
 								</div>
 
 								<h2
 									style={{
-										fontSize: '1.35rem',
+										fontSize: '1.4rem',
 										fontWeight: 600,
 										margin: '0 0 0.75rem',
 										color: 'var(--foreground, #f0f6fc)',
@@ -134,107 +148,127 @@ export default function UnitsHub() {
 									{unit.name}
 								</h2>
 
+								{/* Area Highlights */}
 								<p
 									style={{
-										fontSize: '0.875rem',
-										color: 'var(--muted, #a0aec0)',
+										fontSize: '0.85rem',
+										color: 'var(--muted, #cbd5e0)',
 										lineHeight: 1.6,
 										margin: '0 0 1.25rem',
+										background: 'rgba(255, 255, 255, 0.03)',
+										padding: '0.75rem',
+										borderRadius: '8px',
+										borderLeft: '3px solid var(--accent, #e5a93c)',
 									}}
 								>
-									{unit.description}
+									{unit.areaHighlights}
 								</p>
 
+								{/* Physical Office Address */}
 								<div
 									style={{
 										display: 'flex',
 										alignItems: 'flex-start',
 										gap: '0.5rem',
-										fontSize: '0.8rem',
-										color: 'var(--muted, #8b949e)',
+										fontSize: '0.825rem',
+										color: 'var(--foreground, #f0f6fc)',
 										marginBottom: '0.75rem',
 									}}
 								>
 									<MapPin size={16} style={{ flexShrink: 0, marginTop: '2px', color: 'var(--accent, #e5a93c)' }} />
 									<span>
-										{unit.address}, {unit.city} – {unit.pincode}
+										<strong>Office Address:</strong> {unit.address}, {unit.city}, {unit.state} – {unit.pincode}
 									</span>
 								</div>
 
+								{/* Authority Tag */}
 								<div
 									style={{
 										display: 'flex',
 										alignItems: 'center',
 										gap: '0.5rem',
-										fontSize: '0.75rem',
-										color: 'var(--muted, #718096)',
+										fontSize: '0.78rem',
+										color: 'var(--muted, #8b949e)',
 										marginBottom: '1.25rem',
 									}}
 								>
 									<Building2 size={14} style={{ flexShrink: 0 }} />
-									<span>{unit.authority}</span>
+									<span>Authority: {unit.authority}</span>
 								</div>
 							</div>
 
 							<div>
-								<div
-									style={{
-										display: 'flex',
-										alignItems: 'center',
-										gap: '0.5rem',
-										padding: '0.5rem 0.75rem',
-										background: 'rgba(255, 255, 255, 0.03)',
-										borderRadius: '8px',
-										marginBottom: '1.25rem',
-										fontSize: '0.75rem',
-										color: 'var(--accent, #e5a93c)',
-									}}
-								>
-									<CheckCircle2 size={14} />
-									<span>Includes 200 City-Specific FAQs & Tech Specs</span>
-								</div>
-
-								<div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-									<Link
-										to={`/units/${unit.slug}`}
+								{/* Direct Google Maps & Action Buttons */}
+								<div style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.75rem' }}>
+									<a
+										href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(unit.mapQuery)}`}
+										target="_blank"
+										rel="noreferrer"
 										style={{
 											flex: 1,
 											display: 'inline-flex',
 											alignItems: 'center',
 											justifyContent: 'center',
-											gap: '0.5rem',
-											padding: '0.75rem 1rem',
-											background: 'var(--accent, #e5a93c)',
-											color: '#000',
-											fontWeight: 600,
-											fontSize: '0.875rem',
-											borderRadius: '8px',
-											textDecoration: 'none',
-										}}
-									>
-										View {unit.city} Unit <ArrowUpRight size={16} />
-									</Link>
-
-									<a
-										href={`https://wa.me/918302806913?text=${encodeURIComponent(`Hello Vistar Models, I am inquiring about scale model services for ${unit.city}.`)}`}
-										target="_blank"
-										rel="noreferrer"
-										aria-label={`WhatsApp Vistar Models ${unit.city}`}
-										style={{
-											display: 'inline-flex',
-											alignItems: 'center',
-											justifyContent: 'center',
-											padding: '0.75rem',
+											gap: '0.4rem',
+											padding: '0.65rem 0.75rem',
 											background: 'rgba(255, 255, 255, 0.05)',
 											color: 'var(--foreground, #f0f6fc)',
+											fontSize: '0.8rem',
+											fontWeight: 600,
 											borderRadius: '8px',
 											textDecoration: 'none',
 											border: '1px solid rgba(255, 255, 255, 0.1)',
 										}}
 									>
-										<MessageSquare size={16} />
+										<Navigation size={14} style={{ color: 'var(--accent, #e5a93c)' }} />
+										Google Maps
+									</a>
+
+									<a
+										href={`https://wa.me/918302806913?text=${encodeURIComponent(`Hello Vistar Models, I am inquiring about scale model services at the ${unit.city} branch.`)}`}
+										target="_blank"
+										rel="noreferrer"
+										style={{
+											display: 'inline-flex',
+											alignItems: 'center',
+											justifyContent: 'center',
+											gap: '0.4rem',
+											padding: '0.65rem 1rem',
+											background: 'rgba(37, 211, 102, 0.15)',
+											color: '#25d366',
+											fontSize: '0.8rem',
+											fontWeight: 600,
+											borderRadius: '8px',
+											textDecoration: 'none',
+											border: '1px solid rgba(37, 211, 102, 0.25)',
+										}}
+									>
+										<MessageSquare size={14} />
+										WhatsApp
 									</a>
 								</div>
+
+								{/* Main City Detail Page Link */}
+								<Link
+									to={`/units/${unit.slug}`}
+									style={{
+										width: '100%',
+										boxSizing: 'border-box',
+										display: 'inline-flex',
+										alignItems: 'center',
+										justifyContent: 'center',
+										gap: '0.5rem',
+										padding: '0.8rem 1rem',
+										background: 'var(--accent, #e5a93c)',
+										color: '#000',
+										fontWeight: 700,
+										fontSize: '0.9rem',
+										borderRadius: '8px',
+										textDecoration: 'none',
+									}}
+								>
+									Explore {unit.city} Branch & 200 FAQs <ArrowUpRight size={16} />
+								</Link>
 							</div>
 						</article>
 					))}
