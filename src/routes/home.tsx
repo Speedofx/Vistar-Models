@@ -9,6 +9,7 @@ import { Process } from '@/components/process';
 import { Founder } from '@/components/founder';
 import { IndustryPartners } from '@/components/home/industry-partners';
 import { BlogTeaser } from '@/components/home/blog-teaser';
+import { HomepageFaq } from '@/components/home/homepage-faq';
 import { ContactCta } from '@/components/contact-cta';
 import { business, openingHoursSpec } from '@/data/business';
 
@@ -26,29 +27,93 @@ export function meta({ matches, location }: Route.MetaArgs) {
 	return seo(
 		{ matches, location },
 		{
-			title: 'Vistar Models | The Right Model. The Right Maker.',
+			title: 'Vistar Models | Scale Model Consultancy & Manufacturer Sourcing India',
 			description:
-				'Find suitable scale-model makers across India with Vistar Models. Requirement consultation, capability-based sourcing and introductions for your project.',
+				'Vistar Models — India\'s scale-model consultancy. Find verified architectural, township and industrial model makers across Mumbai, Delhi, Bengaluru, Jaipur and 5 more cities. Submit your brief today.',
 			image: images.architectural,
 			jsonLd: [
 				{
 					'@context': 'https://schema.org',
 					'@type': 'WebSite',
+					'@id': business.primaryDomain + '/#website',
 					name: business.name,
 					url: business.primaryDomain,
+					publisher: { '@id': business.primaryDomain + '/#organization' },
+					potentialAction: {
+						'@type': 'SearchAction',
+						target: {
+							'@type': 'EntryPoint',
+							urlTemplate: business.primaryDomain + '/find-a-model-maker?q={search_term_string}',
+						},
+						'query-input': 'required name=search_term_string',
+					},
 				},
 				{
 					'@context': 'https://schema.org',
 					'@type': 'Organization',
+					'@id': business.primaryDomain + '/#organization',
 					name: business.name,
 					url: business.primaryDomain,
+					logo: business.primaryDomain + '/favicon.png',
 					foundingDate: business.foundingDate,
-					founder: { '@type': 'Person', name: business.founder },
+					founder: {
+						'@type': 'Person',
+						name: business.founder,
+						jobTitle: 'Founder',
+						url: business.primaryDomain + '/about',
+					},
 					telephone: business.phoneE164,
 					email: business.email,
 					description: business.description,
-					areaServed: business.areaServed,
-					sameAs: ['https://msme.gov.in'],
+					address: {
+						'@type': 'PostalAddress',
+						addressCountry: 'IN',
+						addressRegion: 'Rajasthan',
+						addressLocality: 'Jaipur',
+					},
+					identifier: {
+						'@type': 'PropertyValue',
+						name: 'MSME UDYAM',
+						value: 'UDYAM-RJ-17-0536099',
+					},
+					areaServed: [
+						'Jaipur', 'Mumbai', 'Delhi', 'Gurugram', 'Bengaluru',
+						'Pune', 'Hyderabad', 'Ahmedabad', 'Noida', 'India',
+					],
+					sameAs: [
+						'https://msme.gov.in',
+						business.whatsapp,
+					],
+					hasOfferCatalog: {
+						'@type': 'OfferCatalog',
+						name: 'Scale Model Consultancy Services',
+						itemListElement: [
+							{
+								'@type': 'Offer',
+								itemOffered: {
+									'@type': 'Service',
+									name: 'Architectural Scale Model Sourcing',
+									description: 'Requirement consultation and maker matching for architectural presentation and sales-gallery models',
+								},
+							},
+							{
+								'@type': 'Offer',
+								itemOffered: {
+									'@type': 'Service',
+									name: 'Township & Masterplan Model Sourcing',
+									description: 'Specialist sourcing for large-scale masterplan and township development models',
+								},
+							},
+							{
+								'@type': 'Offer',
+								itemOffered: {
+									'@type': 'Service',
+									name: 'Industrial Model Sourcing',
+									description: 'Sourcing for industrial plant layouts and engineering demonstration models',
+								},
+							},
+						],
+					},
 				},
 				{
 					'@context': 'https://schema.org',
@@ -59,10 +124,16 @@ export function meta({ matches, location }: Route.MetaArgs) {
 					url: business.primaryDomain,
 					telephone: business.phoneE164,
 					email: business.email,
+					address: {
+						'@type': 'PostalAddress',
+						addressLocality: 'Jaipur',
+						addressRegion: 'Rajasthan',
+						addressCountry: 'IN',
+					},
 					areaServed: { '@type': 'Country', name: business.areaServed },
 					openingHoursSpecification: openingHoursSpec,
 					currenciesAccepted: 'INR',
-					priceRange: '$$',
+					priceRange: '₹₹₹',
 					sameAs: ['https://msme.gov.in'],
 				},
 			],
@@ -81,6 +152,7 @@ export default function HomePage() {
 			<Founder />
 			<IndustryPartners />
 			<BlogTeaser />
+			<HomepageFaq />
 			<ContactCta />
 		</main>
 	);
