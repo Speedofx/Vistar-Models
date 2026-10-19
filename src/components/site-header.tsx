@@ -14,9 +14,16 @@ const links = [
 	['Contact', '/contact'],
 ];
 
+const WHATSAPP_DISCUSS_URL =
+	'https://wa.me/918302806913?text=' +
+	encodeURIComponent(
+		'Hello Vistar Models, we have a scale model requirement for our project. Do you make architectural and industrial scale models? Please share the details and process.'
+	);
+
 export function SiteHeader() {
 	const [open, setOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
 	const location = useLocation();
 	const isHome = location.pathname === '/';
 
@@ -24,10 +31,25 @@ export function SiteHeader() {
 		const handleScroll = () => {
 			setScrolled(window.scrollY > 40);
 		};
-		window.addEventListener('scroll', handleScroll, { passive: true });
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth <= 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent));
+		};
+		checkMobile();
 		handleScroll();
-		return () => window.removeEventListener('scroll', handleScroll);
+		window.addEventListener('scroll', handleScroll, { passive: true });
+		window.addEventListener('resize', checkMobile);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+			window.removeEventListener('resize', checkMobile);
+		};
 	}, []);
+
+	const handleDiscussClick = (e: React.MouseEvent) => {
+		if (window.innerWidth <= 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+			e.preventDefault();
+			window.location.href = WHATSAPP_DISCUSS_URL;
+		}
+	};
 
 	return (
 		<header
@@ -61,23 +83,43 @@ export function SiteHeader() {
 					</NavLink>
 				))}
 				<div className="mobile-drawer-cta-wrap">
-					<Link
-						to="/find-a-model-maker"
+					<a
+						href={WHATSAPP_DISCUSS_URL}
+						target="_blank"
+						rel="noreferrer"
 						className="mobile-drawer-cta"
 						onClick={() => setOpen(false)}
 					>
-						<span>Discuss Your Requirement</span>
+						<span>Discuss on WhatsApp</span>
 						<ArrowUpRight size={16} />
-					</Link>
+					</a>
 				</div>
 			</nav>
 
 			<div className="site-header-actions">
-				<Link className="header-cta" to="/find-a-model-maker">
-					<span className="header-cta-text-full">Discuss Your Requirement</span>
-					<span className="header-cta-text-mobile">Discuss</span>
-					<ArrowUpRight size={14} className="header-cta-arrow" />
-				</Link>
+				{isMobile ? (
+					<a
+						className="header-cta"
+						href={WHATSAPP_DISCUSS_URL}
+						target="_blank"
+						rel="noreferrer"
+						onClick={handleDiscussClick}
+						aria-label="Discuss on WhatsApp"
+					>
+						<span className="header-cta-text-mobile">Discuss</span>
+						<ArrowUpRight size={14} className="header-cta-arrow" />
+					</a>
+				) : (
+					<Link
+						className="header-cta"
+						to="/find-a-model-maker"
+						onClick={handleDiscussClick}
+					>
+						<span className="header-cta-text-full">Discuss Your Requirement</span>
+						<span className="header-cta-text-mobile">Discuss</span>
+						<ArrowUpRight size={14} className="header-cta-arrow" />
+					</Link>
+				)}
 
 				<button
 					className="menu-button"

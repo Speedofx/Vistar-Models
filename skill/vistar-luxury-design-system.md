@@ -191,67 +191,312 @@ All reveal boxes must declare:
 
 ---
 
-## 🎨 5. MONOCHROME ARCHITECTURAL LUXURY (ANTI-GAUDY PROTOCOL)
+## 🎨 5. THE 75% MUSEUM WHITE / 25% ONYX CONTRAST RHYTHM PROTOCOL
 
-1. **Color Palette:**
-   - **Canvas:** Deep Onyx (`#09090b`) & Midnight Charcoal (`#121214`).
-   - **Primary Accents:** Crisp Pure White (`#ffffff`), Titanium Silver (`#e4e4e7`), Muted Graphite (`#a1a1aa`).
-   - **Strict Rule on Gold/Yellow:** Never splash heavy solid yellow blocks across buttons, badges, or headlines. Restrict gold strictly to micro-dots, subtle progress bars, or active state accents.
+> **THE ARCHITECTURAL RATIO LAW:**  
+> A 100% black website causes cognitive fatigue, suffocates long-form reading, and suppresses the natural warm wood and crisp acrylic textures of physical scale models.  
+> Conversely, a 100% white website loses cinematic exclusivity and dramatic scale lighting.  
+> **The Supreme Formula:** Maintain a **75% Museum White / 25% Onyx Black** editorial monograph rhythm.
 
-2. **Button Standards (`.cmd-btn`):**
-   - **Primary Action:** Transparent glass background with a razor-sharp white hairline border:
-     `border: 1.5px solid rgba(255, 255, 255, 0.85); background: rgba(0, 0, 0, 0.25); color: #ffffff;`
-   - **Hover State:** Smooth inverted contrast: `background: #ffffff; color: #000000; border-color: #ffffff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);`.
+### 📊 Master Color Palette & Design Tokens
 
-3. **Glassmorphism Spec Cards:**
-   - `background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;`.
-
----
-
-## 📐 6. THE 7 CORE SECTIONS ARCHITECTURE
-
-1. **Section 1: The Consultancy Philosophy & Interactive Paradigm:**
-   - Asymmetric 2-column split with 3D slide reveals.
-   - Left: Core value proposition and philosophical statement.
-   - Right: 4 glass metric cards (`09 Cities`, `0.1mm Laser Precision`, `1:50–1:1000 Scale`, `100% Verified Track Record`).
-
-2. **Section 2: Signature Alternating Showcase (Zig-Zag Rhythm):**
-   - Alternating rows: Even rows (Left Text / Right Photo) | Odd rows (Left Photo / Right Text).
-   - Optical shutter light-flare reveal on media frames.
-   - Detailed specification cards (Scale, Mediums, Illumination) + tag pills + outline CTA.
-
-3. **Section 3: Model Category Matrix (3x2):**
-   - 6 high-priority categories with `tilt-in` staggered 3D entries.
-   - Floating index pills (`CAT · 01`) and interactive hover zoom.
-
-4. **Section 4: Fabrication Capabilities Lab (Studio Showcase):**
-   - Interactive tabbed architecture (`CNC Milling`, `SLA/SLS Printing`, `DMX Illumination`, `Joinery & Plinth`).
-   - Real-time spec updates and dynamic blueprint laser scan beam effect.
-
-5. **Section 5: The 5-Stage Orchestration Timeline:**
-   - Kinetic circuit line with glowing pulse.
-   - Staggered domino 3D step cards.
-
-6. **Section 6: Industry Sectors & Proven Track Record:**
-   - 8 architectural sector cards with 3D tilt.
-   - Direct Maker Network onboarding portal dock.
-
-7. **Section 7: Executive Briefing Suite & Midnight FAQ:**
-   - Dark glass accordion FAQ cards preserving JSON-LD schema.
-   - Midnight Onyx & Liquid Gold Perimeter CTA with dual action triggers (Submit Brief + WhatsApp Direct Desk).
+| Token Purpose | Hex / Value | Usage & Application |
+|---|---|---|
+| **Dark Canvas (Hero & Lab)** | `#09090b` / `#0c0c0e` | Hero background, Precision Tooling Lab, Executive CTA vitrine, Footer. |
+| **Light Canvas (75% Body)** | `#ffffff` / `#fbfbfa` | Showcase, Solutions, Perspectives, Matrix, Process, Founder, FAQ. |
+| **Light Stone Surfaces** | `#f8f8f9` / `#f4f4f5` | Spec cards, accordion closed state, tag chips, secondary badges. |
+| **Dark Obsidian Text** | `#09090b` / `#18181b` | All primary headings, section titles, card names, active tabs. |
+| **Muted Slate Body Text** | `#52525b` / `#71717a` | Descriptions, technical specifications, subtitles, disclaimer text. |
+| **Architectural Gold Accent**| `#b8860b` / `#d4a017` | Hover button morphs, micro-dot indicators, metric units, active badges. |
+| **Porcelain Card Elevation** | `0 16px 48px rgba(0,0,0,0.06)`| Floating stage cards, category cards, showcase photo vitrines. |
+| **Hairline Dividers** | `rgba(0, 0, 0, 0.08)` | Borders on light cards, horizontal dividing rules, table borders. |
 
 ---
 
-## ✅ 7. PRE-FLIGHT VERIFICATION CHECKLIST FOR ANY FUTURE EDIT
+### 🌉 The Smooth Gradient Bridge (Hero ➔ White Transition)
 
-Before concluding any development task or presenting work to the user:
-- [ ] **No Static PDF Feel:** Does the section load with dynamic 3D/2D motion graphics?
-- [ ] **Varied Animation:** Is the animation distinct from neighboring sections (shutter reveal, laser scan, circuit pulse, domino flip)?
-- [ ] **Zero Emojis on UI:** Absolutely NO consumer emojis (📐, 🏢, 🏛️, 🏭, etc.) in badges, tags, or headers. Use pure typography, subtle micro-dots (`.cmd-persona-dot`), or sleek Lucide SVG vector line icons.
-- [ ] **Desktop Headline 2-Line Flow:** Long hero headlines (e.g. *"Architectural & Industrial Scale Models."*) must break cleanly on desktop into 2 lines (*"Architectural & Industrial"* on line 1, *"Scale Models."* on line 2) with slightly scaled desktop font-size (`clamp(38px, 4.3vw, 68px)`), leaving mobile responsive wrapping untouched.
-- [ ] **Zero Blank Photos:** Are all images WebP, eagerly or asynchronously loaded, with safe viewport fallbacks?
-- [ ] **Mobile Header Check:** Do the logo, compact CTA pill, and hamburger menu have comfortable spacing without ANY overlap?
-- [ ] **Logo Integrity:** Is the header logo using `/header-logo.png` and the footer logo using the 2X enlarged `/image.png`?
-- [ ] **Monochrome Luxury:** Are all primary buttons using the CMD white hairline outline standard (no cheap flat yellow blocks)?
-- [ ] **TypeScript Clean:** Does `npm run typecheck` complete with 0 errors?
+Never abruptly cut from the dark Hero section to a white section. Always deploy the **Vertical Dark-to-Light Ramp** at the top of the first section below the Hero:
+
+```css
+/* Smooth Dark-to-White Bridge on First Section Below Hero */
+.lux-solutions-section {
+	background: linear-gradient(180deg, 
+		#09090b 0%, 
+		#1c1c1f 80px, 
+		#fbfbfa 220px, 
+		#fbfbfa 100%
+	);
+	color: #09090b;
+	padding: 130px 6.5% 120px;
+	position: relative;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+```
+
+---
+
+### 🌫️ Zero Dark Smoke on Photos Law (Strictly Enforced)
+
+1. **Why Dark Smoke Fails on White:**
+   - On pitch-black websites, dark vignette gradients hide image borders.
+   - On **Museum White backgrounds**, a dark gradient (`linear-gradient(rgba(0,0,0,0.55))`) makes photos look dusty, dirty, and smudged ("dhuha jaisa").
+2. **The Clean Architectural Vitrine Standard:**
+   - **MANDATORY:** Set all photo overlays in light sections to `display: none;` or `background: transparent;`.
+   - Wrap scale model photos in crisp, elevated porcelain frames with clean borders:
+
+```css
+/* Clean Museum Photo Vitrine — Zero Smoke */
+.luxury-media-frame {
+	position: relative;
+	border-radius: 12px;
+	overflow: hidden;
+	aspect-ratio: 16 / 10;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	background: #ffffff;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+	transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-color 0.4s ease;
+}
+.luxury-media-frame:hover {
+	transform: translateY(-6px) scale(1.01);
+	box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
+	border-color: rgba(0, 0, 0, 0.22);
+}
+.luxury-media-overlay {
+	display: none; /* Zero dark smoke or vignette */
+}
+.luxury-media-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.luxury-media-frame:hover .luxury-media-img {
+	transform: scale(1.045);
+}
+```
+
+---
+
+### 🔲 High-Contrast Button & Interactive Link Standards
+
+To ensure zero "disappearing buttons" or white-on-white invisibility on mouse hover:
+
+```css
+/* Primary Action Button in Light Sections */
+.luxury-showcase .cmd-btn,
+.lux-solution-actions .cmd-btn,
+.luxury-action-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	padding: 13px 26px;
+	background: #09090b;
+	color: #ffffff;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	border-radius: 4px;
+	border: 1px solid #09090b;
+	text-decoration: none;
+	transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Hover: Morphs into Rich Metallic Gold with Glow (NEVER White-on-White) */
+.luxury-showcase .cmd-btn:hover,
+.lux-solution-actions .cmd-btn:hover,
+.luxury-action-btn:hover {
+	background: #b8860b;
+	color: #ffffff;
+	border-color: #b8860b;
+	box-shadow: 0 6px 22px rgba(184, 134, 11, 0.35);
+	transform: translateY(-2px);
+}
+
+/* Inline Glass Links in Light Sections */
+.lux-glass-link,
+.luxury-action-link {
+	font-size: 12px;
+	font-weight: 700;
+	color: #09090b;
+	text-decoration: none;
+	border-bottom: 1.5px solid rgba(0, 0, 0, 0.25);
+	padding-bottom: 2px;
+	transition: all 0.2s ease;
+}
+.lux-glass-link:hover,
+.luxury-action-link:hover {
+	color: #b8860b;
+	border-bottom-color: #b8860b;
+}
+```
+
+---
+
+## 📐 6. THE 12-SECTION CHOREOGRAPHY ON HOMEPAGE
+
+Every page must respect this alternating visual rhythm:
+
+1. **Hero Section (`.cmd-hero`):** ⬛ **Dark Onyx (`#09090b`)** — Cinematic scale models, floating glass header, 2-line title flow.
+2. **Client Solutions (`.lux-solutions-section`):** ⬛ ➔ ⬜ **Smooth Gradient Ramp** — 4 interactive persona tabs, porcelain stage.
+3. **Curated Showcase (`.luxury-showcase`):** ⬜ **Museum White (`#ffffff`)** — Alternating zig-zag rows, 3-spec pills, zero smoke.
+4. **Perspective & Metrics (`.lux-perspective`):** ⬜ **Museum Light Stone (`#fbfbfa`)** — 4 metric cards (`09 Cities`, `0.1mm Tolerance`, etc.).
+5. **Scale Category Matrix (`.lux-category-matrix`):** ⬜ **Museum White (`#ffffff`)** — 3x2 grid of scale categories.
+6. **Precision Tooling Lab (`.lux-capability`):** ⬛ **Deep Onyx Tech Lab (~10% Mid Accent)** — Single black accent where laser scan beam sweeps over 5-axis CNC & SLA 3D print capabilities.
+7. **Process Timeline (`.lux-process`):** ⬜ **Museum White (`#ffffff`)** — 5-stage kinetic workflow with fine gold line.
+8. **Founder Heritage (`.lux-founder`):** ⬜ **Porcelain White (`#fbfbfa`)** — Quote vitrine with 24k gold accent, MSME certification tokens.
+9. **Industry Sectors (`.lux-industries`):** ⬜ **Museum White (`#ffffff`)** — Real Estate, Aviation, Rail, Industrial cards + Maker Dock.
+10. **The Vistar Journal (`.lux-journal`):** ⬜ **Museum White (`#fbfbfa`)** — Editorial insights cards with hover link animation.
+11. **Bespoke FAQs (`.lux-faq`):** ⬜ **Museum White (`#ffffff`)** — Clean accordion rows with gold index numbers.
+12. **Executive Consultation & Footer (`.lux-cta`):** ⬛ **Midnight Onyx (`#09090b` / `#000000`)** — Liquid 24k gold vitrine + 2X brand footer mark.
+
+---
+
+## 🚀 7. COMPLETE AI BOILERPLATE TEMPLATE FOR NEW PAGES
+
+When creating a new route or page in this repository (e.g. `/services`, `/portfolio`, `/about`, `/city-landing`), copy and adapt this exact architectural blueprint:
+
+```tsx
+import { Link } from 'react-router';
+import { ShieldCheck, ArrowUpRight, Compass, Zap } from 'lucide-react';
+import { ScrollReveal } from '@/components/ui/scroll-reveal';
+import { useScrollProgress } from '@/hooks/use-scroll-reveal';
+
+export default function SamplePage() {
+	const progress = useScrollProgress();
+
+	return (
+		<main>
+			{/* 1. Hardware-Accelerated Scroll Progress Bar */}
+			<div
+				className="lux-scroll-progress"
+				style={{ width: `${progress}%` }}
+				role="progressbar"
+				aria-valuenow={progress}
+				aria-label="Scroll Progress"
+			/>
+
+			{/* 2. Hero Section: Dark Onyx (10%) */}
+			<section className="cmd-hero" style={{ minHeight: '65vh' }}>
+				<div className="cmd-hero-content">
+					<ScrollReveal animation="fade-up-3d">
+						<div className="cmd-hero-tag">
+							<span className="cmd-persona-dot" />
+							<span>PRECISION SCALE CONSULTANCY</span>
+						</div>
+						<h1 className="cmd-hero-title">
+							Architectural & Industrial<br />Scale Models.
+						</h1>
+						<p className="cmd-hero-sub">
+							Authentic physical scale models engineered to 0.1mm tolerance for India's leading studios.
+						</p>
+					</ScrollReveal>
+				</div>
+			</section>
+
+			{/* 3. Section 1 with Smooth Dark-to-Light Ramp Bridge */}
+			<section className="lux-solutions-section">
+				<div className="lux-solutions-container">
+					<ScrollReveal animation="fade-up-3d">
+						<div className="lux-solutions-header">
+							<div className="lux-section-badge">
+								<ShieldCheck size={13} className="lux-badge-icon" />
+								<span>ENGINEERED DELIVERABLES</span>
+							</div>
+							<h2 className="lux-solutions-title">Architectural Precision at Any Scale</h2>
+							<p className="lux-solutions-subtitle">
+								Zero text bloat. Direct physical solutions matching the exact demands of your brief.
+							</p>
+						</div>
+					</ScrollReveal>
+
+					{/* Clean White Porcelain Stage Card */}
+					<ScrollReveal animation="shutter-reveal" delay={80}>
+						<div className="lux-solution-stage">
+							<div className="lux-solution-content">
+								<h3 className="lux-solution-headline">Masterplan & Tower Physical Twins</h3>
+								<p className="lux-solution-desc">
+									Laser-cut acrylic facades, hand-finished teak plinths, and multi-zone DMX lighting.
+								</p>
+								<div className="lux-solution-actions">
+									<Link to="/find-a-model-maker" className="cmd-btn">
+										<span>Submit Brief</span>
+										<ArrowUpRight size={14} style={{ marginLeft: 6 }} />
+									</Link>
+									<a href="https://wa.me/918302806913" className="lux-glass-link">
+										Instant Technical Review &rarr;
+									</a>
+								</div>
+							</div>
+
+							{/* Zero-Smoke Media Vitrine */}
+							<div className="lux-solution-visual">
+								<div className="luxury-media-frame">
+									<img
+										src="/images/cmd_hero_1.jpg"
+										alt="Architectural Scale Model"
+										className="luxury-media-img"
+										loading="lazy"
+										width={600}
+										height={400}
+									/>
+									{/* NOTE: Zero dark overlay. Image remains bright and natural. */}
+								</div>
+							</div>
+						</div>
+					</ScrollReveal>
+				</div>
+			</section>
+
+			{/* 4. Deep Onyx Tech Lab Section (10% Mid Accent) */}
+			<section className="lux-capability">
+				{/* High-tech blueprint scanning animations on dark slate */}
+			</section>
+
+			{/* 5. Executive Midnight Consultation & Footer (15% Bottom Anchor) */}
+			<section className="lux-cta">
+				{/* 24k liquid gold card vitrine */}
+			</section>
+		</main>
+	);
+}
+```
+
+---
+
+## 🚫 8. THE ZERO-EMOJI LUXURY LAW & MOBILE CONTRAST RULES
+
+1. **The Zero-Emoji Architectural Law:**
+   - Emojis (📐, 🏢, 🏛️, 🏭, 🚀, ✨, etc.) make a luxury platform look cheap, informal, and amateur.
+   - High-tier architectural brands (CMD Models, Foster + Partners, BIG) NEVER use consumer emojis.
+   - Use only:
+     - 5px glowing gold micro-dots (`.cmd-persona-dot`)
+     - Clean SVG vector line icons (`lucide-react`)
+     - Pure architectural typography in `Manrope` and monospace.
+
+2. **Desktop 2-Line Headline Flow:**
+   - Long hero headlines (e.g. *"Architectural & Industrial Scale Models."*) must break cleanly on desktop:
+     - Line 1: *"Architectural & Industrial"*
+     - Line 2: *"Scale Models."*
+   - Font size: `clamp(38px, 4.3vw, 68px)` with `white-space: nowrap` on Line 1 for desktop screens `> 900px`.
+   - Never break this rule on desktop, while leaving mobile flex wrapping natural.
+
+3. **Logo Integrity Standards:**
+   - **Header:** Always use `/header-logo.png` (crisp white emblem + metallic gold wings, height `46px`).
+   - **Footer:** Always use `/image.png` enlarged to **2X scale** (`height: 84px; max-width: 320px;`) with luminescent white hover glow.
+
+---
+
+## ✅ 9. DEVELOPER PRE-FLIGHT VERIFICATION CHECKLIST
+
+Before concluding ANY code changes or generating a new page:
+- [ ] **Contrast Ratio:** Is the page ~75% Museum White with Hero, 1 Mid Accent Lab, and Footer Dark?
+- [ ] **Gradient Bridge:** Does the first section below the Hero have the vertical dark-to-white gradient ramp?
+- [ ] **Zero Photo Smoke:** Are all image frames in white sections free of dark smoke gradients and heavy 90% black shadows?
+- [ ] **Button Visibility:** Do all buttons in white sections have dark obsidian defaults (`#09090b`) and transition into rich metallic gold (`#b8860b`) on hover?
+- [ ] **Zero Consumer Emojis:** Are badges, tags, buttons, and titles 100% free of emojis?
+- [ ] **No Static PDF:** Is every element animated on scroll via `<ScrollReveal>` without premature `setTimeout`?
+- [ ] **CSS Syntax Integrity:** Are all braces matching with zero rogue properties (run `npm run typecheck` and verify HTTP 200)?
+
 
