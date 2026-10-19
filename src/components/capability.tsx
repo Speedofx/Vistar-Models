@@ -10,7 +10,7 @@ const CAPABILITIES = [
 		title: 'Sub-Millimeter CNC Facade & Structural Milling',
 		lead: 'Machining monolithic acrylic blocks, metals, and composite substrates with 0.05mm precision.',
 		desc: 'Ideal for complex curtain walls, parametric roofs, and razor-sharp floorplates. Every joint and interlocking module fits with museum-grade tolerances, eliminating visible seams in high-scrutiny presentations.',
-		image: '/images/cmd_hero_1.jpg',
+		image: '/images/cmd_hero_1.webp',
 		alt: 'Precision CNC milled architectural facade model showing sharp mullions',
 		badge: '±0.05mm Tooling Tolerance',
 		specs: [
@@ -50,7 +50,7 @@ const CAPABILITIES = [
 		title: 'Smart Tablet-Controlled LED Choreography',
 		lead: 'Bringing static architecture alive with dynamic lighting zones and interactive storytelling.',
 		desc: 'Multi-circuit DMX controllers illuminate distinct towers, amenities, transport lines, or phasing zones independently. Controlled via custom iPad/tablet interface during high-stakes sales gallery walkthroughs and board reviews.',
-		image: '/images/cmd_hero_2.jpg',
+		image: '/images/cmd_hero_2.webp',
 		alt: 'Illuminated stadium and masterplan scale model with glowing LED zones',
 		badge: 'Programmable DMX Circuits',
 		specs: [
@@ -70,7 +70,7 @@ const CAPABILITIES = [
 		title: 'Fine Timber Bases & Archival Vitrine Glazing',
 		lead: 'The pedestal is as critical as the model. Hardwood plinths built for permanence.',
 		desc: 'Crafted from solid seasoned teak, walnut, or brushed stainless steel. Fitted with optically pure, anti-reflective, UV-filtering acrylic covers that protect the investment from dust and UV discoloration across decades of exhibition.',
-		image: '/images/cmd_hero_3.jpg',
+		image: '/images/cmd_hero_3.webp',
 		alt: 'Contemporary pavilion model on finished hardwood base with vertical louvers',
 		badge: 'Archival Vitrine Pedestals',
 		specs: [

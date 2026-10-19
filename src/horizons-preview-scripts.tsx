@@ -37,7 +37,23 @@ export function HorizonsPreviewScripts() {
 			appendTemplateBannerScript(bannerAttrs);
 		}
 
-		if (!import.meta.env.DEV) {
+		if (import.meta.env.DEV) {
+			const devScripts = [
+				viteVirtualSrc('virtual:horizons-runtime'),
+				viteVirtualSrc('virtual:horizons-edit-mode'),
+				viteVirtualSrc('virtual:horizons-iframe-route-restoration'),
+				viteVirtualSrc('virtual:horizons-pocketbase-auth'),
+				viteVirtualSrc('virtual:session-journal-client'),
+			];
+			devScripts.forEach((src) => {
+				if (!document.querySelector(`script[src="${src}"]`)) {
+					const script = document.createElement('script');
+					script.type = 'module';
+					script.src = src;
+					document.head.appendChild(script);
+				}
+			});
+		} else {
 			if ('requestIdleCallback' in window) {
 				window.requestIdleCallback(() => void import('virtual:horizons-runtime'));
 			} else {
@@ -46,13 +62,5 @@ export function HorizonsPreviewScripts() {
 		}
 	}, []);
 
-	return import.meta.env.DEV ? (
-		<>
-			<script type="module" src={viteVirtualSrc('virtual:horizons-runtime')} />
-			<script type="module" src={viteVirtualSrc('virtual:horizons-edit-mode')} />
-			<script type="module" src={viteVirtualSrc('virtual:horizons-iframe-route-restoration')} />
-			<script type="module" src={viteVirtualSrc('virtual:horizons-pocketbase-auth')} />
-			<script type="module" src={viteVirtualSrc('virtual:session-journal-client')} />
-		</>
-	) : null;
+	return null;
 }

@@ -195,7 +195,7 @@ export function LuxuryShowcase() {
 									src={item.image}
 									alt={item.alt}
 									className="luxury-media-img"
-									loading="eager"
+									loading="lazy"
 									decoding="async"
 									width={720}
 									height={450}

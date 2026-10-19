@@ -20,8 +20,8 @@ export const links: Route.LinksFunction = () => [
 	{
 		rel: 'preload',
 		as: 'image',
-		href: '/images/cmd_hero_1.jpg',
-		type: 'image/jpeg',
+		href: '/images/cmd_hero_1.webp',
+		type: 'image/webp',
 		fetchPriority: 'high',
 	},
 ];

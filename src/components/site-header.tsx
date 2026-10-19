@@ -142,7 +142,7 @@ export function SiteHeader() {
 				aria-hidden={!open}
 			/>
 
-			<aside
+			<div
 				id="mobile-bottom-sheet"
 				className={`lux-bottom-sheet ${open ? 'active' : ''}`}
 				role="dialog"
@@ -213,7 +213,7 @@ export function SiteHeader() {
 						</div>
 					</div>
 				</div>
-			</aside>
+			</div>
 		</>
 	);
 }
