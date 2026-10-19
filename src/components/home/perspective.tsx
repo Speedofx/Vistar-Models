@@ -68,7 +68,7 @@ export function Perspective() {
 							</div>
 							<div className="lux-point">
 								<CheckCircle2 size={15} className="lux-point-check" />
-								<span>Strict commercial confidentiality on CAD/Revit drawing submissions</span>
+								<span>Strict commercial confidentiality on AutoCAD, SketchUp & Revit drawing submissions</span>
 							</div>
 							<div className="lux-point">
 								<CheckCircle2 size={15} className="lux-point-check" />

@@ -32,7 +32,7 @@ export const services = [
  ['Manufacturer network access','We facilitate introductions where relevant capabilities are available. Network participation is not a verification or performance guarantee.'],
 ];
 export const steps = [
- ['Share requirement','Submit your model category, intended use, site location, and any CAD/Revit/PDF drawings or reference data available.'],
+ ['Share requirement','Submit your model category, intended use, site location, and any AutoCAD, SketchUp, Revit, or PDF drawings or reference data available.'],
  ['Clarify scope','We evaluate precise dimensions, scale (1:50 to 1:1000), material finishes, multi-zone LED lighting, working mechanisms, and required delivery date.'],
  ['Identify suitable makers','We match your brief with verified specialist model makers vetted for CNC/laser precision, production capacity, and portfolio track record.'],
  ['Connect and discuss','Review tailored fabrication proposals, material samples, and milestone schedules directly with the shortlisted manufacturing partner.'],
@@ -46,10 +46,10 @@ export const faqs = [
  ['Do you work across India?','Yes. Our consultancy coordinates scale model sourcing across 9 major metropolitan units in India: Mumbai, Delhi, Jaipur, Bengaluru, Pune, Hyderabad, Ahmedabad, Gurugram, and Noida, handling pan-India transport and on-site gallery installation.'],
  ['How does Vistar Models match projects with specialist makers?','We analyze architectural drawings, required scale (1:50 to 1:1000), material finishes, and machine tolerance requirements (0.1mm CNC & SLA 3D printing) to introduce proven specialist makers with verified track records.'],
  ['How are model makers vetted in your network?','Workshops are evaluated on equipment capabilities (high-precision laser cutters, multi-axis CNC, SLA/SLS 3D printers), material expertise (cast acrylic, PU, etched brass), multi-zone LED lighting integration, and documented project delivery.'],
- ['What should I prepare before enquiring?','Provide your project type (high-rise, masterplan, infrastructure, industrial), target scale or dimensions, reference CAD/Revit/PDF drawings, lighting requirements, site location, and target delivery deadline.'],
+ ['What should I prepare before enquiring?','Provide your project type (high-rise, masterplan, infrastructure, industrial), target scale or dimensions, reference AutoCAD/SketchUp/Revit/PDF drawings, lighting requirements, site location, and target delivery deadline.'],
  ['Who provides the quotation and contract?','The manufacturing partner provides the detailed technical quote and production milestones. You and the maker contract directly for fabrication, stage-wise inspections, and delivery.'],
  ['How does Vistar Models coordinate projects across India?','Operating under MSME Registration UDYAM-RJ-17-0536099 (founded by Yogendra Yogi), Vistar Models coordinates precision scale model brief specifications and fabrication with specialist studios across 9 metropolitan hubs nationwide.'],
- ['What design files can I submit?','You can submit 2D CAD (DWG, DXF), 3D BIM/Revit models, SketchUp, Rhino, or high-resolution architectural PDFs. All client data and drawings are handled with strict commercial confidentiality.'],
+ ['What design files can I submit?','You can submit AutoCAD (.DWG/.DXF), SketchUp (.SKP), 3D BIM/Revit, Rhino, 3ds Max, or high-resolution architectural PDFs. All client data and drawings are handled with strict commercial confidentiality under Non-Disclosure Agreements.'],
  ['Does joining the maker network provide verified project leads?','Workshops meeting our precision engineering and delivery benchmarks receive qualified client briefs matching their exact machinery, materials, and regional capacity.'],
  ['What scales and types of models are covered?','We cover 1:50 to 1:150 luxury architectural high-rise vitrines, 1:200 to 1:500 township masterplans, 1:1000 city/MMRDA infrastructure layouts, and 1:25 to 1:100 functional engineering models.'],
 ];

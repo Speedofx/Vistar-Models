@@ -27,7 +27,7 @@ const HOMEPAGE_FAQS = [
 	{
 		question: 'What design files can we submit for consultation?',
 		answer:
-			'We accept 2D CAD (DWG/DXF), 3D BIM/Revit models, SketchUp, Rhino, or high-resolution architectural PDFs. All client data and drawings are handled with strict commercial confidentiality under Non-Disclosure agreements.',
+			'We accept AutoCAD (.DWG/.DXF), SketchUp (.SKP), Revit BIM models, Rhino, 3ds Max, or high-resolution architectural PDFs. All client data and drawings are handled with strict commercial confidentiality under Non-Disclosure agreements.',
 	},
 	{
 		question: 'Do you work with government and infrastructure projects?',

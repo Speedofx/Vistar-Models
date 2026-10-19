@@ -23,9 +23,9 @@ const PERSONA_SOLUTIONS: PersonaSolution[] = [
 		tabTitle: '01 / Architects & Design Studios',
 		roleLabel: 'PRIMARY PARTNER — 50%+ OF SOURCING',
 		icon: Compass,
-		hook: 'Sub-Millimeter Fidelity to Your CAD & Revit BIM Models.',
+		hook: 'Sub-Millimeter Fidelity to AutoCAD, SketchUp & Revit Models.',
 		description:
-			'You spend months perfecting facade mullions, cantilevered rooflines, and spatial circulation. We connect you with master craftsmen who fabricate with 0.1mm laser precision, natural timber louvers, and museum-grade finishes that honor your exact architectural vision.',
+			'You spend months perfecting floorplans, facade mullions, and spatial circulation. We connect you with master craftsmen who fabricate with 0.1mm laser precision directly from your 2D AutoCAD (DWG), SketchUp (SKP), Revit BIM, or Rhino 3D files, honoring your exact architectural vision with museum-grade finishes.',
 		deliverables: [
 			'Design-Review & Competition Scale Vitrines',
 			'Double-Curved & Parametric Façade Prototyping',
@@ -34,7 +34,7 @@ const PERSONA_SOLUTIONS: PersonaSolution[] = [
 		],
 		specs: [
 			{ label: 'Tolerance', value: '±0.05 mm' },
-			{ label: 'Design Formats', value: 'CAD, Revit, Rhino' },
+			{ label: 'Design Formats', value: 'AutoCAD, SketchUp, Revit' },
 			{ label: 'Primary Mediums', value: 'Cast Acrylic, Teak' },
 		],
 		ctaText: 'Submit Architectural Drawings',
