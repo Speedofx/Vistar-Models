@@ -76,13 +76,19 @@ export function SiteHeader() {
 				}`}
 			>
 				<Link to="/" className="site-header-logo-wrap" aria-label="Vistar Models home">
-					<img
-						src="/header-logo.png"
-						alt="Vistar Models"
-						className="site-header-logo-img"
-						width={220}
-						height={52}
-					/>
+					<picture>
+						<source media="(max-width: 768px)" srcSet="/header-logo-mobile.webp" type="image/webp" />
+						<source srcSet="/header-logo.webp" type="image/webp" />
+						<img
+							src="/header-logo.png"
+							alt="Vistar Models"
+							className="site-header-logo-img"
+							width={220}
+							height={52}
+							loading="eager"
+							decoding="async"
+						/>
+					</picture>
 				</Link>
 
 				{/* Desktop Navigation (Untouched, sits in header) */}

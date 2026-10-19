@@ -6,6 +6,7 @@ import { whatsapp } from '@/data/site';
 const SLIDES = [
 	{
 		image: '/images/cmd_hero_1.webp',
+		imageMobile: '/images/cmd_hero_1_mobile.webp',
 		headlineDesktop: (
 			<>
 				<span className="hero-desktop-line">Architectural &amp; Industrial</span>{' '}
@@ -19,6 +20,7 @@ const SLIDES = [
 	},
 	{
 		image: '/images/cmd_hero_2.webp',
+		imageMobile: '/images/cmd_hero_2_mobile.webp',
 		headlineDesktop: 'Grand Vision. Micro Precision.',
 		tagline: 'Grand Vision. Micro Precision.',
 		isLongTitle: false,
@@ -27,6 +29,7 @@ const SLIDES = [
 	},
 	{
 		image: '/images/cmd_hero_3.webp',
+		imageMobile: '/images/cmd_hero_3_mobile.webp',
 		headlineDesktop: 'All Kinds. Any Scale.',
 		tagline: 'All Kinds. Any Scale.',
 		isLongTitle: false,
@@ -53,12 +56,21 @@ export function Hero() {
 					<div
 						key={idx}
 						className={`cmd-hero-slide ${idx === current ? 'active' : ''}`}
-						style={{
-							backgroundImage: `url(${slide.image})`,
-						}}
-						role="img"
-						aria-label={slide.alt}
-					/>
+					>
+						<picture>
+							<source media="(max-width: 768px)" srcSet={slide.imageMobile} type="image/webp" />
+							<img
+								src={slide.image}
+								alt={slide.alt}
+								className="cmd-hero-img"
+								fetchPriority={idx === 0 ? 'high' : 'low'}
+								loading={idx === 0 ? 'eager' : 'lazy'}
+								decoding={idx === 0 ? 'sync' : 'async'}
+								width={1376}
+								height={768}
+							/>
+						</picture>
+					</div>
 				))}
 				{/* Dark Scrim / Vignette Overlay for maximum contrast and luxury feel */}
 				<div className="cmd-hero-overlay" />
