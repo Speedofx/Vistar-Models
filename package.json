@@ -4,11 +4,11 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "react-router dev --port 302",
-		"dev:302": "react-router dev --port 302",
+		"dev": "react-router dev --port 3002",
+		"dev:3002": "react-router dev --port 3002",
 		"build": "react-router build",
 		"start": "react-router-serve ./build/server/index.js",
-		"start:302": "node -e \"process.env.PORT=302; import('@react-router/serve/cli')\"",
+		"start:3002": "node -e \"process.env.PORT=3002; import('@react-router/serve/cli')\"",
 		"lint": "cache_dir=node_modules/.cache/eslint/$({ cat ../../package-lock.json eslint.config.mjs eslint.unicode-escapes-plugin.mjs src/hooks/use-toast.ts; find src/components/ui -type f -exec cat {} +; find src -type f | LC_ALL=C sort; } 2>/dev/null | cksum | cut -d\" \" -f1)/; mkdir -p \"$cache_dir\" && touch \"$cache_dir/.run-started\"; if eslint . --cache --cache-strategy content --cache-location \"$cache_dir\" --format ./eslint.errors-and-unicode-escapes-formatter.mjs; then if [ -n \"$(find src eslint.config.mjs eslint.unicode-escapes-plugin.mjs eslint.errors-and-unicode-escapes-formatter.mjs package.json ../../package-lock.json -type f -newer \"$cache_dir/.run-started\" -print -quit 2>/dev/null)\" ]; then rm -rf node_modules/.cache/eslint; fi; else lint_status=$?; rm -rf node_modules/.cache/eslint; exit $lint_status; fi",
 		"lint:warn": "eslint .",
 		"typecheck": "react-router typegen && tsc --noEmit"

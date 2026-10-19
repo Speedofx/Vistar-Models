@@ -7,8 +7,14 @@ export function SiteFooter() {
 		<footer className="site-footer">
 			<div className="footer-top">
 				<div>
-					<Link to="/" className="wordmark">
-						VISTAR<span>MODELS<span className="logo-dot" /></span>
+					<Link to="/" className="footer-logo-wrap" aria-label="Vistar Models home">
+						<img
+							src="/image.png"
+							alt="Vistar Models"
+							className="footer-logo-img"
+							width={300}
+							height={92}
+						/>
 					</Link>
 					<p>
 						Scale Model Consultancy &<br />

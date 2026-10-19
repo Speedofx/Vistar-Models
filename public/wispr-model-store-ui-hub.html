@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wispr Model Store — UI/UX Master Execution Hub & Class Roadmap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --surface: #111827;
+      --surface-hover: #1f2937;
+      --surface-card: rgba(17, 24, 39, 0.85);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(217, 119, 6, 0.35);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-glow: rgba(245, 158, 11, 0.15);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.15);
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    /* Ambient background glow */
+    .ambient-glow {
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, rgba(11, 15, 25, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 30px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header Masthead */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .dot-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(26px, 3.2vw, 38px);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .domain-url {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,0,0,0.3);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .pdf-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #0b0f19;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .pdf-download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+    }
+
+    /* Stats Ribbon */
+    .stats-ribbon {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-val {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      font-family: var(--font-mono);
+    }
+    .stat-val.gold { color: var(--accent); }
+    .stat-val.green { color: var(--success); }
+    .stat-lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+
+    /* Search & Global Controls */
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 280px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 12px 16px 12px 42px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 14px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box input:focus {
+      border-color: var(--accent);
+    }
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-secondary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover {
+      background: var(--surface-hover);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    /* Class Section / Module Block */
+    .class-module {
+      background: var(--surface-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .class-module:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .class-module.active {
+      border-color: var(--border-accent);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .class-header {
+      padding: 20px 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .class-title-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .class-number-pill {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--accent);
+      color: #0b0f19;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+    .class-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .class-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .class-badge {
+      background: rgba(255,255,255,0.06);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+    .chevron-icon {
+      font-size: 18px;
+      transition: transform 0.25s ease;
+      color: var(--accent);
+    }
+    .class-module.open .chevron-icon {
+      transform: rotate(180deg);
+    }
+
+    .class-content {
+      display: none;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .class-module:not(.open) .class-content {
+      display: none;
+    }
+    .class-module.open .class-content {
+      display: flex;
+    }
+
+    /* Page UI Card */
+    .page-card {
+      background: rgba(11, 15, 25, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: all 0.2s ease;
+    }
+    .page-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(11, 15, 25, 0.9);
+    }
+    .page-card.completed {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.03);
+    }
+
+    .page-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .page-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .page-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .page-url-link {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .page-url-link:hover {
+      text-decoration: underline;
+    }
+
+    .page-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .sec-count-badge {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+    }
+    .status-select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      outline: none;
+      cursor: pointer;
+    }
+    .status-select.done {
+      color: var(--success);
+      border-color: var(--success);
+      background: var(--success-glow);
+    }
+
+    /* Section Details Inside Page */
+    .sections-container {
+      margin-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 14px;
+    }
+    .sections-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .section-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 10px;
+    }
+    .section-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .section-header-tag {
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-comp {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      background: rgba(245, 158, 11, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      width: fit-content;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    /* Sticky Bottom Action Dock */
+    .dock-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(17, 24, 39, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      border-radius: 40px;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      z-index: 100;
+    }
+    .dock-status {
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 16px 12px; }
+      .section-list { grid-template-columns: 1fr; }
+      .dock-bar { width: 90%; justify-content: space-between; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <div class="container">
+    <!-- Top Header -->
+    <header class="top-header">
+      <div>
+        <div class="brand-badge">
+          <span class="dot-pulse"></span> Wispr Model Store · Execution Roadmap
+        </div>
+        <h1>Website Pages & Sections UI/UX Studio</h1>
+        <p style="color: var(--text-muted); font-size: 14px; max-width: 650px;">
+          Master class-by-class execution hub. Open each class module below, inspect every section component, and update the UI/UX one page at a time.
+        </p>
+        <div style="margin-top: 10px;">
+          <span class="domain-url">🌐 Domain: Wispr Model Store (vistarmodels.com)</span>
+          <span class="domain-url" style="margin-left: 8px;">📑 MSME: UDYAM-RJ-17-0536099</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
+        <a href="Wispr_Model_Store_UI_UX_Master_Catalog.pdf" download class="pdf-download-btn">
+          📥 Download PDF Catalog
+        </a>
+        <span style="font-size: 11px; color: var(--text-muted);">Print-ready A4 PDF catalog generated</span>
+      </div>
+    </header>
+
+    <!-- Stats Ribbon -->
+    <div class="stats-ribbon">
+      <div class="stat-card">
+        <span class="stat-val gold">39</span>
+        <span class="stat-lbl">Total Web Pages</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-val">200</span>
+        <span class="stat-lbl">Total UI Sections</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-val">6</span>
+        <span class="stat-lbl">Structured Classes</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-val green" id="completed-stat">0 / 39</span>
+        <span class="stat-lbl">Pages Designed (Tracked)</span>
+      </div>
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search pages, sections or URLs (e.g. /about, high-rise, 200 FAQs)..." oninput="filterPages()">
+      </div>
+      <div class="quick-actions">
+        <button class="btn-secondary" onclick="expandAllClasses()">Expand All Classes</button>
+        <button class="btn-secondary" onclick="collapseAllClasses()">Collapse All Classes</button>
+      </div>
+    </div>
+
+    <!-- ==================== CLASS 1 ==================== -->
+    <div class="class-module open" id="class-1">
+      <div class="class-header" onclick="toggleClass('class-1')">
+        <div class="class-title-group">
+          <span class="class-number-pill">Class 01</span>
+          <span class="class-title">Home Page Foundation & Master Gateway</span>
+        </div>
+        <div class="class-meta">
+          <span class="class-badge">1 Page</span>
+          <span class="class-badge">10 Sections</span>
+          <span class="chevron-icon">▼</span>
+        </div>
+      </div>
+      <div class="class-content">
+        <!-- Home Page Card -->
+        <div class="page-card" data-slug="home">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">1. Home Page (Master Gateway)</span>
+              <a href="/" target="_blank" class="page-url-link">🔗 Route: / &nbsp;(https://www.vistarmodels.com/)</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/home.tsx</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">10 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('home', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="sections-title">
+              <span>Included UI Sections & Components:</span>
+              <span style="color: var(--accent);">Complete Anatomy</span>
+            </div>
+            <div class="section-list">
+              <div class="section-item">
+                <span class="section-header-tag">01. Hero Banner</span>
+                <span class="section-comp">&lt;Hero /&gt;</span>
+                <span class="section-desc">H1 Brand pill, tagline "The Right Model. The Right Maker", 2 CTA buttons, preloaded 960x548 WebP showcase image, scroll indicator.</span>
+              </div>
+              <div class="section-item">
+                <span class="section-header-tag">02. Perspective</span>
+                <span class="section-comp">&lt;Perspective /&gt;</span>
+                <span class="section-desc">Mission statement: "Understand. Source. Connect." Neutral consultancy philosophy.</span>
+              </div>
+              <div class="section-item">
+                <span class="section-header-tag">03. Category Gallery</span>
+                <span class="section-comp">&lt;CategoryGallery compact /&gt;</span>
+                <span class="section-desc">9-card responsive scale model category visual grid with image zoom and direct routing.</span>
+              </div>
+              <div class="section-item">
+                <span class="section-header-tag">04. Capability Matrix</span>
+                <span class="section-comp">&lt;Capability /&gt;</span>
+                <span class="section-desc">8-point vetting criteria (laser/CNC tolerances, finishes, multi-zone lighting, capacity).</span>
+              </div>
+              <div class="section-item">
+                <span class="section-header-tag">05. 5-Step Process</span>
+                <span class="section-comp">&lt;Process /&gt;</span>
+                <span class="section-desc">Numbered workflow: 1 Share Requirement &rarr; 2 Clarify &rarr; 3 Match &rarr; 4 Discuss &rarr; 5 Execution.</span>
+              </div>
+              <div class="section-item">
+                <span class="section-header-tag">06. Founder Profile</span>
+                <span class="section-comp">&lt;Founder /&gt;</span>
+                <span class="section-desc">Yogendra Yogi bio, Government MSME UDYAM-RJ-17-0536099 certification, neutrality doctrine.</span>
+              </div>
+              <div class="section-item">
+                <span class="section-header-tag">07. Industry Partners</span>
+                <span class="section-comp">&lt;IndustryPartners /&gt;</span>
+                <span class="section-desc">8 client sector badges (Architects, Developers, Infrastructure, Industrial Plants, etc.).</span>
+              </div>
+              <div class="section-item">
+                <span class="section-header-tag">08. Journal Teaser</span>
+                <span class="section-comp">&lt;BlogTeaser /&gt;</span>
+                <span class="section-desc">3 featured article cards from The Vistar Journal with read times and links.</span>
+              </div>
+              <div class="section-item">
+                <span class="section-header-tag">09. Homepage FAQs</span>
+                <span class="section-comp">&lt;HomepageFaq /&gt;</span>
+                <span class="section-desc">10 expandable native accordions with embedded FAQPage Schema.</span>
+              </div>
+              <div class="section-item">
+                <span class="section-header-tag">10. Institutional CTA</span>
+                <span class="section-comp">&lt;ContactCta /&gt;</span>
+                <span class="section-desc">Instant WhatsApp desk, phone call (+91 83028 06913), and brief intake trigger.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== CLASS 2 ==================== -->
+    <div class="class-module" id="class-2">
+      <div class="class-header" onclick="toggleClass('class-2')">
+        <div class="class-title-group">
+          <span class="class-number-pill">Class 02</span>
+          <span class="class-title">Core Institutional & Informational Pages</span>
+        </div>
+        <div class="class-meta">
+          <span class="class-badge">12 Pages</span>
+          <span class="class-badge">38 Sections</span>
+          <span class="chevron-icon">▼</span>
+        </div>
+      </div>
+      <div class="class-content">
+        
+        <!-- About -->
+        <div class="page-card" data-slug="about">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">2. About Vistar Models</span>
+              <a href="/about" target="_blank" class="page-url-link">🔗 Route: /about</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + site.ts</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">4 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('about', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"Better connections. More considered models."</span></div>
+              <div class="section-item"><span class="section-header-tag">2. Founder Component</span><span class="section-desc">Founder bio, UDYAM registration, neutrality.</span></div>
+              <div class="section-item"><span class="section-header-tag">3. PageContent Block</span><span class="section-desc">Consultancy not manufacturing, Approach, Responsibilities.</span></div>
+              <div class="section-item"><span class="section-header-tag">4. ContactCta</span><span class="section-desc">Consultancy consultation banner.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="page-card" data-slug="services">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">3. Consultancy Services</span>
+              <a href="/services" target="_blank" class="page-url-link">🔗 Route: /services</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + page-content.tsx</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">3 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('services', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"A clearer brief. A more relevant search."</span></div>
+              <div class="section-item"><span class="section-header-tag">2. 8 Services Rail</span><span class="section-desc">Editorial intro rail + 8 numbered service cards with ArrowUpRight icons.</span></div>
+              <div class="section-item"><span class="section-header-tag">3. ContactCta</span><span class="section-desc">Action banner to discuss requirement.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Find a Maker -->
+        <div class="page-card" data-slug="find-a-model-maker">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">4. Find a Model Maker (Intake Hub)</span>
+              <a href="/find-a-model-maker" target="_blank" class="page-url-link">🔗 Route: /find-a-model-maker</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + enquiry-form.tsx</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">4 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('find-a-model-maker', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"Let’s find the capabilities your project needs."</span></div>
+              <div class="section-item"><span class="section-header-tag">2. Capability Matrix</span><span class="section-desc">8-point matching criteria for fabrication partners.</span></div>
+              <div class="section-item"><span class="section-header-tag">3. Interactive Intake Form</span><span class="section-desc">Category picker, scale, dimensions, timeline, budget, CAD/PDF upload.</span></div>
+              <div class="section-item"><span class="section-header-tag">4. Process Summary</span><span class="section-desc">Overview of what happens after submitting brief.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories Directory -->
+        <div class="page-card" data-slug="categories">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">5. Model Categories Directory</span>
+              <a href="/categories" target="_blank" class="page-url-link">🔗 Route: /categories</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + category-gallery.tsx</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">3 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('categories', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"Different models. Different expertise."</span></div>
+              <div class="section-item"><span class="section-header-tag">2. Full Category Gallery</span><span class="section-desc">9 visual cards linking to all categories with high-res photos.</span></div>
+              <div class="section-item"><span class="section-header-tag">3. ContactCta</span><span class="section-desc">Bottom consultation prompt.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Industries -->
+        <div class="page-card" data-slug="industries">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">6. Industries We Serve</span>
+              <a href="/industries" target="_blank" class="page-url-link">🔗 Route: /industries</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + site.ts</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">3 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('industries', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"Built around your industry’s purpose."</span></div>
+              <div class="section-item"><span class="section-header-tag">2. 8 Industry Sector Cards</span><span class="section-desc">Architects, Developers, Infrastructure, Industrial, Government, Colleges, Museums, Expos.</span></div>
+              <div class="section-item"><span class="section-header-tag">3. ContactCta</span><span class="section-desc">Bottom consultation prompt.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- How it works -->
+        <div class="page-card" data-slug="how-it-works">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">7. How It Works (Sourcing Workflow)</span>
+              <a href="/how-it-works" target="_blank" class="page-url-link">🔗 Route: /how-it-works</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + process.tsx</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">4 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('how-it-works', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"From a requirement to a relevant introduction."</span></div>
+              <div class="section-item"><span class="section-header-tag">2. Process Component</span><span class="section-desc">5 visual milestone cards from brief to on-site assembly.</span></div>
+              <div class="section-item"><span class="section-header-tag">3. Reading Block</span><span class="section-desc">Brief preparation guide, scope comparison, agreements.</span></div>
+              <div class="section-item"><span class="section-header-tag">4. ContactCta</span><span class="section-desc">Bottom consultation prompt.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- For Manufacturers -->
+        <div class="page-card" data-slug="for-manufacturers">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">8. For Manufacturing Partners</span>
+              <a href="/for-manufacturers" target="_blank" class="page-url-link">🔗 Route: /for-manufacturers</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + site.ts</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">4 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('for-manufacturers', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"Your capabilities. The relevant conversation."</span></div>
+              <div class="section-item"><span class="section-header-tag">2. Editorial Split</span><span class="section-desc">Network intro and link to join partner network.</span></div>
+              <div class="section-item"><span class="section-header-tag">3. Checklist Block</span><span class="section-desc">What workshops should include in their profile.</span></div>
+              <div class="section-item"><span class="section-header-tag">4. ContactCta</span><span class="section-desc">Bottom consultation prompt.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Become a Partner -->
+        <div class="page-card" data-slug="become-a-partner">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">9. Become a Partner (Workshop Onboarding)</span>
+              <a href="/become-a-partner" target="_blank" class="page-url-link">🔗 Route: /become-a-partner</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + enquiry-form.tsx</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">3 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('become-a-partner', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"Introduce your workshop."</span></div>
+              <div class="section-item"><span class="section-header-tag">2. Workshop Application Form</span><span class="section-desc">Company details, equipment (Laser, CNC, SLA), portfolio URLs, capacity.</span></div>
+              <div class="section-item"><span class="section-header-tag">3. Terms Notice</span><span class="section-desc">Evaluation and non-guarantee policy.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="page-card" data-slug="faq">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">10. Frequently Asked Questions (FAQ)</span>
+              <a href="/faq" target="_blank" class="page-url-link">🔗 Route: /faq</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + site.ts</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">3 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('faq', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"Good questions. Clear expectations."</span></div>
+              <div class="section-item"><span class="section-header-tag">2. Accordion FAQ Stream</span><span class="section-desc">10 full FAQs with direct Hotline & WhatsApp button desk.</span></div>
+              <div class="section-item"><span class="section-header-tag">3. ContactCta</span><span class="section-desc">Bottom consultation prompt.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="page-card" data-slug="contact">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">11. Contact Us & Hotline Desk</span>
+              <a href="/contact" target="_blank" class="page-url-link">🔗 Route: /contact</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + enquiry-form.tsx</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">3 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('contact', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"Tell us what your project needs."</span></div>
+              <div class="section-item"><span class="section-header-tag">2. Direct Contact Terminals</span><span class="section-desc">Phone (+91 83028 06913), WhatsApp link, Email (vistarmodels@gmail.com).</span></div>
+              <div class="section-item"><span class="section-header-tag">3. Inbound Enquiry Form</span><span class="section-desc">Interactive requirement submission form.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Privacy & Terms -->
+        <div class="page-card" data-slug="privacy">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">12. Privacy Policy</span>
+              <a href="/privacy" target="_blank" class="page-url-link">🔗 Route: /privacy</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + site.ts</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">2 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('privacy', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"Privacy Policy · Last updated 15 October 2026"</span></div>
+              <div class="section-item"><span class="section-header-tag">2. 6 Privacy Blocks</span><span class="section-desc">Information collected, Usage, Database storage, Retention, External services, Drawing confidentiality.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-card" data-slug="terms">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">13. Terms of Use</span>
+              <a href="/terms" target="_blank" class="page-url-link">🔗 Route: /terms</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/page.tsx + site.ts</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">2 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('terms', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. PageHeading</span><span class="section-desc">"Terms of Use · Last updated 15 October 2026"</span></div>
+              <div class="section-item"><span class="section-header-tag">2. 7 Terms Blocks</span><span class="section-desc">Role as consultancy, No guarantees, Client-maker contract autonomy, Illustrative AI imagery, Permitted use.</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== CLASS 3 ==================== -->
+    <div class="class-module" id="class-3">
+      <div class="class-header" onclick="toggleClass('class-3')">
+        <div class="class-title-group">
+          <span class="class-number-pill">Class 03</span>
+          <span class="class-title">Specialized Model Category Showcases</span>
+        </div>
+        <div class="class-meta">
+          <span class="class-badge">9 Pages</span>
+          <span class="class-badge">27 Sections</span>
+          <span class="chevron-icon">▼</span>
+        </div>
+      </div>
+      <div class="class-content">
+        <p style="font-size: 13px; color: var(--text-muted);">
+          Each Category page contains 3 core UI sections: <b>PageHeading</b> (Masthead) + <b>CategoryContent</b> (High-res Figure, Considerations, Scope Needs Checklist) + <b>ContactCta</b> (Inbound Project Banner).
+        </p>
+
+        <!-- 9 Category Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+          
+          <div class="page-card" data-slug="cat-1">
+            <div class="page-card-top">
+              <div class="page-info">
+                <span class="page-name">14. Architectural Models</span>
+                <a href="/architectural-makers" target="_blank" class="page-url-link">🔗 /architectural-makers</a>
+              </div>
+              <span class="sec-count-badge">3 Sections</span>
+            </div>
+            <div class="section-desc">Building facade detail, residential towers, sales-gallery models, multi-tier lighting.</div>
+          </div>
+
+          <div class="page-card" data-slug="cat-2">
+            <div class="page-card-top">
+              <div class="page-info">
+                <span class="page-name">15. Township & Master Plans</span>
+                <a href="/township-makers" target="_blank" class="page-url-link">🔗 /township-makers</a>
+              </div>
+              <span class="sec-count-badge">3 Sections</span>
+            </div>
+            <div class="section-desc">50-500 acre masterplans, zoning, topographical contours, resin water ripple bodies.</div>
+          </div>
+
+          <div class="page-card" data-slug="cat-3">
+            <div class="page-card-top">
+              <div class="page-info">
+                <span class="page-name">16. Industrial Plants & Factories</span>
+                <a href="/industrial-makers" target="_blank" class="page-url-link">🔗 /industrial-makers</a>
+              </div>
+              <span class="sec-count-badge">3 Sections</span>
+            </div>
+            <div class="section-desc">Chemical refineries, color-coded piping schemes, equipment cutaways, process flow.</div>
+          </div>
+
+          <div class="page-card" data-slug="cat-4">
+            <div class="page-card-top">
+              <div class="page-info">
+                <span class="page-name">17. Villa & Commercial Models</span>
+                <a href="/villa-commercial-makers" target="_blank" class="page-url-link">🔗 /villa-commercial-makers</a>
+              </div>
+              <span class="sec-count-badge">3 Sections</span>
+            </div>
+            <div class="section-desc">Luxury bungalows, swimming pools, pergolas, cutaways, commercial retail podiums.</div>
+          </div>
+
+          <div class="page-card" data-slug="cat-5">
+            <div class="page-card-top">
+              <div class="page-info">
+                <span class="page-name">18. Interior Presentation Models</span>
+                <a href="/interior-makers" target="_blank" class="page-url-link">🔗 /interior-makers</a>
+              </div>
+              <span class="sec-count-badge">3 Sections</span>
+            </div>
+            <div class="section-desc">Cutaway room layouts, bespoke miniature furniture, removable roof and wall systems.</div>
+          </div>
+
+          <div class="page-card" data-slug="cat-6">
+            <div class="page-card-top">
+              <div class="page-info">
+                <span class="page-name">19. Exhibition & Presentation</span>
+                <a href="/exhibition-makers" target="_blank" class="page-url-link">🔗 /exhibition-makers</a>
+              </div>
+              <span class="sec-count-badge">3 Sections</span>
+            </div>
+            <div class="section-desc">Museum exhibits, trade expo kiosks, protective acrylic vitrines, transport crating.</div>
+          </div>
+
+          <div class="page-card" data-slug="cat-7">
+            <div class="page-card-top">
+              <div class="page-info">
+                <span class="page-name">20. Engineering & Infrastructure</span>
+                <a href="/engineering-infrastructure-makers" target="_blank" class="page-url-link">🔗 /engineering-infrastructure-makers</a>
+              </div>
+              <span class="sec-count-badge">3 Sections</span>
+            </div>
+            <div class="section-desc">Bridges, metro networks, transit corridors, civil engineering mockups.</div>
+          </div>
+
+          <div class="page-card" data-slug="cat-8">
+            <div class="page-card-top">
+              <div class="page-info">
+                <span class="page-name">21. Working & Demonstration</span>
+                <a href="/working-demonstration-makers" target="_blank" class="page-url-link">🔗 /working-demonstration-makers</a>
+              </div>
+              <span class="sec-count-badge">3 Sections</span>
+            </div>
+            <div class="section-desc">Moving mechanical parts, motorized gearboxes, flow indicators, teaching demonstrations.</div>
+          </div>
+
+          <div class="page-card" data-slug="cat-9">
+            <div class="page-card-top">
+              <div class="page-info">
+                <span class="page-name">22. 3D Printing & Components</span>
+                <a href="/3d-printing-components" target="_blank" class="page-url-link">🔗 /3d-printing-components</a>
+              </div>
+              <span class="sec-count-badge">3 Sections</span>
+            </div>
+            <div class="section-desc">SLA/PolyJet micro-detailing, CAD vectorization, surface finishing, precision accents.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== CLASS 4 ==================== -->
+    <div class="class-module" id="class-4">
+      <div class="class-header" onclick="toggleClass('class-4')">
+        <div class="class-title-group">
+          <span class="class-number-pill">Class 04</span>
+          <span class="class-title">Regional Operating Hubs & 200-FAQ Engine</span>
+        </div>
+        <div class="class-meta">
+          <span class="class-badge">10 Pages</span>
+          <span class="class-badge">86 Sections</span>
+          <span class="chevron-icon">▼</span>
+        </div>
+      </div>
+      <div class="class-content">
+        <!-- Units Directory -->
+        <div class="page-card" data-slug="units-hub">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">23. All Branches Hub Directory (/units)</span>
+              <a href="/units" target="_blank" class="page-url-link">🔗 Route: /units</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/units.tsx</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">5 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('units-hub', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. Regional Masthead</span><span class="section-desc">"Our Registered Branches & Operating Units Across India"</span></div>
+              <div class="section-item"><span class="section-header-tag">2. Metro Corridor Station Bar</span><span class="section-desc">9-station monospace quick anchor navigation ribbon.</span></div>
+              <div class="section-item"><span class="section-header-tag">3. 9 Terminal Rows</span><span class="section-desc">Clean monospace rows: City, RERA, Authority, 5.0 Star Ratings, Maps, WhatsApp.</span></div>
+              <div class="section-item"><span class="section-header-tag">4. National Capability Badges</span><span class="section-desc">MSME UDYAM, Heavy-duty Crating, 24/6 Technical Desk.</span></div>
+              <div class="section-item"><span class="section-header-tag">5. ContactCta</span><span class="section-desc">Bottom consultation prompt.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9 City Hubs Grid -->
+        <div style="margin-top: 10px;">
+          <h3 style="font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 12px;">
+            The 9 City Regional Pages (9 Sections Each · 200 Searchable FAQs Per Page):
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px;">
+            
+            <div class="page-card" data-slug="unit-jaipur">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">24. Jaipur (Flagship Headquarters)</span>
+                  <a href="/units/jaipur" target="_blank" class="page-url-link">🔗 /units/jaipur</a>
+                </div>
+                <span class="sec-count-badge">9 Sections</span>
+              </div>
+              <div class="section-desc">Ashok Marg office, JDA & RajRERA alignment, 200 FAQs, pricing table, GPS navigation.</div>
+            </div>
+
+            <div class="page-card" data-slug="unit-mumbai">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">25. Mumbai (Financial Capital)</span>
+                  <a href="/units/mumbai" target="_blank" class="page-url-link">🔗 /units/mumbai</a>
+                </div>
+                <span class="sec-count-badge">9 Sections</span>
+              </div>
+              <div class="section-desc">Nariman Point & BKC coverage, MahaRERA & MMRDA alignment, 200 FAQs, pricing table.</div>
+            </div>
+
+            <div class="page-card" data-slug="unit-delhi">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">26. Delhi (National Capital Region)</span>
+                  <a href="/units/delhi" target="_blank" class="page-url-link">🔗 /units/delhi</a>
+                </div>
+                <span class="sec-count-badge">9 Sections</span>
+              </div>
+              <div class="section-desc">Connaught Place branch, DDA compliance, 200 FAQs, pricing table, GPS navigation.</div>
+            </div>
+
+            <div class="page-card" data-slug="unit-gurugram">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">27. Gurugram (Cyber City Hub)</span>
+                  <a href="/units/gurugram" target="_blank" class="page-url-link">🔗 /units/gurugram</a>
+                </div>
+                <span class="sec-count-badge">9 Sections</span>
+              </div>
+              <div class="section-desc">Golf Course Road presence, Haryana RERA & GMDA, 200 FAQs, pricing table.</div>
+            </div>
+
+            <div class="page-card" data-slug="unit-noida">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">28. Noida (Expressway & Airport Hub)</span>
+                  <a href="/units/noida" target="_blank" class="page-url-link">🔗 /units/noida</a>
+                </div>
+                <span class="sec-count-badge">9 Sections</span>
+              </div>
+              <div class="section-desc">Sector 62 office, UP RERA & NOIDA authority, 200 FAQs, pricing table.</div>
+            </div>
+
+            <div class="page-card" data-slug="unit-bengaluru">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">29. Bengaluru (Silicon Valley)</span>
+                  <a href="/units/bengaluru" target="_blank" class="page-url-link">🔗 /units/bengaluru</a>
+                </div>
+                <span class="sec-count-badge">9 Sections</span>
+              </div>
+              <div class="section-desc">MG Road presence, Karnataka RERA & BDA, 200 FAQs, pricing table.</div>
+            </div>
+
+            <div class="page-card" data-slug="unit-pune">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">30. Pune (Auto & Tech Corridor)</span>
+                  <a href="/units/pune" target="_blank" class="page-url-link">🔗 /units/pune</a>
+                </div>
+                <span class="sec-count-badge">9 Sections</span>
+              </div>
+              <div class="section-desc">Shivajinagar office, MahaRERA & PMC/PMRDA, 200 FAQs, pricing table.</div>
+            </div>
+
+            <div class="page-card" data-slug="unit-hyderabad">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">31. Hyderabad (HITEC City & Cyberabad)</span>
+                  <a href="/units/hyderabad" target="_blank" class="page-url-link">🔗 /units/hyderabad</a>
+                </div>
+                <span class="sec-count-badge">9 Sections</span>
+              </div>
+              <div class="section-desc">Madhapur office, TG RERA & HMDA, 200 FAQs, pricing table.</div>
+            </div>
+
+            <div class="page-card" data-slug="unit-ahmedabad">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">32. Ahmedabad (GIFT City & DMIC)</span>
+                  <a href="/units/ahmedabad" target="_blank" class="page-url-link">🔗 /units/ahmedabad</a>
+                </div>
+                <span class="sec-count-badge">9 Sections</span>
+              </div>
+              <div class="section-desc">SG Highway presence, Gujarat RERA & AUDA, 200 FAQs, pricing table.</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== CLASS 5 ==================== -->
+    <div class="class-module" id="class-5">
+      <div class="class-header" onclick="toggleClass('class-5')">
+        <div class="class-title-group">
+          <span class="class-number-pill">Class 05</span>
+          <span class="class-title">The Vistar Journal / Articles</span>
+        </div>
+        <div class="class-meta">
+          <span class="class-badge">7 Pages</span>
+          <span class="class-badge">39 Sections</span>
+          <span class="chevron-icon">▼</span>
+        </div>
+      </div>
+      <div class="class-content">
+        <!-- Blog Main -->
+        <div class="page-card" data-slug="blog-hub">
+          <div class="page-card-top">
+            <div class="page-info">
+              <span class="page-name">33. Journal Main Directory (/blog)</span>
+              <a href="/blog" target="_blank" class="page-url-link">🔗 Route: /blog</a>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">Source: src/routes/blog.tsx + blog-index.tsx</span>
+            </div>
+            <div class="page-badges">
+              <span class="sec-count-badge">3 UI Sections</span>
+              <select class="status-select" onchange="updatePageStatus('blog-hub', this)">
+                <option value="pending">⏳ Pending Design</option>
+                <option value="progress">⚡ In Progress</option>
+                <option value="done">✅ UI Updated</option>
+              </select>
+            </div>
+          </div>
+          <div class="sections-container">
+            <div class="section-list">
+              <div class="section-item"><span class="section-header-tag">1. Journal Masthead</span><span class="section-desc">"The Vistar Journal — Practical, honest guidance"</span></div>
+              <div class="section-item"><span class="section-header-tag">2. BlogIndex Component</span><span class="section-desc">Intro banner + 6 responsive article cards + 24/6 schedule note.</span></div>
+              <div class="section-item"><span class="section-header-tag">3. ContactCta</span><span class="section-desc">Bottom consultation prompt.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 In-depth Articles -->
+        <div style="margin-top: 10px;">
+          <h3 style="font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 12px;">
+            The 6 In-Depth Journal Articles (6 Sections Each: Sticky Sidebar TOC + Cover + TL;DR + Body + In-Article CTA + Global CTA):
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px;">
+            
+            <div class="page-card" data-slug="article-1">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">34. How to Choose an Architectural Model Maker</span>
+                  <a href="/blog/how-to-choose-an-architectural-model-maker" target="_blank" class="page-url-link">🔗 /blog/how-to-choose-an-architectural-model-maker</a>
+                </div>
+                <span class="sec-count-badge">6 Sections</span>
+              </div>
+              <div class="section-desc">Matching materials, purpose, sales vs design-review, quotation brief preparation.</div>
+            </div>
+
+            <div class="page-card" data-slug="article-2">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">35. Prepare a Useful Quotation Brief</span>
+                  <a href="/blog/prepare-a-useful-quotation-brief-for-a-scale-model" target="_blank" class="page-url-link">🔗 /blog/prepare-a-useful-quotation-brief-for-a-scale-model</a>
+                </div>
+                <span class="sec-count-badge">6 Sections</span>
+              </div>
+              <div class="section-desc">Scope checklist: scale, CAD/PDF drawings, lighting, crating, destination, budget.</div>
+            </div>
+
+            <div class="page-card" data-slug="article-3">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">36. Matching a Maker to Capabilities</span>
+                  <a href="/blog/matching-a-model-maker-to-project-capabilities" target="_blank" class="page-url-link">🔗 /blog/matching-a-model-maker-to-project-capabilities</a>
+                </div>
+                <span class="sec-count-badge">6 Sections</span>
+              </div>
+              <div class="section-desc">Why size alone fails; laser tolerances, CNC capacity, multi-vendor coordination.</div>
+            </div>
+
+            <div class="page-card" data-slug="article-4">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">37. Types of Scale Models & Uses</span>
+                  <a href="/blog/types-of-scale-models-and-their-uses" target="_blank" class="page-url-link">🔗 /blog/types-of-scale-models-and-their-uses</a>
+                </div>
+                <span class="sec-count-badge">6 Sections</span>
+              </div>
+              <div class="section-desc">Comprehensive review of architectural, township, industrial, interior, working models.</div>
+            </div>
+
+            <div class="page-card" data-slug="article-5">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">38. Timelines & Budget Considerations</span>
+                  <a href="/blog/scale-model-timelines-and-budget-considerations" target="_blank" class="page-url-link">🔗 /blog/scale-model-timelines-and-budget-considerations</a>
+                </div>
+                <span class="sec-count-badge">6 Sections</span>
+              </div>
+              <div class="section-desc">Factors determining fabrication cost & timeline; milestones, inspections, delivery.</div>
+            </div>
+
+            <div class="page-card" data-slug="article-6">
+              <div class="page-card-top">
+                <div class="page-info">
+                  <span class="page-name">39. What Does a Sourcing Consultancy Do?</span>
+                  <a href="/blog/what-does-a-scale-model-sourcing-consultancy-do" target="_blank" class="page-url-link">🔗 /blog/what-does-a-scale-model-sourcing-consultancy-do</a>
+                </div>
+                <span class="sec-count-badge">6 Sections</span>
+              </div>
+              <div class="section-desc">Vistar's role explained: brief specification, maker matching, direct client agreements.</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== CLASS 6 ==================== -->
+    <div class="class-module" id="class-6">
+      <div class="class-header" onclick="toggleClass('class-6')">
+        <div class="class-title-group">
+          <span class="class-number-pill">Class 06</span>
+          <span class="class-title">Discovery, AI & SEO Technical Feeds</span>
+        </div>
+        <div class="class-meta">
+          <span class="class-badge">6 Feeds</span>
+          <span class="class-badge">Automated</span>
+          <span class="chevron-icon">▼</span>
+        </div>
+      </div>
+      <div class="class-content">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+          <div class="page-card">
+            <div class="page-info">
+              <span class="page-name">/sitemap.xml</span>
+              <span class="section-desc">Dynamic XML sitemap indexing all 39 URLs with lastmod dates.</span>
+            </div>
+          </div>
+          <div class="page-card">
+            <div class="page-info">
+              <span class="page-name">/robots.txt</span>
+              <span class="section-desc">Search engine and AI bot permissions (Googlebot, GPTBot, ClaudeBot, Perplexity).</span>
+            </div>
+          </div>
+          <div class="page-card">
+            <div class="page-info">
+              <span class="page-name">/llms.txt</span>
+              <span class="section-desc">Structured markdown knowledge feed for LLMs and agentic search systems.</span>
+            </div>
+          </div>
+          <div class="page-card">
+            <div class="page-info">
+              <span class="page-name">/rss.xml</span>
+              <span class="section-desc">RSS 2.0 XML feed broadcasting all newly published Journal articles.</span>
+            </div>
+          </div>
+          <div class="page-card">
+            <div class="page-info">
+              <span class="page-name">/api/health</span>
+              <span class="section-desc">Lightweight HTTP 200 health check endpoint for monitoring uptime.</span>
+            </div>
+          </div>
+          <div class="page-card">
+            <div class="page-info">
+              <span class="page-name">/api/*</span>
+              <span class="section-desc">Serverless catch-all endpoint for inbound inquiries and integrations.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Dock Status -->
+  <div class="dock-bar">
+    <div class="dock-status">
+      <span class="dot-pulse" style="background: var(--success); box-shadow: 0 0 10px var(--success);"></span>
+      <span><b>Wispr Model Store UI Studio</b> · 39 Pages Ready for Phased Execution</span>
+    </div>
+    <a href="Wispr_Model_Store_UI_UX_Master_Catalog.pdf" download class="pdf-download-btn" style="padding: 6px 14px; font-size: 11px;">
+      📄 PDF Catalog
+    </a>
+  </div>
+
+  <script>
+    // Toggle Accordion Class Modules
+    function toggleClass(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle('open');
+    }
+
+    function expandAllClasses() {
+      document.querySelectorAll('.class-module').forEach(m => m.classList.add('open'));
+    }
+
+    function collapseAllClasses() {
+      document.querySelectorAll('.class-module').forEach(m => m.classList.remove('open'));
+    }
+
+    // Filter Search
+    function filterPages() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.page-card');
+      
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (!q || text.includes(q)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (q) {
+        expandAllClasses();
+      }
+    }
+
+    // LocalStorage UI Progress Tracking
+    function updatePageStatus(slug, selectEl) {
+      const val = selectEl.value;
+      localStorage.setItem('wispr_page_status_' + slug, val);
+      applyStatusStyle(selectEl.closest('.page-card'), val, selectEl);
+      updateTotalProgress();
+    }
+
+    function applyStatusStyle(card, val, selectEl) {
+      if (val === 'done') {
+        card.classList.add('completed');
+        selectEl.classList.add('done');
+      } else {
+        card.classList.remove('completed');
+        selectEl.classList.remove('done');
+      }
+    }
+
+    function updateTotalProgress() {
+      const selects = document.querySelectorAll('.status-select');
+      let done = 0;
+      selects.forEach(s => {
+        if (s.value === 'done') done++;
+      });
+      document.getElementById('completed-stat').innerText = done + ' / 39';
+    }
+
+    // Load saved states
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.page-card').forEach(card => {
+        const slug = card.getAttribute('data-slug');
+        if (slug) {
+          const saved = localStorage.getItem('wispr_page_status_' + slug);
+          if (saved) {
+            const selectEl = card.querySelector('.status-select');
+            if (selectEl) {
+              selectEl.value = saved;
+              applyStatusStyle(card, saved, selectEl);
+            }
+          }
+        }
+      });
+      updateTotalProgress();
+    });
+  </script>
+</body>
+</html>

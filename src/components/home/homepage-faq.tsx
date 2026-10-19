@@ -1,47 +1,49 @@
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
+import { Link } from 'react-router';
+import { ScrollReveal } from '@/components/ui/scroll-reveal';
 
 const HOMEPAGE_FAQS = [
 	{
 		question: 'What does Vistar Models do?',
 		answer:
-			'Vistar Models is a scale-model consultancy — not a manufacturer. We help architects, developers, and infrastructure clients clarify their model requirements, identify verified specialist makers, and facilitate direct introductions to relevant workshops across India.',
+			'Vistar Models is a specialized scale-model consultancy — not a factory or broker. We help architects, developers, and infrastructure clients evaluate technical scope, identify verified specialist makers, and facilitate direct introductions to relevant workshops across India with zero broker markups.',
 	},
 	{
-		question: 'How much does a scale model cost in India?',
+		question: 'How much does an architectural scale model cost in India?',
 		answer:
-			'Costs vary by scale, size, materials, and detailing. A basic 1:200 residential model starts from approximately ₹50,000–₹1,50,000. A detailed sales-gallery high-rise model with LED lighting can range from ₹3,00,000–₹15,00,000 or more. We help you clarify scope so makers can quote accurately.',
+			'Costs vary based on scale (1:50 to 1:1000), material palette (cast acrylic, brass, natural hardwood), and illumination (multi-zone DMX LEDs). A basic residential review model starts around ₹50,000–₹1,50,000. An elaborate sales-gallery high-rise vitrine or township masterplan ranges from ₹3,00,000 to ₹18,00,000+. We help structure your brief so makers quote accurately without surprise add-ons.',
 	},
 	{
-		question: 'Which cities do you serve?',
+		question: 'Which cities do you coordinate scale-model sourcing in?',
 		answer:
-			'We source scale models across 9 cities: Mumbai, Delhi, Jaipur, Gurugram, Bengaluru, Pune, Hyderabad, Ahmedabad, and Noida, with pan-India transport and installation coordination.',
+			'We coordinate scale-model sourcing across 9 major metropolitan units: Mumbai, Delhi, Bengaluru, Jaipur, Gurugram, Pune, Hyderabad, Ahmedabad, and Noida, handling pan-India transport in custom shockproof flight cases and on-site gallery installation.',
 	},
 	{
-		question: 'How long does a scale model take to make?',
+		question: 'How long does a scale model take to manufacture?',
 		answer:
-			'Production timelines range from 3–4 weeks for simpler residential models to 6–12 weeks for large township masterplans or detailed LED-lit high-rise models. Share your delivery deadline when submitting your brief.',
+			'Standard fabrication timelines range from 3–4 weeks for residential villas and design review cutaways, to 6–10 weeks for high-rise towers with illuminated interiors, and up to 12 weeks for complex regional infrastructure or airport masterplans.',
 	},
 	{
-		question: 'What files should I prepare?',
+		question: 'What design files can we submit for consultation?',
 		answer:
-			'2D CAD (DWG/DXF), 3D BIM/Revit, SketchUp, Rhino, or high-resolution architectural PDFs. All drawings are handled with commercial confidentiality.',
+			'We accept 2D CAD (DWG/DXF), 3D BIM/Revit models, SketchUp, Rhino, or high-resolution architectural PDFs. All client data and drawings are handled with strict commercial confidentiality under Non-Disclosure agreements.',
 	},
 	{
 		question: 'Do you work with government and infrastructure projects?',
 		answer:
-			'Yes. We source scale models for public-sector buyers, infrastructure and engineering firms, educational institutions, and municipal/MMRDA projects, in addition to private developers and architects.',
+			'Yes. We source physical models for public-sector authorities, infrastructure and civil engineering firms, technical universities, and municipal/MMRDA bodies, in addition to private real estate developers and architectural studios.',
 	},
 ];
 
 export function HomepageFaq() {
-	const [openIndex, setOpenIndex] = useState<number | null>(null);
+	const [openIndex, setOpenIndex] = useState<number | null>(0);
 
 	const toggle = (i: number) => setOpenIndex(prev => (prev === i ? null : i));
 
 	return (
-		<section className="homepage-faq section" aria-label="Frequently asked questions">
-			{/* Hidden FAQPage JSON-LD for AI parsers — duplicates the visible accordion */}
+		<section className="lux-faq" aria-label="Frequently Asked Questions">
+			{/* JSON-LD Schema for AI & Search Parsers */}
 			<script
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{
@@ -60,54 +62,61 @@ export function HomepageFaq() {
 				}}
 			/>
 
-			<div className="homepage-faq-inner">
-				<div className="homepage-faq-header">
-					<p className="label">
-						<span className="yellow-square" /> Common Questions
-					</p>
-					<h2>
-						Everything You Need to Know
-						<span>.</span>
-					</h2>
-					<p className="homepage-faq-sub">
-						Straightforward answers about how scale-model sourcing works, what it costs, and what to
-						prepare before you reach out.
-					</p>
-				</div>
+			<div className="lux-faq-container">
+				{/* Section Header */}
+				<ScrollReveal animation="fade-up-3d">
+					<div className="lux-faq-header">
+						<div className="lux-section-badge">
+							<HelpCircle size={13} className="lux-badge-icon" />
+							<span>08 / CLARITY BEFORE COMMITMENT</span>
+						</div>
+						<h2 className="lux-faq-title">Frequently Addressed Inquiries.</h2>
+						<p className="lux-faq-subtitle">
+							Straightforward guidance on scale-model procurement, pricing parameters,
+							lead times, and technical scope across India.
+						</p>
+					</div>
+				</ScrollReveal>
 
-				<div className="homepage-faq-list" role="list">
-					{HOMEPAGE_FAQS.map((faq, i) => {
-						const isOpen = openIndex === i;
+				{/* Luxury Glass Accordion with Staggered 3D Reveal */}
+				<div className="lux-faq-list">
+					{HOMEPAGE_FAQS.map((faq, idx) => {
+						const isOpen = openIndex === idx;
 						return (
-							<div key={i} className={`faq-item${isOpen ? ' faq-item--open' : ''}`} role="listitem">
-								<button
-									type="button"
-									aria-expanded={isOpen}
-									aria-controls={`faq-answer-${i}`}
-									id={`faq-question-${i}`}
-									className="faq-trigger"
-									onClick={() => toggle(i)}
-								>
-									<span className="faq-q-number">Q{i + 1}</span>
-									<span className="faq-q-text">{faq.question}</span>
-									<ChevronDown
-										size={20}
-										className="faq-chevron"
-										aria-hidden="true"
-									/>
-								</button>
-								<div
-									id={`faq-answer-${i}`}
-									role="region"
-									aria-labelledby={`faq-question-${i}`}
-									className="faq-answer"
-									hidden={!isOpen}
-								>
-									<p>{faq.answer}</p>
+							<ScrollReveal key={idx} animation="tilt-in" delay={idx * 60}>
+								<div className={`lux-faq-item ${isOpen ? 'open' : ''}`}>
+									<button
+										className="lux-faq-trigger"
+										onClick={() => toggle(idx)}
+										aria-expanded={isOpen}
+										id={`faq-btn-${idx}`}
+										aria-controls={`faq-panel-${idx}`}
+									>
+										<span className="lux-faq-num">0{idx + 1}</span>
+										<span className="lux-faq-q">{faq.question}</span>
+										<span className="lux-faq-chevron">
+											<ChevronDown size={18} />
+										</span>
+									</button>
+									<div
+										id={`faq-panel-${idx}`}
+										role="region"
+										aria-labelledby={`faq-btn-${idx}`}
+										className={`lux-faq-panel ${isOpen ? 'open' : ''}`}
+									>
+										<p className="lux-faq-answer">{faq.answer}</p>
+									</div>
 								</div>
-							</div>
+							</ScrollReveal>
 						);
 					})}
+				</div>
+
+				<div className="lux-faq-footer">
+					<span>Have a custom municipal, defence, or high-rise enquiry?</span>
+					<Link to="/contact" className="lux-glass-link">
+						Speak Directly with a Senior Consultant &rarr;
+					</Link>
 				</div>
 			</div>
 		</section>

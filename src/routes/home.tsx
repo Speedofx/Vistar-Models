@@ -2,6 +2,8 @@ import type { Route } from './+types/home';
 import { seo } from '@/lib/seo';
 import { images } from '@/data/site';
 import { Hero } from '@/components/home/hero';
+import { ClientSolutions } from '@/components/home/client-solutions';
+import { LuxuryShowcase } from '@/components/home/luxury-showcase';
 import { Perspective } from '@/components/home/perspective';
 import { CategoryGallery } from '@/components/category-gallery';
 import { Capability } from '@/components/capability';
@@ -12,13 +14,14 @@ import { BlogTeaser } from '@/components/home/blog-teaser';
 import { HomepageFaq } from '@/components/home/homepage-faq';
 import { ContactCta } from '@/components/contact-cta';
 import { business, openingHoursSpec } from '@/data/business';
+import { useScrollProgress } from '@/hooks/use-scroll-reveal';
 
 export const links: Route.LinksFunction = () => [
 	{
 		rel: 'preload',
 		as: 'image',
-		href: images.architectural,
-		type: 'image/webp',
+		href: '/images/cmd_hero_1.jpg',
+		type: 'image/jpeg',
 		fetchPriority: 'high',
 	},
 ];
@@ -142,9 +145,23 @@ export function meta({ matches, location }: Route.MetaArgs) {
 }
 
 export default function HomePage() {
+	const progress = useScrollProgress();
+
 	return (
 		<main>
+			{/* Top Luxury Scroll Progress Indicator */}
+			<div
+				className="lux-scroll-progress"
+				style={{ width: `${progress}%` }}
+				role="progressbar"
+				aria-valuenow={progress}
+				aria-valuemin={0}
+				aria-valuemax={100}
+				aria-label="Page scroll progress"
+			/>
 			<Hero />
+			<ClientSolutions />
+			<LuxuryShowcase />
 			<Perspective />
 			<CategoryGallery compact />
 			<Capability />
@@ -157,5 +174,6 @@ export default function HomePage() {
 		</main>
 	);
 }
+
 
 
