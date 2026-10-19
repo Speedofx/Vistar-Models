@@ -6,19 +6,30 @@ import { whatsapp } from '@/data/site';
 const SLIDES = [
 	{
 		image: '/images/cmd_hero_1.webp',
+		headlineDesktop: (
+			<>
+				<span className="hero-desktop-line">Architectural &amp; Industrial</span>{' '}
+				<span className="hero-desktop-line">Scale Models.</span>
+			</>
+		),
 		tagline: 'Architectural & Industrial Scale Models.',
-		sub: 'Turning CAD, Revit BIM & Site Plans into museum-grade physical reality for Architects, Developers, Governments & Industrialists.',
+		isLongTitle: true,
+		sub: '',
 		alt: 'Luxury architectural high-rise scale model with illuminated interior rooms and miniature trees on polished presentation base',
 	},
 	{
 		image: '/images/cmd_hero_2.webp',
+		headlineDesktop: 'Grand Vision. Micro Precision.',
 		tagline: 'Grand Vision. Micro Precision.',
+		isLongTitle: false,
 		sub: '0.1mm laser & CNC tolerances, interactive tablet-controlled DMX lighting, and bespoke sales gallery presentation vitrines.',
 		alt: 'Expansive stadium and township masterplan architectural scale model with glowing arena canopy and detailed miniature landscape',
 	},
 	{
 		image: '/images/cmd_hero_3.webp',
+		headlineDesktop: 'All Kinds. Any Scale.',
 		tagline: 'All Kinds. Any Scale.',
+		isLongTitle: false,
 		sub: 'From 1:50 luxury tower cutaways to 50,000+ sq.ft regional masterplans. Vetted fabrication network across 9 metropolitan hubs.',
 		alt: 'Contemporary architectural pavilion scale model with intricate vertical wooden louvers and cantilevered roof structure',
 	},
@@ -60,15 +71,18 @@ export function Hero() {
 					VISTAR MODEL &amp; DESIGN
 				</p>
 
-				{/* Huge Iconic Headline */}
-				<h1 className="cmd-hero-headline">
-					{SLIDES[current].tagline}
+				{/* Huge Iconic Headline with Desktop Refined 2-Line Flow */}
+				<h1 className={`cmd-hero-headline ${SLIDES[current].isLongTitle ? 'has-long-title' : ''}`}>
+					<span className="cmd-headline-desktop">{SLIDES[current].headlineDesktop}</span>
+					<span className="cmd-headline-mobile">{SLIDES[current].tagline}</span>
 				</h1>
 
-				{/* Refined Subtitle */}
-				<p className="cmd-hero-sub">
-					{SLIDES[current].sub}
-				</p>
+				{/* Refined Subtitle (only shown if present) */}
+				{SLIDES[current].sub ? (
+					<p className="cmd-hero-sub">
+						{SLIDES[current].sub}
+					</p>
+				) : null}
 
 				{/* 3 Iconic Rectangular Outline Buttons */}
 				<div className="cmd-hero-buttons">
@@ -83,12 +97,20 @@ export function Hero() {
 					</Link>
 				</div>
 
-				{/* 4 Core Client Personas Anchor Bar */}
+				{/* 4 Core Client Personas Anchor Bar - Clean architectural typography with micro-dots, zero emojis */}
 				<div className="cmd-hero-personas">
-					<span className="cmd-persona-tag">📐 Architects &amp; Design Studios</span>
-					<span className="cmd-persona-tag">🏢 Real Estate Developers</span>
-					<span className="cmd-persona-tag">🏛️ Governments &amp; Civic</span>
-					<span className="cmd-persona-tag">🏭 Industrial Leaders</span>
+					<span className="cmd-persona-tag">
+						<span className="cmd-persona-dot" /> Architects &amp; Design Studios
+					</span>
+					<span className="cmd-persona-tag">
+						<span className="cmd-persona-dot" /> Real Estate Developers
+					</span>
+					<span className="cmd-persona-tag">
+						<span className="cmd-persona-dot" /> Governments &amp; Civic
+					</span>
+					<span className="cmd-persona-tag">
+						<span className="cmd-persona-dot" /> Industrial Leaders
+					</span>
 				</div>
 
 				{/* Slide Pagination Indicator Dots */}

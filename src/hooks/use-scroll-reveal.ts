@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 /**
  * Hook to trigger 3D/2D scroll-reveal animations when an element enters the viewport.
  */
-export function useScrollReveal(threshold = 0.02) {
+export function useScrollReveal(threshold = 0.06) {
 	const ref = useRef<HTMLDivElement>(null);
 	const [isRevealed, setIsRevealed] = useState(false);
 
@@ -11,16 +11,16 @@ export function useScrollReveal(threshold = 0.02) {
 		const node = ref.current;
 		if (!node) return;
 
-		// 1. Immediate mount check: if element is near or in viewport, reveal immediately
+		// 1. Initial viewport check: ONLY reveal if element is actually visible right now on page load
 		if (typeof window !== 'undefined') {
 			const rect = node.getBoundingClientRect();
-			if (rect.top <= window.innerHeight + 150 && rect.bottom >= -150) {
+			if (rect.top < window.innerHeight - 20 && rect.bottom > 0) {
 				setIsRevealed(true);
 				return;
 			}
 		}
 
-		// 2. IntersectionObserver with generous rootMargin so elements trigger 120px in advance
+		// 2. IntersectionObserver: fires dynamically as user scrolls down to the element
 		if (typeof IntersectionObserver !== 'undefined') {
 			const observer = new IntersectionObserver(
 				([entry]) => {
@@ -29,19 +29,25 @@ export function useScrollReveal(threshold = 0.02) {
 						observer.unobserve(entry.target);
 					}
 				},
-				{ threshold, rootMargin: '120px 0px 120px 0px' }
+				{ threshold, rootMargin: '0px 0px -40px 0px' }
 			);
 
 			observer.observe(node);
 
-			// Safety fallback: reveal after 1.5s so content is never stuck hidden
-			const safetyTimer = setTimeout(() => {
-				setIsRevealed(true);
-			}, 1500);
+			// Dynamic scroll backup: ensures fast scrolls always reveal content smoothly
+			const handleScroll = () => {
+				if (!node) return;
+				const r = node.getBoundingClientRect();
+				if (r.top <= window.innerHeight - 20) {
+					setIsRevealed(true);
+					window.removeEventListener('scroll', handleScroll);
+				}
+			};
+			window.addEventListener('scroll', handleScroll, { passive: true });
 
 			return () => {
 				observer.disconnect();
-				clearTimeout(safetyTimer);
+				window.removeEventListener('scroll', handleScroll);
 			};
 		} else {
 			setIsRevealed(true);

@@ -138,97 +138,101 @@ export function ClientSolutions() {
 				</ScrollReveal>
 
 				{/* 4 Persona Tabs Switcher */}
-				<div className="lux-solutions-tabs" role="tablist" aria-label="Select your role">
-					{PERSONA_SOLUTIONS.map((item, idx) => {
-						const TabIcon = item.icon;
-						const isSelected = idx === activeIdx;
-						return (
-							<button
-								key={item.id}
-								role="tab"
-								aria-selected={isSelected}
-								className={`lux-solution-tab ${isSelected ? 'active' : ''}`}
-								onClick={() => setActiveIdx(idx)}
-							>
-								<TabIcon size={16} className="lux-tab-icon" />
-								<span>{item.tabTitle}</span>
-							</button>
-						);
-					})}
-				</div>
+				<ScrollReveal animation="tilt-in" delay={60}>
+					<div className="lux-solutions-tabs" role="tablist" aria-label="Select your role">
+						{PERSONA_SOLUTIONS.map((item, idx) => {
+							const TabIcon = item.icon;
+							const isSelected = idx === activeIdx;
+							return (
+								<button
+									key={item.id}
+									role="tab"
+									aria-selected={isSelected}
+									className={`lux-solution-tab ${isSelected ? 'active' : ''}`}
+									onClick={() => setActiveIdx(idx)}
+								>
+									<TabIcon size={16} className="lux-tab-icon" />
+									<span>{item.tabTitle}</span>
+								</button>
+							);
+						})}
+					</div>
+				</ScrollReveal>
 
 				{/* Dynamic Showcase Stage */}
-				<div className="lux-solution-stage">
-					{/* Left: Solution & Deliverables */}
-					<div className="lux-solution-content">
-						<div className="lux-solution-role">
-							<ActiveIcon size={14} className="lux-role-icon" />
-							<span>{active.roleLabel}</span>
-						</div>
+				<ScrollReveal animation="shutter-reveal" delay={120}>
+					<div className="lux-solution-stage" key={active.id}>
+						{/* Left: Solution & Deliverables */}
+						<div className="lux-solution-content">
+							<div className="lux-solution-role">
+								<ActiveIcon size={14} className="lux-role-icon" />
+								<span>{active.roleLabel}</span>
+							</div>
 
-						<h3 className="lux-solution-headline">{active.hook}</h3>
-						<p className="lux-solution-desc">{active.description}</p>
+							<h3 className="lux-solution-headline">{active.hook}</h3>
+							<p className="lux-solution-desc">{active.description}</p>
 
-						{/* 4 Key Deliverables */}
-						<div className="lux-solution-deliverables">
-							<span className="lux-deliverables-title">CORE PROJECT DELIVERABLES:</span>
-							<ul className="lux-deliverables-list">
-								{active.deliverables.map((del, dIdx) => (
-									<li key={dIdx} className="lux-deliverable-item">
-										<CheckCircle2 size={14} className="lux-del-check" />
-										<span>{del}</span>
-									</li>
+							{/* 4 Key Deliverables */}
+							<div className="lux-solution-deliverables">
+								<span className="lux-deliverables-title">CORE PROJECT DELIVERABLES:</span>
+								<ul className="lux-deliverables-list">
+									{active.deliverables.map((del, dIdx) => (
+										<li key={dIdx} className="lux-deliverable-item">
+											<CheckCircle2 size={14} className="lux-del-check" />
+											<span>{del}</span>
+										</li>
+									))}
+								</ul>
+							</div>
+
+							{/* 3 Specs Cards */}
+							<div className="lux-solution-specs">
+								{active.specs.map((sp, sIdx) => (
+									<div key={sIdx} className="lux-solution-spec-card">
+										<span className="lux-spec-label">{sp.label}</span>
+										<span className="lux-spec-value">{sp.value}</span>
+									</div>
 								))}
-							</ul>
+							</div>
+
+							{/* Action Triggers */}
+							<div className="lux-solution-actions">
+								<Link to={active.ctaLink} className="cmd-btn">
+									<span>{active.ctaText}</span>
+									<ArrowUpRight size={15} style={{ marginLeft: 6 }} />
+								</Link>
+								<a
+									href="https://wa.me/918302806913?text=Hello%20Vistar%20Models,%20I%20would%20like%20to%20discuss%20a%20scale%20model%20requirement."
+									target="_blank"
+									rel="noreferrer"
+									className="lux-glass-link"
+								>
+									Instant WhatsApp Technical Review &rarr;
+								</a>
+							</div>
 						</div>
 
-						{/* 3 Specs Cards */}
-						<div className="lux-solution-specs">
-							{active.specs.map((sp, sIdx) => (
-								<div key={sIdx} className="lux-solution-spec-card">
-									<span className="lux-spec-label">{sp.label}</span>
-									<span className="lux-spec-value">{sp.value}</span>
+						{/* Right: Visual Physical Model Exhibit */}
+						<div className="lux-solution-visual">
+							<div className="lux-solution-media-frame">
+								<img
+									src={active.image}
+									alt={active.hook}
+									className="lux-solution-img"
+									loading="lazy"
+									decoding="async"
+									width={680}
+									height={460}
+								/>
+								<div className="lux-solution-media-overlay" />
+								<div className="lux-solution-floating-badge">
+									<Zap size={13} />
+									<span>0.1mm Tolerances &bull; Vetted Fabrication Network</span>
 								</div>
-							))}
-						</div>
-
-						{/* Action Triggers */}
-						<div className="lux-solution-actions">
-							<Link to={active.ctaLink} className="cmd-btn">
-								<span>{active.ctaText}</span>
-								<ArrowUpRight size={15} style={{ marginLeft: 6 }} />
-							</Link>
-							<a
-								href="https://wa.me/918302806913?text=Hello%20Vistar%20Models,%20I%20would%20like%20to%20discuss%20a%20scale%20model%20requirement."
-								target="_blank"
-								rel="noreferrer"
-								className="lux-glass-link"
-							>
-								Instant WhatsApp Technical Review &rarr;
-							</a>
-						</div>
-					</div>
-
-					{/* Right: Visual Physical Model Exhibit */}
-					<div className="lux-solution-visual">
-						<div className="lux-solution-media-frame">
-							<img
-								src={active.image}
-								alt={active.hook}
-								className="lux-solution-img"
-								loading="lazy"
-								decoding="async"
-								width={680}
-								height={460}
-							/>
-							<div className="lux-solution-media-overlay" />
-							<div className="lux-solution-floating-badge">
-								<Zap size={13} />
-								<span>0.1mm Tolerances &bull; Vetted Fabrication Network</span>
 							</div>
 						</div>
 					</div>
-				</div>
+				</ScrollReveal>
 			</div>
 		</section>
 	);

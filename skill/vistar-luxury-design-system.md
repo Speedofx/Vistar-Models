@@ -11,25 +11,129 @@ description: The absolute, non-negotiable gold standard protocol and master desi
 
 ---
 
-## 💎 1. THE ANTI-STATIC "PDF WEBSITE" LAW
+## 💎 1. THE ANTI-STATIC "PDF WEBSITE" LAW & SCROLL MOTION ARCHITECTURE
 
-A website is NOT a printed catalog or PDF export. Static layouts with zero animation or identical repetitive fades make high-end projects feel cheap.
+> **THE GOLDEN CONSTITUTIONAL LAW:**  
+> A website is NOT a printed brochure, a catalog, or a flat PDF export.  
+> If a visitor scrolls and sections simply appear statically without living, dynamic, 3D motion, the platform has **FAILED**.  
+> Every scroll movement must feel kinetic, alive, tactile, and cinematic — mirroring the spatial reality of physical architectural scale models.
 
-### Mandatory Kinetic Experience:
-1. **Multi-Variant 3D & 2D Motion Graphics Engine:**
-   - **Never repeat the same animation everywhere.** Each section must express its mechanical and spatial purpose:
-     - **Architectural Showcase (Zig-Zag):** `shutter-reveal` — 3D scale elevation combined with an optical architectural light-flare sweep (`.luxury-media-frame::after`).
-     - **Fabrication Capabilities Lab:** `laser-scan` — A precision holographic blueprint laser scanner beam (`.lux-cap-scanner-beam`) sweeping horizontally across the active tooling display.
-     - **5-Stage Process & Workflow:** `circuit-pulse` & `domino-flip` — An electrified kinetic energy timeline track with sequential 3D domino step cards.
-     - **Industry Sectors & Partners:** `domino-flip` 3D masonry tilt — Heavy titanium-finished cards rotating gracefully into view on scroll.
-     - **Category Matrix Cards:** `tilt-in` with live 3D mouse gyro tilt (`use3DTilt`) responding to cursor coordinates.
-     - **Global Viewport:** Minimalist top 2px luxury scroll depth indicator (`.lux-scroll-progress`) tracking 0% to 100% page traversal.
+---
 
-2. **Fail-Safe Viewport Detection Protocol (`useScrollReveal`):**
-   - **Immediate Mount Check:** Always check `getBoundingClientRect()` on mount. If an element is already in or near the viewport (`rect.top <= window.innerHeight + 150`), reveal it immediately so the user never sees a blank space.
-   - **Pre-emptive Triggering:** Set `rootMargin: '120px 0px 120px 0px'` and `threshold: 0.02` so animations start *before* the element enters view.
-   - **Safety Timer:** Include an automatic 1.5s fallback reveal timer in JavaScript to prevent any element from ever staying invisible.
-   - **Zero Degenerate Clip-Paths:** Never use `clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)` as an initial state because it collapses elements to 0-width in Chromium and breaks lazy loading.
+### 🔬 Technical Anatomy of the Scroll Motion Engine
+
+The entire kinetic scroll experience is powered by a triad of high-performance primitives:
+1. **The Observer Hook:** [`src/hooks/use-scroll-reveal.ts`](file:///c:/Users/RD%20MODELS/Desktop/RD%20PRO%20PROJECTS/vistar-models/src/hooks/use-scroll-reveal.ts)
+2. **The React Component Wrapper:** [`src/components/ui/scroll-reveal.tsx`](file:///c:/Users/RD%20MODELS/Desktop/RD%20PRO%20PROJECTS/vistar-models/src/components/ui/scroll-reveal.tsx)
+3. **The GPU-Accelerated 3D Engine:** [`src/index.css`](file:///c:/Users/RD%20MODELS/Desktop/RD%20PRO%20PROJECTS/vistar-models/src/index.css) (lines 850–960)
+
+---
+
+### ⚠️ The "Static PDF Bug" Root Cause & Permanent Outlaw
+
+* **What Caused the Bug:** In previous iterations, an unconditional `setTimeout(() => setIsRevealed(true), 1500)` was placed inside `useScrollReveal`. If a visitor spent 2 seconds reading the Hero section, this timer fired for every element down to the footer. When the user finally scrolled, every card was already revealed and stationary (`transform: translateY(0)`), creating the exact feeling of scrolling a flat, dead PDF!
+* **THE PERMANENT BAN:**
+  - ❌ **FORBIDDEN:** Never use unconditional `setTimeout` timers on component mount to force-reveal below-the-fold content.
+  - ❌ **FORBIDDEN:** Never use `clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)` as initial state (causes 0-width collapse in Chromium).
+  - ❌ **FORBIDDEN:** Never set `rootMargin` with positive top values like `120px` that trigger animations before elements are even visible.
+
+---
+
+### ⚙️ The Exact Protocol for `useScrollReveal`
+
+```ts
+export function useScrollReveal(threshold = 0.06) {
+	const ref = useRef<HTMLDivElement>(null);
+	const [isRevealed, setIsRevealed] = useState(false);
+
+	useEffect(() => {
+		const node = ref.current;
+		if (!node) return;
+
+		// 1. Initial viewport check: ONLY reveal elements that are ALREADY in the active viewport on load
+		if (typeof window !== 'undefined') {
+			const rect = node.getBoundingClientRect();
+			if (rect.top < window.innerHeight - 20 && rect.bottom > 0) {
+				setIsRevealed(true);
+				return;
+			}
+		}
+
+		// 2. IntersectionObserver: fires dynamically 40px inside the viewport as user scrolls
+		if (typeof IntersectionObserver !== 'undefined') {
+			const observer = new IntersectionObserver(
+				([entry]) => {
+					if (entry.isIntersecting) {
+						setIsRevealed(true);
+						observer.unobserve(entry.target); // Unobserve to save CPU cycles
+					}
+				},
+				{ threshold, rootMargin: '0px 0px -40px 0px' }
+			);
+
+			observer.observe(node);
+
+			// 3. Dynamic passive scroll backup: ensures fast fling scrolls reveal cleanly
+			const handleScroll = () => {
+				if (!node) return;
+				const r = node.getBoundingClientRect();
+				if (r.top <= window.innerHeight - 20) {
+					setIsRevealed(true);
+					window.removeEventListener('scroll', handleScroll);
+				}
+			};
+			window.addEventListener('scroll', handleScroll, { passive: true });
+
+			return () => {
+				observer.disconnect();
+				window.removeEventListener('scroll', handleScroll);
+			};
+		} else {
+			setIsRevealed(true);
+		}
+	}, [threshold]);
+
+	return { ref, isRevealed };
+}
+```
+
+---
+
+### 🎨 The 9 Distinct Kinetic Animation Variants
+
+Never repeat the same animation across adjacent sections. Use the right kinetic metaphor for each component:
+
+| Animation Variant | Visual Behavior & Metaphor | Ideal Application |
+|---|---|---|
+| `fade-up-3d` | 45px vertical glide with 4° 3D X-axis elevation (`rotateX(4deg)`). | Section headers, badges, editorial subtexts, FAQs. |
+| `tilt-in` | 3D perspective scale up from 0.96 with 6° tilt. | Feature grid cards, specification tables, persona tabs. |
+| `slide-left-3d` | Sweeps in from left with 45px translation + 4° Y-axis rotation. | Left-hand editorial text in alternating zig-zag rows. |
+| `slide-right-3d` | Sweeps in from right with 45px translation - 4° Y-axis rotation. | Right-hand editorial text in reversed zig-zag rows. |
+| `zoom-in-3d` | Scales gracefully from 0.92 to 1.0 with 30px vertical rise. | Centerpiece masterplan vitrines, high-impact hero displays. |
+| `shutter-reveal` | Physical elevation + an optical light-flare beam sweeping across the frame (`.luxury-media-frame::after` transforms from `-120%` to `+120%`). | Real scale model photos, showcase galleries. |
+| `laser-scan` | Real-time holographic blueprint laser beam (`@keyframes laserSweep`) sweeping horizontally over the tooling container. | Fabrication capabilities lab, CNC & 3D print specs. |
+| `circuit-pulse` | High-energy glowing pulse along a connecting timeline rail. | 5-Stage production workflow, delivery timelines. |
+| `domino-flip` | 3D rotation along the horizontal axis with staggered delays. | Process cards, city branches, partner credentials. |
+
+---
+
+### 📐 CSS Hardware-Acceleration Standard
+
+All reveal boxes must declare:
+```css
+.scroll-reveal-box {
+	opacity: 0;
+	will-change: transform, opacity;
+	transition-property: transform, opacity;
+	transition-duration: 0.85s;
+	transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); /* Luxury deceleration curve */
+}
+```
+
+### 📋 Mandatory Developer Rules for Every New Page:
+1. **Always wrap interactive sections:** Every row, card group, or media vitrine MUST be wrapped in `<ScrollReveal animation="...">`.
+2. **Stagger children:** In grids or lists, apply progressive delays: `delay={idx * 60}` ms so cards cascade into view like dominoes rather than popping up all at once.
+3. **Mount the Scroll Progress Bar:** Include `<useScrollProgress />` and `.lux-scroll-progress` at the top of every new page to give the visitor tactile feedback on their journey.
 
 ---
 
@@ -143,8 +247,11 @@ A website is NOT a printed catalog or PDF export. Static layouts with zero anima
 Before concluding any development task or presenting work to the user:
 - [ ] **No Static PDF Feel:** Does the section load with dynamic 3D/2D motion graphics?
 - [ ] **Varied Animation:** Is the animation distinct from neighboring sections (shutter reveal, laser scan, circuit pulse, domino flip)?
+- [ ] **Zero Emojis on UI:** Absolutely NO consumer emojis (📐, 🏢, 🏛️, 🏭, etc.) in badges, tags, or headers. Use pure typography, subtle micro-dots (`.cmd-persona-dot`), or sleek Lucide SVG vector line icons.
+- [ ] **Desktop Headline 2-Line Flow:** Long hero headlines (e.g. *"Architectural & Industrial Scale Models."*) must break cleanly on desktop into 2 lines (*"Architectural & Industrial"* on line 1, *"Scale Models."* on line 2) with slightly scaled desktop font-size (`clamp(38px, 4.3vw, 68px)`), leaving mobile responsive wrapping untouched.
 - [ ] **Zero Blank Photos:** Are all images WebP, eagerly or asynchronously loaded, with safe viewport fallbacks?
 - [ ] **Mobile Header Check:** Do the logo, compact CTA pill, and hamburger menu have comfortable spacing without ANY overlap?
 - [ ] **Logo Integrity:** Is the header logo using `/header-logo.png` and the footer logo using the 2X enlarged `/image.png`?
 - [ ] **Monochrome Luxury:** Are all primary buttons using the CMD white hairline outline standard (no cheap flat yellow blocks)?
 - [ ] **TypeScript Clean:** Does `npm run typecheck` complete with 0 errors?
+
