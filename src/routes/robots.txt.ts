@@ -48,15 +48,15 @@ const AI_AGENTS = [
 	'FacebookBot',
 ];
 
-const CONTENT_SIGNAL = 'Content-Signal: search=yes, ai-input=yes, ai-train=yes';
-
 function publishedRules(origin: string): string[] {
 	return [
+		'# Content-Signal: search=yes, ai-input=yes, ai-train=yes',
 		'User-agent: *',
-		CONTENT_SIGNAL,
 		'Allow: /',
 		'',
-		...AI_AGENTS.flatMap(agent => [`User-agent: ${agent}`, CONTENT_SIGNAL, 'Allow: /', '']),
+		'# AI Crawlers & Answer Engines (Explicitly Allowed)',
+		...AI_AGENTS.flatMap(agent => [`User-agent: ${agent}`, 'Allow: /', '']),
+		'# Aggressive Content Scrapers',
 		'User-agent: Bytespider',
 		'Disallow: /',
 		'',
@@ -76,6 +76,7 @@ export function loader({ request }: Route.LoaderArgs) {
 		headers: {
 			'Content-Type': 'text/plain; charset=utf-8',
 			'Cache-Control': 'public, max-age=3600',
+			'Content-Signal': 'search=yes, ai-input=yes, ai-train=yes',
 		},
 	});
 }
